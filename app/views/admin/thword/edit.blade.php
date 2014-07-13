@@ -78,6 +78,7 @@
 
     <div class="form-group">
         {{ HTML::link('/admin/thword', 'Cancel', ['class' => 'btn btn-primary']) }}
+        {{ HTML::link('/admin/thword/'.$thword->id.'/show', 'Show', ['class' => 'btn btn-primary']) }}
         {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
     </div>
 

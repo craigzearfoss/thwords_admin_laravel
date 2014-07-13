@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class='col-lg-4 col-lg-offset-4'>
+<div class='col-lg-8 col-lg-offset-4'>
 
     @if ($errors->has())
         @foreach ($errors->all() as $error)
@@ -77,7 +77,8 @@
     </div>
 
     <div class="form-group">
-        {{ HTML::link('/admin/thword', 'Cancel', ['class' => 'btn btn-primary']) }}
+        {{ HTML::link('/admin/thword-play', 'Cancel', ['class' => 'btn btn-primary']) }}
+        {{ HTML::link('/admin/thword-play/'.$thword->id.'/show', 'Show', ['class' => 'btn btn-primary']) }}
         {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
     </div>
 

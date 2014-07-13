@@ -159,10 +159,14 @@ class AdminThwordController extends \AdminController {
      */
     public function show($id)
     {
+        Breadcrumbs::addCrumb('Show', '/admin/thword/show');
+
         $thword = Thword::find($id);
         $thwArray = $thword->toArray();
 
-        var_dump($thwArray); die;
+        return View::make('admin.thword.show', [
+            'thwArray' => $thwArray
+        ]);
     }
 
 

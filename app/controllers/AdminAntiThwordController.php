@@ -158,10 +158,14 @@ class AdminAntiThwordController extends \AdminController {
      */
     public function show($id)
     {
+        Breadcrumbs::addCrumb('Show', '/admin/anti-thword/show');
+
         $thword = Antithword::find($id);
         $thwArray = $thword->toArray();
 
-        var_dump($thwArray); die;
+        return View::make('admin.anti-thword.show', [
+            'thwArray' => $thwArray
+        ]);
     }
 
 

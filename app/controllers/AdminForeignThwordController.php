@@ -158,10 +158,14 @@ class AdminForeignThwordController extends \AdminController {
      */
     public function show($id)
     {
+        Breadcrumbs::addCrumb('Show', '/admin/foreign-thword/show');
+
         $thword = Foreignthword::find($id);
         $thwArray = $thword->toArray();
 
-        var_dump($thwArray); die;
+        return View::make('admin.foreign-thword.show', [
+            'thwArray' => $thwArray
+        ]);
     }
 
 
