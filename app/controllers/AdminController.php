@@ -2,6 +2,13 @@
 
 class AdminController extends \BaseController {
 
+	public function __construct()
+	{
+		Breadcrumbs::setDivider('»');
+		Breadcrumbs::addCrumb('Home', '/');
+		Breadcrumbs::addCrumb('Admin', '/admin');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /admin
@@ -10,7 +17,7 @@ class AdminController extends \BaseController {
 	 */
 	public function index()
 	{
-        return View::make('admin.index');
+        	return View::make('admin.index');
 	}
 
 	/**

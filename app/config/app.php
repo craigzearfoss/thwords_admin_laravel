@@ -95,6 +95,7 @@ return array(
 
 	'providers' => array(
 
+        	'Creitive\Breadcrumbs\BreadcrumbsServiceProvider',
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
@@ -156,6 +157,7 @@ return array(
 		'Artisan'         => 'Illuminate\Support\Facades\Artisan',
 		'Auth'            => 'Illuminate\Support\Facades\Auth',
 		'Blade'           => 'Illuminate\Support\Facades\Blade',
+        	'Breadcrumbs'     => 'Creitive\Breadcrumbs\Facades\Breadcrumbs',
 		'Cache'           => 'Illuminate\Support\Facades\Cache',
         	'Carbon'          => 'Carbon\Carbon',
 		'ClassLoader'     => 'Illuminate\Support\ClassLoader',

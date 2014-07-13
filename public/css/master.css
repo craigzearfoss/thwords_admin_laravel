@@ -1,0 +1,12 @@
+.breadcrumbs {
+    list-style: none;
+    overflow: hidden;
+}
+
+.breadcrumbs li {
+    float: left;
+}
+
+.breadcrumbs li .divider {
+    margin-right: 3px;
+}
