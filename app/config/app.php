@@ -121,7 +121,9 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-        'Cartalyst\Sentry\SentryServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider',
+		'Cartalyst\Sentry\SentryServiceProvider',
+
 	),
 
 	/*
@@ -155,6 +157,7 @@ return array(
 		'Auth'            => 'Illuminate\Support\Facades\Auth',
 		'Blade'           => 'Illuminate\Support\Facades\Blade',
 		'Cache'           => 'Illuminate\Support\Facades\Cache',
+        	'Carbon'          => 'Carbon\Carbon',
 		'ClassLoader'     => 'Illuminate\Support\ClassLoader',
 		'Config'          => 'Illuminate\Support\Facades\Config',
 		'Controller'      => 'Illuminate\Routing\Controller',
@@ -181,7 +184,7 @@ return array(
 		'Route'           => 'Illuminate\Support\Facades\Route',
 		'Schema'          => 'Illuminate\Support\Facades\Schema',
 		'Seeder'          => 'Illuminate\Database\Seeder',
-        'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+        	'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 		'Session'         => 'Illuminate\Support\Facades\Session',
 		'SoftDeletingTrait' => 'Illuminate\Database\Eloquent\SoftDeletingTrait',
 		'SSH'             => 'Illuminate\Support\Facades\SSH',
