@@ -2,7 +2,7 @@
 
 use LaravelBook\Ardent\Ardent;
 
-class Antithword extends Ardent {
+class Foreignthword extends Ardent {
 
     /**
      * The database table used by the model.

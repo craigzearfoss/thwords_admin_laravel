@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title') Edit Thword Play @stop
+@section('title') Edit Foreign Thword @stop
 
 @section('content')
 
@@ -13,13 +13,13 @@
     @endif
 
     <h1>
-        <i class="fa fa-thword"></i> Edit Thword Play
+        <i class="fa fa-thword"></i> Edit Foreign Thword
         {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
     </h1>
 
     {{ Breadcrumbs::render() }}
 
-    {{ Form::model($thword, ['role' => 'form', 'url' => '/admin/thword-play/' . $thword->id, 'method' => 'PUT']) }}
+    {{ Form::model($thword, ['role' => 'form', 'url' => '/admin/foreign-thword/' . $thword->id, 'method' => 'PUT']) }}
 
     <div class="form-group">
         {{ Form::label('topic', 'Topic') }}

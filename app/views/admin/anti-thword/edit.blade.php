@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title') Edit Thword Play @stop
+@section('title') Edit Anti-Thword @stop
 
 @section('content')
 
@@ -13,13 +13,13 @@
     @endif
 
     <h1>
-        <i class="fa fa-thword"></i> Edit Thword Play
+        <i class="fa fa-thword"></i> Edit Anti-Thword
         {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
     </h1>
 
     {{ Breadcrumbs::render() }}
 
-    {{ Form::model($thword, ['role' => 'form', 'url' => '/admin/thword-play/' . $thword->id, 'method' => 'PUT']) }}
+    {{ Form::model($thword, ['role' => 'form', 'url' => '/admin/anti-thword/' . $thword->id, 'method' => 'PUT']) }}
 
     <div class="form-group">
         {{ Form::label('topic', 'Topic') }}
@@ -31,12 +31,12 @@
         {{ Form::select('expert', $expertOptions, null, ['class' => 'form-control']) }}
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="display: none;">
         {{ Form::label('category_id', 'Category') }}
         {{ Form::select('category_id', $categoryOptions, null, ['class' => 'form-control']) }}
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="display: none;">
         {{ Form::label('subject_id', 'Subject') }}
         {{ Form::select('subject_id', $subjectOptions, null, ['class' => 'form-control']) }}
     </div>
@@ -51,12 +51,12 @@
         {{ Form::text('description', null, ['placeholder' => 'Description', 'class' => 'form-control']) }}
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="display: none;">
         {{ Form::label('bonus', 'Bonus Question?') }}
         {{ Form::checkbox('bonus', null, ['class' => 'form-control']) }}
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="display: none;">
         {{ Form::label('bonus_question', 'Bonus Question Text (optional)') }}
         {{ Form::text('bonus_question', null, ['placeholder' => 'Bonus Question', 'class' => 'form-control']) }}
     </div>

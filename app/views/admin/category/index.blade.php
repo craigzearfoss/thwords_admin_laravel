@@ -30,7 +30,7 @@
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
                     <td>
-                        <a href="/admin/category/{{ $category->id }}/edit" class="btn btn-primary pull-left" style="margin-right: 3px;">Edit</a>
+                        {{ HTML::link('/admin/category/'.$category->id.'/edit', 'Edit', array('class' => 'btn btn-primary pull-left')) }}
                         {{ Form::open(['url' => '/admin/category/' . $category->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}

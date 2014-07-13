@@ -36,7 +36,7 @@
                     <td>{{ $language->code2 }}</td>
                     <td>{{ $language->spoken_in }}</td>
                     <td>
-                        <a href="/admin/language/{{ $language->id }}/edit" class="btn btn-primary pull-left" style="margin-right: 3px;">Edit</a>
+                        {{ HTML::link('/admin/language/'.$language->id.'/edit', 'Edit', array('class' => 'btn btn-primary pull-left')) }}
                         {{ Form::open(['url' => '/admin/language/' . $language->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}

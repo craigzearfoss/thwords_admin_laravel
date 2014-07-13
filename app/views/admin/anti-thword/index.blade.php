@@ -32,7 +32,7 @@
                     <td>{{ $thword->topic }}</td>
                     <td>{{ $thword->description }}</td>
                     <td>
-                        <a href="/admin/anti-thword/{{ $thword->id }}/edit" class="btn btn-primary pull-left" style="margin-right: 3px;">Edit</a>
+                        {{ HTML::link('/admin/anti-thword/'.$thword->id.'/edit', 'Edit', array('class' => 'btn btn-primary pull-left')) }}
                         {{ Form::open(['url' => '/admin/anti-thword/' . $thword->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}

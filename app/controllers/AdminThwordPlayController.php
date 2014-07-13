@@ -51,23 +51,30 @@ class AdminThwordPlayController extends \AdminController {
 
 
 	/**
-	 * Store a newly created keyword in storage.
+	 * Store a newly created thword play in storage.
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-        $keyword = new Keyword;
+        $thword = new Thwordplay;
 
-        $keyword->term            = Input::get('term');
-        $keyword->response_url_id = Input::get('response_url_id');
+        $thword->category_id    = Input::get('category_id');
+        $thword->subject_id     = Input::get('subject_id');
+        $thword->lang           = Input::get('lang');
+        $thword->expert         = Input::get('expert');
+        $thword->topic          = Input::get('topic');
+        $thword->description    = Input::get('description');
+        $thword->bonus          = Input::get('bonus');
+        $thword->bonus_question = Input::get('bonus_question');
+        $thword->answers        = Input::get('answers');
+        $thword->source         = Input::get('source');
+        $thword->notes          = Input::get('notes');
 
-        $keyword->save();
-
-        if ($success = $keyword->save()) {
-            return Redirect::to('/admin/keyword')->with('message', 'Keywords created successfully.');
+        if ($success = $thword->save()) {
+            return Redirect::to('/admin/thword-play')->with('message', 'Thword Play created successfully.');
         } else {
-            return Redirect::to('/admin/keyword/create')->withErrors($keyword->errors());
+            return Redirect::to('/admin/thword-play/create')->withErrors($thword->errors());
         }
 	}
 
@@ -100,37 +107,46 @@ class AdminThwordPlayController extends \AdminController {
 
 
 	/**
-	 * Update the specified keyword in storage.
+	 * Update the specified thword play in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function update($id)
 	{
-        $keyword = Keyword::find($id);
+        $thword = Thwordplay::find($id);
 
-        $keyword->term            = Input::get('term');
-        $keyword->response_url_id = Input::get('response_url_id');
+        $thword->category_id    = Input::get('category_id');
+        $thword->subject_id     = Input::get('subject_id');
+        $thword->lang           = Input::get('lang');
+        $thword->expert         = Input::get('expert');
+        $thword->topic          = Input::get('topic');
+        $thword->description    = Input::get('description');
+        $thword->bonus          = Input::get('bonus');
+        $thword->bonus_question = Input::get('bonus_question');
+        $thword->answers        = Input::get('answers');
+        $thword->source         = Input::get('source');
+        $thword->notes          = Input::get('notes');
 
-        if ($success = $keyword->save()) {
-            return Redirect::to('/admin/keyword');
+        if ($success = $thword->save()) {
+            return Redirect::to('/admin/thword-play');
         } else {
-            return Redirect::to('/admin/keyword/' . $id . '/edit/')->withErrors($keyword->errors());
+            return Redirect::to('/admin/thword-play/' . $id . '/edit/')->withErrors($thword->errors());
         }
 	}
 
 
 	/**
-	 * Remove the specified keyword from storage.
+	 * Remove the specified thword play from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-        Keyword::destroy($id);
+        Thwordplay::destroy($id);
 
-        return Redirect::to('/admin/keyword');
+        return Redirect::to('/admin/thword-play');
 	}
 
 

@@ -59,7 +59,6 @@ class AdminThwordController extends \AdminController {
 	{
         $thword = new Thword;
 
-
         $thword->category_id    = Input::get('category_id');
         $thword->subject_id     = Input::get('subject_id');
         $thword->lang           = Input::get('lang');

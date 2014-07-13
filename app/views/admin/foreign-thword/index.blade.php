@@ -30,7 +30,7 @@
                     <td>{{ $thword->id }}</td>
                     <td>{{ $thword->topic }}</td>
                     <td>
-                        <a href="/admin/foreign-thword/{{ $thword->id }}/edit" class="btn btn-primary pull-left" style="margin-right: 3px;">Edit</a>
+                        {{ HTML::link('/admin/foreign-thword/'.$thword->id.'/edit', 'Edit', array('class' => 'btn btn-primary pull-left')) }}
                         {{ Form::open(['url' => '/admin/foreign-thword/' . $thword->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}

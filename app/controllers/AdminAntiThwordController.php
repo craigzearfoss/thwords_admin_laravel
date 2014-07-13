@@ -28,96 +28,125 @@ class AdminAntiThwordController extends \AdminController {
 
 
 	/**
-	 * Show the form for creating a new keyword.
+	 * Show the form for creating a new anti-thword.
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-        Breadcrumbs::addCrumb('Create', '/admin/keyword/create');
+        Breadcrumbs::addCrumb('Create', '/admin/anti-thword/create');
 
-        $responseUrlOptions = DB::table('response_urls')->orderBy('url', 'asc')->lists('url','id');
+        $expertOptions = array(0=>0, 1=>1, 2=>2, 3=>3, 4=>4, 5=>5);
+        $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
+        $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
+        $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
-        return View::make('admin.keyword.create', [
-            'responseUrlOptions' => $responseUrlOptions
+        return View::make('admin.anti-thword.create', [
+            'expertOptions'   => $expertOptions,
+            'categoryOptions' => $categoryOptions,
+            'subjectOptions'  => $subjectOptions,
+            'languageOptions' => $languageOptions
         ]);
 	}
 
 
 	/**
-	 * Store a newly created keyword in storage.
+	 * Store a newly created anti-thword in storage.
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-        $keyword = new Keyword;
+        $thword = new Antithword;
 
-        $keyword->term            = Input::get('term');
-        $keyword->response_url_id = Input::get('response_url_id');
+        $thword->category_id    = Input::get('category_id');
+        $thword->subject_id     = Input::get('subject_id');
+        $thword->lang           = Input::get('lang');
+        $thword->expert         = Input::get('expert');
+        $thword->topic          = Input::get('topic');
+        $thword->description    = Input::get('description');
+        $thword->bonus          = Input::get('bonus');
+        $thword->bonus_question = Input::get('bonus_question');
+        $thword->answers        = Input::get('answers');
+        $thword->source         = Input::get('source');
+        $thword->notes          = Input::get('notes');
 
-        $keyword->save();
-
-        if ($success = $keyword->save()) {
-            return Redirect::to('/admin/keyword')->with('message', 'Keywords created successfully.');
+        if ($success = $thword->save()) {
+            return Redirect::to('/admin/anti-thword')->with('message', 'Anti-Thword created successfully.');
         } else {
-            return Redirect::to('/admin/keyword/create')->withErrors($keyword->errors());
+            return Redirect::to('/admin/anti-thword/create')->withErrors($thword->errors());
         }
 	}
 
 
 	/**
-	 * Show the form for editing the specified keyword.
+	 * Show the form for editing the specified anti-thwod.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-        Breadcrumbs::addCrumb('Edit', '/admin/keyword/edit');
+        Breadcrumbs::addCrumb('Edit', '/admin/anti-thword/edit');
 
-        $keyword = Keyword::find($id);
-        $responseUrlOptions = DB::table('response_urls')->orderBy('url', 'asc')->lists('url','id');
+        $thword = Antithword::find($id);
 
-        return View::make('admin.keyword.edit', [
-            'keyword' => $keyword,
-            'responseUrlOptions' => $responseUrlOptions
+        $expertOptions = array(0=>0, 1=>1, 2=>2, 3=>3, 4=>4, 5=>5);
+        $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
+        $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
+        $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
+
+        return View::make('admin.anti-thword.edit', [
+            'thword'          => $thword,
+            'expertOptions'   => $expertOptions,
+            'categoryOptions' => $categoryOptions,
+            'subjectOptions'  => $subjectOptions,
+            'languageOptions' => $languageOptions
         ]);
 	}
 
 
 	/**
-	 * Update the specified keyword in storage.
+	 * Update the specified anti-thword in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function update($id)
 	{
-        $keyword = Keyword::find($id);
+        $thword = Antithword::find($id);
 
-        $keyword->term            = Input::get('term');
-        $keyword->response_url_id = Input::get('response_url_id');
+        $thword->category_id    = Input::get('category_id');
+        $thword->subject_id     = Input::get('subject_id');
+        $thword->lang           = Input::get('lang');
+        $thword->expert         = Input::get('expert');
+        $thword->topic          = Input::get('topic');
+        $thword->description    = Input::get('description');
+        $thword->bonus          = Input::get('bonus');
+        $thword->bonus_question = Input::get('bonus_question');
+        $thword->answers        = Input::get('answers');
+        $thword->source         = Input::get('source');
+        $thword->notes          = Input::get('notes');
 
-        if ($success = $keyword->save()) {
-            return Redirect::to('/admin/keyword');
+        if ($success = $thword->save()) {
+            return Redirect::to('/admin/anti-thword');
         } else {
-            return Redirect::to('/admin/keyword/' . $id . '/edit/')->withErrors($keyword->errors());
+            return Redirect::to('/admin/anti-thword/' . $id . '/edit/')->withErrors($thword->errors());
         }
 	}
 
 
 	/**
-	 * Remove the specified keyword from storage.
+	 * Remove the specified anti-thword from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-        Keyword::destroy($id);
+        Antithword::destroy($id);
 
-        return Redirect::to('/admin/keyword');
+        return Redirect::to('/admin/anti-thword');
 	}
 
 
