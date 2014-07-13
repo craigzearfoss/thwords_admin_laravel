@@ -34,9 +34,11 @@
                     <td>
                         {{ HTML::link('/admin/thword-play/'.$thword->id.'/show', 'Show', array('class' => 'btn btn-primary')) }}
                         {{ HTML::link('/admin/thword-play/'.$thword->id.'/edit', 'Edit', array('class' => 'btn btn-primary')) }}
+                        <?php /*
                         {{ Form::open(['url' => '/admin/thword-play/' . $thword->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}
+                        */ ?>
                     </td>
                 </tr>
             @endforeach

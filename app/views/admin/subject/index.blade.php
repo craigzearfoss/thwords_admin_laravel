@@ -31,9 +31,11 @@
                     <td>{{ $subject->name }}</td>
                     <td>
                         {{ HTML::link('/admin/subject/'.$subject->id.'/edit', 'Edit', array('class' => 'btn btn-primary pull-left')) }}
+                        <?php /*
                         {{ Form::open(['url' => '/admin/subject/' . $subject->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}
+                        */ ?>
                     </td>
                 </tr>
             @endforeach

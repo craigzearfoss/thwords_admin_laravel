@@ -37,9 +37,11 @@
                     <td>{{ $language->spoken_in }}</td>
                     <td>
                         {{ HTML::link('/admin/language/'.$language->id.'/edit', 'Edit', array('class' => 'btn btn-primary pull-left')) }}
+                        <?php /*
                         {{ Form::open(['url' => '/admin/language/' . $language->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}
+                        */ ?>
                     </td>
                 </tr>
             @endforeach

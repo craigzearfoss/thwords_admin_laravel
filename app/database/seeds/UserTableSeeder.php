@@ -20,6 +20,7 @@ class UserTableSeeder extends Seeder {
             'password'   => Hash::make('rocket88'),
             'first_name' => 'Craig',
             'last_name'  => 'Zearfoss',
+            'activate'  => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);

@@ -16,11 +16,10 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('register', 'HomeController@getRegister');
 Route::get('login', 'HomeController@getLogin');
-
 Route::post('login', 'HomeController@postLogin');
-Route::post('register', 'HomeController@postRegister');
+//Route::get('register', 'HomeController@getRegister');
+//Route::post('register', 'HomeController@postRegister');
 
 Route::group(array('before' => 'auth'), function(){
     Route::get('admin', 'AdminController@index');

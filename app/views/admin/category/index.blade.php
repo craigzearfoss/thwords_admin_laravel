@@ -31,9 +31,11 @@
                     <td>{{ $category->name }}</td>
                     <td>
                         {{ HTML::link('/admin/category/'.$category->id.'/edit', 'Edit', array('class' => 'btn btn-primary pull-left')) }}
+                        <?php /*
                         {{ Form::open(['url' => '/admin/category/' . $category->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}
+                        */ ?>
                     </td>
                 </tr>
             @endforeach
