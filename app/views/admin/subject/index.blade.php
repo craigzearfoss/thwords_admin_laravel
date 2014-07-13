@@ -43,8 +43,8 @@
         <?php echo $subjects->links(); ?>
     </div>
 
-    <a href="/admin" class="btn btn-primary">Back to Admin Home</a>
-    <a href="/admin/subject/create" class="btn btn-success">Create Subject</a>
+    {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
+    {{ HTML::link('/admin/subject/create', 'Create Subject', array('class' => 'btn btn-success pull-right')) }}
 
 </div>
 

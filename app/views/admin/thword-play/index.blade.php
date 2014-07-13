@@ -45,8 +45,8 @@
         <?php echo $thwords->links(); ?>
     </div>
 
-    <a href="/admin" class="btn btn-primary">Back to Admin Home</a>
-    <a href="/admin/thword-play/create" class="btn btn-success">Create Thword Play</a>
+    {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
+    {{ HTML::link('/admin/thword-play/create', 'Create Thword Play', array('class' => 'btn btn-success pull-right')) }}
 
 </div>
 

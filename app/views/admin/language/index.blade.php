@@ -49,8 +49,8 @@
         <?php echo $languages->links(); ?>
     </div>
 
-    <a href="/admin" class="btn btn-primary">Back to Admin Home</a>
-    <a href="/admin/language/create" class="btn btn-success">Create Language</a>
+    {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
+    {{ HTML::link('/admin/language/create', 'Create Language', array('class' => 'btn btn-success pull-right')) }}
 
 </div>
 

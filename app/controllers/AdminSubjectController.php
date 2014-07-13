@@ -28,96 +28,86 @@ class AdminSubjectController extends \AdminController {
 
 
 	/**
-	 * Show the form for creating a new keyword.
+	 * Show the form for creating a new subject.
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-        Breadcrumbs::addCrumb('Create', '/admin/keyword/create');
+        Breadcrumbs::addCrumb('Create', '/admin/subject/subject');
 
-        $responseUrlOptions = DB::table('response_urls')->orderBy('url', 'asc')->lists('url','id');
-
-        return View::make('admin.keyword.create', [
-            'responseUrlOptions' => $responseUrlOptions
-        ]);
+        return View::make('admin.subject.create', []);
 	}
 
 
 	/**
-	 * Store a newly created keyword in storage.
+	 * Store a newly created subject in storage.
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-        $keyword = new Keyword;
+        $subject = new Subject;
 
-        $keyword->term            = Input::get('term');
-        $keyword->response_url_id = Input::get('response_url_id');
+        $subject->name = Input::get('name');
 
-        $keyword->save();
-
-        if ($success = $keyword->save()) {
-            return Redirect::to('/admin/keyword')->with('message', 'Keywords created successfully.');
+        if ($success = $subject->save()) {
+            return Redirect::to('/admin/subject')->with('message', 'Subject created successfully.');
         } else {
-            return Redirect::to('/admin/keyword/create')->withErrors($keyword->errors());
+            return Redirect::to('/admin/subject/create')->withErrors($subject->errors());
         }
 	}
 
 
 	/**
-	 * Show the form for editing the specified keyword.
+	 * Show the form for editing the specified subject.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-        Breadcrumbs::addCrumb('Edit', '/admin/keyword/edit');
+        Breadcrumbs::addCrumb('Edit', '/admin/subject/edit');
 
-        $keyword = Keyword::find($id);
-        $responseUrlOptions = DB::table('response_urls')->orderBy('url', 'asc')->lists('url','id');
+        $subject = Subject::find($id);
 
-        return View::make('admin.keyword.edit', [
-            'keyword' => $keyword,
-            'responseUrlOptions' => $responseUrlOptions
+        return View::make('admin.subject.edit', [
+            'subject' => $subject
         ]);
 	}
 
 
 	/**
-	 * Update the specified keyword in storage.
+	 * Update the specified subject in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function update($id)
 	{
-        $keyword = Keyword::find($id);
+        $subject = Subject::find($id);
 
-        $keyword->term            = Input::get('term');
-        $keyword->response_url_id = Input::get('response_url_id');
+        $subject->name = Input::get('name');
 
-        if ($success = $keyword->save()) {
-            return Redirect::to('/admin/keyword');
+        if ($success = $subject->save()) {
+            return Redirect::to('/admin/subject');
         } else {
-            return Redirect::to('/admin/keyword/' . $id . '/edit/')->withErrors($keyword->errors());
+            return Redirect::to('/admin/subject/' . $id . '/edit/')->withErrors($subject->errors());
         }
 	}
 
 
 	/**
-	 * Remove the specified keyword from storage.
+	 * Remove the specified subject from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-        Keyword::destroy($id);
+        Subject::destroy($id);
 
-        return Redirect::to('/admin/keyword');
+        return Redirect::to('/admin/subject');
 	}
 
 

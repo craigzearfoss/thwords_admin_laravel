@@ -26,96 +26,86 @@ class AdminCategoryController extends \AdminController {
 
 
 	/**
-	 * Show the form for creating a new keyword.
+	 * Show the form for creating a new category.
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-        Breadcrumbs::addCrumb('Create', '/admin/keyword/create');
+        Breadcrumbs::addCrumb('Create', '/admin/category/create');
 
-        $responseUrlOptions = DB::table('response_urls')->orderBy('url', 'asc')->lists('url','id');
-
-        return View::make('admin.keyword.create', [
-            'responseUrlOptions' => $responseUrlOptions
-        ]);
+        return View::make('admin.category.create', []);
 	}
 
 
 	/**
-	 * Store a newly created keyword in storage.
+	 * Store a newly created category in storage.
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-        $keyword = new Keyword;
+        $category = new Category;
 
-        $keyword->term            = Input::get('term');
-        $keyword->response_url_id = Input::get('response_url_id');
+        $category->name = Input::get('name');
 
-        $keyword->save();
-
-        if ($success = $keyword->save()) {
-            return Redirect::to('/admin/keyword')->with('message', 'Keywords created successfully.');
+        if ($success = $category->save()) {
+            return Redirect::to('/admin/category')->with('message', 'Category created successfully.');
         } else {
-            return Redirect::to('/admin/keyword/create')->withErrors($keyword->errors());
+            return Redirect::to('/admin/category/create')->withErrors($category->errors());
         }
 	}
 
 
 	/**
-	 * Show the form for editing the specified keyword.
+	 * Show the form for editing the specified category.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-        Breadcrumbs::addCrumb('Edit', '/admin/keyword/edit');
+        Breadcrumbs::addCrumb('Edit', '/admin/category/edit');
 
-        $keyword = Keyword::find($id);
-        $responseUrlOptions = DB::table('response_urls')->orderBy('url', 'asc')->lists('url','id');
+        $category = Category::find($id);
 
-        return View::make('admin.keyword.edit', [
-            'keyword' => $keyword,
-            'responseUrlOptions' => $responseUrlOptions
+        return View::make('admin.category.edit', [
+            'category' => $category
         ]);
 	}
 
 
 	/**
-	 * Update the specified keyword in storage.
+	 * Update the specified category in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function update($id)
 	{
-        $keyword = Keyword::find($id);
+        $category = Category::find($id);
 
-        $keyword->term            = Input::get('term');
-        $keyword->response_url_id = Input::get('response_url_id');
+        $category->name = Input::get('name');
 
-        if ($success = $keyword->save()) {
-            return Redirect::to('/admin/keyword');
+        if ($success = $category->save()) {
+            return Redirect::to('/admin/category');
         } else {
-            return Redirect::to('/admin/keyword/' . $id . '/edit/')->withErrors($keyword->errors());
+            return Redirect::to('/admin/category/' . $id . '/edit/')->withErrors($category->errors());
         }
 	}
 
 
 	/**
-	 * Remove the specified keyword from storage.
+	 * Remove the specified category from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-        Keyword::destroy($id);
+        Category::destroy($id);
 
-        return Redirect::to('/admin/keyword');
+        return Redirect::to('/admin/category');
 	}
 
 

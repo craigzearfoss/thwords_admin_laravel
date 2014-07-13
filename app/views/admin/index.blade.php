@@ -14,7 +14,7 @@
 
     <h1>
         <i class="fa fa-home"></i> Admin Home
-        {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
+        {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right')) }}
     </h1>
 
     {{ Breadcrumbs::render() }}
@@ -24,20 +24,20 @@
         <div class="panel-body">
 
             <ul>
-                <li>{{ HTML::link('/admin/foreign-thword', 'Foreign Thwords', array())}}</li>
-                <li>{{ HTML::link('/admin/anti-thword', 'Anti-Thwords', array())}}</li>
+                <li>{{ HTML::link('/admin/foreign-thword', 'Foreign Thwords', array()) }}</li>
+                <li>{{ HTML::link('/admin/anti-thword', 'Anti-Thwords', array()) }}</li>
                 <li>{{ HTML::link('/admin/thword', 'Thwords', array())}}</li>
-                <li>{{ HTML::link('/admin/thword-play', 'Thword Plays', array())}}</li>
+                <li>{{ HTML::link('/admin/thword-play', 'Thword Plays', array()) }}</li>
             </ul>
             <ul>
-                <li>{{ HTML::link('/admin/category', 'Categories', array())}}</li>
-                <li>{{ HTML::link('/admin/language', 'Languages', array())}}</li>
-                <li>{{ HTML::link('/admin/result', 'Results', array())}}</li>
-                <li>{{ HTML::link('/admin/subject', 'Subjects', array())}}</li>
+                <li>{{ HTML::link('/admin/category', 'Categories', array()) }}</li>
+                <li>{{ HTML::link('/admin/language', 'Languages', array()) }}</li>
+                <li>{{ HTML::link('/admin/result', 'Results', array()) }}</li>
+                <li>{{ HTML::link('/admin/subject', 'Subjects', array()) }}</li>
             </ul>
 
             <ul>
-                <li>{{ HTML::link('/admin/user', 'Users', array())}}</li>
+                <li>{{ HTML::link('/admin/user', 'Users', array()) }}</li>
             </ul>
 
         </div>

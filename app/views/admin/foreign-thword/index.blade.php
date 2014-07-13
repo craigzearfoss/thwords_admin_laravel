@@ -43,8 +43,8 @@
         <?php echo $thwords->links(); ?>
     </div>
 
-    <a href="/admin" class="btn btn-primary">Back to Admin Home</a>
-    <a href="/admin/foreign-thword/create" class="btn btn-success">Create Foreign Thword</a>
+    {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
+    {{ HTML::link('/admin/foreign-thword/create', 'Create Foreign Thword', array('class' => 'btn btn-success pull-right')) }}
 
 </div>
 

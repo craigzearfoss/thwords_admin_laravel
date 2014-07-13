@@ -45,8 +45,8 @@
         <?php echo $thwords->links(); ?>
     </div>
 
-    <a href="/admin" class="btn btn-primary">Back to Admin Home</a>
-    <a href="/admin/anti-thword/create" class="btn btn-success">Create Anti-Thword</a>
+    {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
+    {{ HTML::link('/admin/anti-thword/create', 'Create Anti-Thword', array('class' => 'btn btn-success pull-right')) }}
 
 </div>
 

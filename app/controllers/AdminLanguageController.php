@@ -26,96 +26,92 @@ class AdminLanguageController extends \AdminController {
 
 
 	/**
-	 * Show the form for creating a new keyword.
+	 * Show the form for creating a new language.
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-        Breadcrumbs::addCrumb('Create', '/admin/keyword/create');
+        Breadcrumbs::addCrumb('Create', '/admin/language/create');
 
-        $responseUrlOptions = DB::table('response_urls')->orderBy('url', 'asc')->lists('url','id');
-
-        return View::make('admin.keyword.create', [
-            'responseUrlOptions' => $responseUrlOptions
-        ]);
+        return View::make('admin.language.create', []);
 	}
 
 
 	/**
-	 * Store a newly created keyword in storage.
+	 * Store a newly created language in storage.
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-        $keyword = new Keyword;
+        $language = new Language;
 
-        $keyword->term            = Input::get('term');
-        $keyword->response_url_id = Input::get('response_url_id');
+        $language->name      = Input::get('name');
+        $language->code1     = Input::get('code1');
+        $language->code2     = Input::get('code2');
+        $language->spoken_in = Input::get('spoken_in');
 
-        $keyword->save();
-
-        if ($success = $keyword->save()) {
-            return Redirect::to('/admin/keyword')->with('message', 'Keywords created successfully.');
+        if ($success = $language->save()) {
+            return Redirect::to('/admin/language')->with('message', 'Language created successfully.');
         } else {
-            return Redirect::to('/admin/keyword/create')->withErrors($keyword->errors());
+            return Redirect::to('/admin/language/create')->withErrors($language->errors());
         }
 	}
 
 
 	/**
-	 * Show the form for editing the specified keyword.
+	 * Show the form for editing the specified language.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-        Breadcrumbs::addCrumb('Edit', '/admin/keyword/edit');
+        Breadcrumbs::addCrumb('Edit', '/admin/language/edit');
 
-        $keyword = Keyword::find($id);
-        $responseUrlOptions = DB::table('response_urls')->orderBy('url', 'asc')->lists('url','id');
+        $language = Language::find($id);
 
-        return View::make('admin.keyword.edit', [
-            'keyword' => $keyword,
-            'responseUrlOptions' => $responseUrlOptions
+        return View::make('admin.language.edit', [
+            'language' => $language
         ]);
 	}
 
 
 	/**
-	 * Update the specified keyword in storage.
+	 * Update the specified language in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function update($id)
 	{
-        $keyword = Keyword::find($id);
+        $language = Language::find($id);
 
-        $keyword->term            = Input::get('term');
-        $keyword->response_url_id = Input::get('response_url_id');
+        $language->name      = Input::get('name');
+        $language->code1     = Input::get('code1');
+        $language->code2     = Input::get('code2');
+        $language->spoken_in = Input::get('spoken_in');
 
-        if ($success = $keyword->save()) {
-            return Redirect::to('/admin/keyword');
+        if ($success = $language->save()) {
+            return Redirect::to('/admin/language');
         } else {
-            return Redirect::to('/admin/keyword/' . $id . '/edit/')->withErrors($keyword->errors());
+            return Redirect::to('/admin/language/' . $id . '/edit/')->withErrors($language->errors());
         }
 	}
 
 
 	/**
-	 * Remove the specified keyword from storage.
+	 * Remove the specified language from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-        Keyword::destroy($id);
+        Language::destroy($id);
 
-        return Redirect::to('/admin/keyword');
+        return Redirect::to('/admin/language');
 	}
 
 
