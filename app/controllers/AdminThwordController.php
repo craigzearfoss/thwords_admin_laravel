@@ -11,6 +11,7 @@ class AdminThwordController extends \AdminController {
         Breadcrumbs::addCrumb('Thwords', '/admin/thword');
     }
 
+
 	/**
 	 * Display a listing of the thword.
 	 *
@@ -148,6 +149,21 @@ class AdminThwordController extends \AdminController {
 
         return Redirect::to('/admin/thword');
 	}
+
+
+    /**
+     * Display the specified thword.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $thword = Thword::find($id);
+        $thwArray = $thword->toArray();
+
+        var_dump($thwArray); die;
+    }
 
 
 }

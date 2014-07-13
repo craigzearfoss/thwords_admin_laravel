@@ -30,7 +30,8 @@
                     <td>{{ $thword->id }}</td>
                     <td>{{ $thword->topic }}</td>
                     <td>
-                        {{ HTML::link('/admin/thword/'.$thword->id.'/edit', 'Edit', array('class' => 'btn btn-primary pull-left')) }}
+                        {{ HTML::link('/admin/thword/'.$thword->id.'/show', 'Show', array('class' => 'btn btn-primary')) }}
+                        {{ HTML::link('/admin/thword/'.$thword->id.'/edit', 'Edit', array('class' => 'btn btn-primary')) }}
                         {{ Form::open(['url' => '/admin/thword/' . $thword->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}

@@ -150,4 +150,19 @@ class AdminAntiThwordController extends \AdminController {
 	}
 
 
+    /**
+     * Display the specified anti-thword.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $thword = Antithword::find($id);
+        $thwArray = $thword->toArray();
+
+        var_dump($thwArray); die;
+    }
+
+
 }

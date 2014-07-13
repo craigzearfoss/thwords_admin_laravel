@@ -32,7 +32,8 @@
                     <td>{{ $thword->topic }}</td>
                     <td>{{ $thword->description }}</td>
                     <td>
-                        {{ HTML::link('/admin/anti-thword/'.$thword->id.'/edit', 'Edit', array('class' => 'btn btn-primary pull-left')) }}
+                        {{ HTML::link('/admin/anti-thword/'.$thword->id.'/show', 'Show', array('class' => 'btn btn-primary')) }}
+                        {{ HTML::link('/admin/anti-thword/'.$thword->id.'/edit', 'Edit', array('class' => 'btn btn-primary')) }}
                         {{ Form::open(['url' => '/admin/anti-thword/' . $thword->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}

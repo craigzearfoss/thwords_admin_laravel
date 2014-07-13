@@ -22,6 +22,7 @@ class Language extends Ardent {
 
     protected $guarded = array('id');
 
+
     /**
      * Ardent validation rules
      */

@@ -22,12 +22,14 @@ class Subject extends Ardent {
 
     protected $guarded = array('id');
 
+
     /**
      * Ardent validation rules
      */
     public static $rules = array(
         'name'   => 'required'
     );
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -37,6 +39,7 @@ class Subject extends Ardent {
         return $this->hasMany('Antithwords');
     }
 
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -45,6 +48,7 @@ class Subject extends Ardent {
         return $this->hasMany('Foreignthwords');
     }
 
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -52,6 +56,7 @@ class Subject extends Ardent {
     {
         return $this->hasMany('Thwordplays');
     }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

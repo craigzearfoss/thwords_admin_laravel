@@ -148,4 +148,21 @@ class AdminThwordPlayController extends \AdminController {
 
         return Redirect::to('/admin/thword-play');
 	}
+
+
+    /**
+     * Display the specified thword play.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $thword = Thwordplay::find($id);
+        $thwArray = $thword->toArray();
+
+        var_dump($thwArray); die;
+    }
+
+
 }

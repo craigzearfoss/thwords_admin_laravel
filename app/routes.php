@@ -32,6 +32,12 @@ Route::group(array('before' => 'auth'), function(){
     Route::resource('/admin/result', 'AdminResultController');
     Route::resource('/admin/subject', 'AdminSubjectController');
     Route::resource('/admin/thword', 'AdminThwordController');
+    Route::resource('/admin/thword', 'AdminThwordController');
     Route::resource('/admin/thword-play', 'AdminThwordPlayController');
     Route::resource('/admin/user', 'AdminUserController');
+
+    Route::get('/admin/anti-thword/{id}/show', 'AdminAntiThwordController@show');
+    Route::get('/admin/foreign-thword/{id}/show', 'AdminForeignThwordController@show');
+    Route::get('/admin/thword/{id}/show', 'AdminThwordController@show');
+    Route::get('/admin/thword-play/{id}/show', 'AdminThwordPlayController@show');
 });

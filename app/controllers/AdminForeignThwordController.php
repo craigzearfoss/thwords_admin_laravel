@@ -150,4 +150,19 @@ class AdminForeignThwordController extends \AdminController {
 	}
 
 
+    /**
+     * Display the specified thword.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $thword = Foreignthword::find($id);
+        $thwArray = $thword->toArray();
+
+        var_dump($thwArray); die;
+    }
+
+
 }
