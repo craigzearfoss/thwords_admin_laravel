@@ -20,6 +20,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Lang</th>
                     <th>Topic</th>
                 </tr>
             </thead>
@@ -28,6 +29,7 @@
             @foreach ($thwords as $thword)
                 <tr>
                     <td>{{ $thword->id }}</td>
+                    <td>{{ $thword->lang }}</td>
                     <td>{{ $thword->topic }}</td>
                     <td>
                         {{ HTML::link('/admin/thword/'.$thword->id.'/show', 'Show', array('class' => 'btn btn-primary')) }}

@@ -19,7 +19,7 @@ class AdminAntiThwordController extends \AdminController {
 	public function index()
     {
         $thwords = DB::table('thw_antithwords')
-            ->select('thw_antithwords.id', 'thw_antithwords.topic', 'thw_antithwords.description')
+            ->select('thw_antithwords.id', 'thw_antithwords.lang', 'thw_antithwords.topic', 'thw_antithwords.description')
             ->orderBy('id', 'asc')
             ->paginate(25);
 

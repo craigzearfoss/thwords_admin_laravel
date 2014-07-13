@@ -19,7 +19,7 @@ class AdminForeignThwordController extends \AdminController {
 	public function index()
     {
         $thwords = DB::table('thw_foreignthwords')
-            ->select('thw_foreignthwords.id', 'thw_foreignthwords.topic')
+            ->select('thw_foreignthwords.id', 'thw_foreignthwords.lang', 'thw_foreignthwords.topic')
             ->orderBy('id', 'asc')
             ->paginate(25);
 

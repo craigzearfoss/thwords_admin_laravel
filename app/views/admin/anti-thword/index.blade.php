@@ -20,6 +20,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Lang</th>
                     <th>Topic</th>
                     <th>Description</th>
                 </tr>
@@ -29,7 +30,8 @@
             @foreach ($thwords as $thword)
                 <tr>
                     <td>{{ $thword->id }}</td>
-                    <td>{{ $thword->topic }}</td>
+                    <td>{{ $thword->lang }}</td>
+                    <td>{{ str_replace('|', ', ', $thword->topic) }}</td>
                     <td>{{ $thword->description }}</td>
                     <td>
                         {{ HTML::link('/admin/anti-thword/'.$thword->id.'/show', 'Show', array('class' => 'btn btn-primary')) }}

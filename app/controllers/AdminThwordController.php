@@ -20,7 +20,7 @@ class AdminThwordController extends \AdminController {
 	public function index()
     {
         $thwords = DB::table('thw_thwords')
-            ->select('thw_thwords.id', 'thw_thwords.topic')
+            ->select('thw_thwords.id', 'thw_thwords.lang', 'thw_thwords.topic')
             ->orderBy('id', 'asc')
             ->paginate(25);
 
