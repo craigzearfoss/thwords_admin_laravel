@@ -24,8 +24,8 @@
         <div class="panel-body">
 
             <ul>
-                <li>{{ HTML::link('/admin/foreign-thword', 'Foreign Thwords', array()) }}</li>
                 <li>{{ HTML::link('/admin/anti-thword', 'Anti-Thwords', array()) }}</li>
+                <li>{{ HTML::link('/admin/foreign-thword', 'Foreign Thwords', array()) }}</li>
                 <li>{{ HTML::link('/admin/thword', 'Thwords', array())}}</li>
                 <li>{{ HTML::link('/admin/thword-play', 'Thword Plays', array()) }}</li>
             </ul>

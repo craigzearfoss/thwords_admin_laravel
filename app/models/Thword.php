@@ -38,4 +38,20 @@ class Thword extends Ardent {
         'source'         => 'url|max:250',
         'notes'          => 'max:250'
     );
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo('Category');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subject()
+    {
+        return $this->belongsTo('Subject');
+    }
 }

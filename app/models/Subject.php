@@ -28,4 +28,36 @@ class Subject extends Ardent {
     public static $rules = array(
         'name'   => 'required'
     );
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function antithwords()
+    {
+        return $this->hasMany('Antithwords');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function foreignthwords()
+    {
+        return $this->hasMany('Foreignthwords');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function thwordplays()
+    {
+        return $this->hasMany('Thwordplays');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function thwords()
+    {
+        return $this->hasMany('Thwords');
+    }
 }

@@ -33,4 +33,5 @@ Route::group(array('before' => 'auth'), function(){
     Route::resource('/admin/subject', 'AdminSubjectController');
     Route::resource('/admin/thword', 'AdminThwordController');
     Route::resource('/admin/thword-play', 'AdminThwordPlayController');
+    Route::resource('/admin/user', 'AdminUserController');
 });

@@ -32,6 +32,7 @@
                     <td>{{ $thword->topic }}</td>
                     <td>{{ $thword->description }}</td>
                     <td>
+                        {{ HTML::link('/admin/thword-play/'.$thword->id.'/view', 'View', array('class' => 'btn btn-primary pull-left')) }}
                         {{ HTML::link('/admin/thword-play/'.$thword->id.'/edit', 'Edit', array('class' => 'btn btn-primary pull-left')) }}
                         {{ Form::open(['url' => '/admin/thword-play/' . $thword->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}

@@ -148,6 +148,4 @@ class AdminThwordPlayController extends \AdminController {
 
         return Redirect::to('/admin/thword-play');
 	}
-
-
 }
