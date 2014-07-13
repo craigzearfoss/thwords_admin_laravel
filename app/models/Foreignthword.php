@@ -2,14 +2,14 @@
 
 use LaravelBook\Ardent\Ardent;
 
-class Thword extends Ardent {
+class Antithword extends Ardent {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'thw_thwords';
+    protected $table = 'thw_foreignthwords';
 
     /**
      * The attributes excluded from the model's JSON form.

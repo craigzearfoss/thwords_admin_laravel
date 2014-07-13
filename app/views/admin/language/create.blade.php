@@ -21,27 +21,27 @@
 
     {{ Form::open(['role' => 'form', 'url' => '/admin/language']) }}
 
-    <div class='form-group'>
+    <div class="form-group">
         {{ Form::label('name', 'Name') }}
         {{ Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) }}
     </div>
 
-    <div class='form-group'>
+    <div class="form-group">
         {{ Form::label('code1', 'Code 1') }}
         {{ Form::text('code1', null, ['placeholder' => 'Code 1', 'class' => 'form-control']) }}
     </div>
 
-    <div class='form-group'>
+    <div class="form-group">
         {{ Form::label('code2', 'Code 2') }}
         {{ Form::text('code2', null, ['placeholder' => 'Code 2', 'class' => 'form-control']) }}
     </div>
 
-    <div class='form-group'>
+    <div class="form-group">
         {{ Form::label('spoken_in', 'Spoken In') }}
         {{ Form::text('spoken_in', null, ['placeholder' => 'Spoken In', 'class' => 'form-control']) }}
     </div>
 
-    <div class='form-group'>
+    <div class="form-group">
         {{ HTML::link('/admin/language', 'Cancel', ['class' => 'btn btn-primary']) }}
         {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
     </div>

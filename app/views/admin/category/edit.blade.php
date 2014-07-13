@@ -21,12 +21,12 @@
 
     {{ Form::model($category, ['role' => 'form', 'url' => '/admin/category/' . $category->id, 'method' => 'PUT']) }}
 
-    <div class='form-group'>
+    <div class="form-group">
         {{ Form::label('name', 'Name') }}
         {{ Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) }}
     </div>
 
-    <div class='form-group'>
+    <div class="form-group">
         {{ HTML::link('/admin/category', 'Cancel', ['class' => 'btn btn-primary']) }}
         {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
     </div>

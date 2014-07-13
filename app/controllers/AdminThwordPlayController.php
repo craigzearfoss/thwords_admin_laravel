@@ -28,18 +28,24 @@ class AdminThwordPlayController extends \AdminController {
 
 
 	/**
-	 * Show the form for creating a new keyword.
+	 * Show the form for creating a new thword play.
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-        Breadcrumbs::addCrumb('Create', '/admin/keyword/create');
+        Breadcrumbs::addCrumb('Create', '/admin/thword-play/create');
 
-        $responseUrlOptions = DB::table('response_urls')->orderBy('url', 'asc')->lists('url','id');
+        $expertOptions = array(0=>0, 1=>1, 2=>2, 3=>3, 4=>4, 5=>5);
+        $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
+        $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
+        $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
-        return View::make('admin.keyword.create', [
-            'responseUrlOptions' => $responseUrlOptions
+        return View::make('admin.thword-play.create', [
+            'expertOptions'   => $expertOptions,
+            'categoryOptions' => $categoryOptions,
+            'subjectOptions'  => $subjectOptions,
+            'languageOptions' => $languageOptions
         ]);
 	}
 
@@ -67,21 +73,28 @@ class AdminThwordPlayController extends \AdminController {
 
 
 	/**
-	 * Show the form for editing the specified keyword.
+	 * Show the form for editing the specified thword play.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-        Breadcrumbs::addCrumb('Edit', '/admin/keyword/edit');
+        Breadcrumbs::addCrumb('Edit', '/admin/thword-play/edit');
 
-        $keyword = Keyword::find($id);
-        $responseUrlOptions = DB::table('response_urls')->orderBy('url', 'asc')->lists('url','id');
+        $thword = Thwordplay::find($id);
 
-        return View::make('admin.keyword.edit', [
-            'keyword' => $keyword,
-            'responseUrlOptions' => $responseUrlOptions
+        $expertOptions = array(0=>0, 1=>1, 2=>2, 3=>3, 4=>4, 5=>5);
+        $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
+        $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
+        $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
+
+        return View::make('admin.thword-play.edit', [
+            'thword'          => $thword,
+            'expertOptions'   => $expertOptions,
+            'categoryOptions' => $categoryOptions,
+            'subjectOptions'  => $subjectOptions,
+            'languageOptions' => $languageOptions
         ]);
 	}
 
