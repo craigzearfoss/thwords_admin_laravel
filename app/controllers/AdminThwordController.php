@@ -99,12 +99,12 @@ class AdminThwordController extends \AdminController {
         $separatorCharacters = ThwordUtil::getSeparatorCharacters();
 
         return View::make('admin.thword.edit', [
-            'thword'           => $thword,
-            'expertOptions'    => $expertOptions,
-            'categoryOptions'  => $categoryOptions,
-            'subjectOptions'   => $subjectOptions,
-            'languageOptions'  => $languageOptions,
-            'answerSeparators' => $separatorCharacters
+            'thword'          => $thword,
+            'expertOptions'   => $expertOptions,
+            'categoryOptions' => $categoryOptions,
+            'subjectOptions'  => $subjectOptions,
+            'languageOptions' => $languageOptions,
+            'answerSeparator' => $separatorCharacters,
         ]);
 	}
 
@@ -130,6 +130,12 @@ class AdminThwordController extends \AdminController {
         $thword->answers        = Input::get('answers');
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');
+
+        // make sure answers are in the correct format
+        $answerSeparator = Input::get('answer_separator');
+        if ($answerSeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::ANSWER_SEPARATOR) {
+            $thword->answers = str_replace($answerSeparator, '|', $thword->answers);
+        }
 
         if ($success = $thword->save()) {
             return Redirect::to('/admin/thword');

@@ -53,7 +53,7 @@
 
     <div class="form-group" style="display: none;">
         {{ Form::label('bonus', 'Bonus') }}
-        {{ Form::checkbox('bonus', null, ['class' => 'form-control']) }}
+        {{ Form::checkbox('bonus', 1, null, ['class' => 'form-control']) }}
     </div>
 
     <div class="form-group" style="display: none;">
@@ -63,7 +63,7 @@
 
     <div class="form-group">
         {{ Form::label('answers', 'Answers') }}
-        <span style="display: inline-block; float: right;">Separator: {{ Form::select('answer_separator', $answerSeparators, "\n", ['class' => '']) }}</span>
+        <span style="display: inline-block; float: right;">Separator: {{ Form::select('answer_separator', $answerSeparator, '|', ['class' => '']) }}</span>
         {{ Form::textarea('answers', null, ['placeholder' => 'Answers', 'class' => 'form-control']) }}
     </div>
 

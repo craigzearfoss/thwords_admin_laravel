@@ -53,7 +53,7 @@
 
     <div class="form-group">
         {{ Form::label('bonus', 'Bonus Question?') }}
-        {{ Form::checkbox('bonus', null, ['class' => 'form-control']) }}
+        {{ Form::checkbox('bonus', 1, null, ['class' => 'form-control']) }}
     </div>
 
     <div class="form-group">
