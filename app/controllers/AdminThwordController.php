@@ -178,4 +178,82 @@ class AdminThwordController extends \AdminController {
     }
 
 
+    /**
+     * Redirect to the first thword.
+     *
+     * @return Response
+     */
+    public function first()
+    {
+        $thword = DB::table('thw_thwords')
+            ->select('thw_thwords.id')
+            ->orderBy('id', 'asc')
+            ->first();
+
+        return Redirect::to('/admin/thword/' . $thword->id . '/show');
+    }
+
+
+    /**
+     * Redirect to the previous thword.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function previous($id)
+    {
+        $thword = DB::table('thw_thwords')
+            ->select('thw_thwords.id')
+            ->where('id', '<', $id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if (!empty($thword)) {
+            return Redirect::to('/admin/thword/' . $thword->id . '/show');
+        } else {
+            // next thword not found
+            return Redirect::to('/admin/thword/' . $id . '/show');
+        }
+    }
+
+
+    /**
+     * Redirect to the next thword.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function next($id)
+    {
+        $thword = DB::table('thw_thwords')
+            ->select('thw_thwords.id')
+            ->where('id', '>', $id)
+            ->orderBy('id', 'asc')
+            ->first();
+
+        if (!empty($thword)) {
+            return Redirect::to('/admin/thword/' . $thword->id . '/show');
+        } else {
+            // next thword not found
+            return Redirect::to('/admin/thword/' . $id . '/show');
+        }
+    }
+
+
+    /**
+     * Redirect to the last thwordy.
+     *
+     * @return Response
+     */
+    public function last()
+    {
+        $thword = DB::table('thw_thwords')
+            ->select('thw_thwords.id')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        return Redirect::to('/admin/thword/' . $thword->id . '/show');
+    }
+
+
 }

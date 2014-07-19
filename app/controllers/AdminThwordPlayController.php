@@ -169,4 +169,82 @@ class AdminThwordPlayController extends \AdminController {
     }
 
 
+    /**
+     * Redirect to the first thword play.
+     *
+     * @return Response
+     */
+    public function first()
+    {
+        $thword = DB::table('thw_thwordplays')
+            ->select('thw_thwordplays.id')
+            ->orderBy('id', 'asc')
+            ->first();
+
+        return Redirect::to('/admin/thword-play/' . $thword->id . '/show');
+    }
+
+
+    /**
+     * Redirect to the previous thword play.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function previous($id)
+    {
+        $thword = DB::table('thw_thwordplays')
+            ->select('thw_thwordplays.id')
+            ->where('id', '<', $id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if (!empty($thword)) {
+            return Redirect::to('/admin/thword-play/' . $thword->id . '/show');
+        } else {
+            // next thword not found
+            return Redirect::to('/admin/thword-play/' . $id . '/show');
+        }
+    }
+
+
+    /**
+     * Redirect to the next thword play.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function next($id)
+    {
+        $thword = DB::table('thw_thwordplays')
+            ->select('thw_thwordplays.id')
+            ->where('id', '>', $id)
+            ->orderBy('id', 'asc')
+            ->first();
+
+        if (!empty($thword)) {
+            return Redirect::to('/admin/thword-play/' . $thword->id . '/show');
+        } else {
+            // next thword not found
+            return Redirect::to('/admin/thword-play/' . $id . '/show');
+        }
+    }
+
+
+    /**
+     * Redirect to the last thword play.
+     *
+     * @return Response
+     */
+    public function last()
+    {
+        $thword = DB::table('thw_thwordplays')
+            ->select('thw_thwordplays.id')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        return Redirect::to('/admin/thword-play/' . $thword->id . '/show');
+    }
+
+
 }

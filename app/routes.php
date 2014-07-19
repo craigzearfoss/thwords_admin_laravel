@@ -24,6 +24,28 @@ Route::post('login', 'HomeController@postLogin');
 Route::group(array('before' => 'auth'), function(){
     Route::get('admin', 'AdminController@index');
     Route::get('logout', 'HomeController@logout');
+
+
+    Route::get('/admin/anti-thword/first', 'AdminAntiThwordController@first');
+    Route::get('/admin/anti-thword/{id}/previous', 'AdminAntiThwordController@previous');
+    Route::get('/admin/anti-thword/{id}/next', 'AdminAntiThwordController@next');
+    Route::get('/admin/anti-thword/last', 'AdminAntiThwordController@last');
+
+    Route::get('/admin/foreign-thword/first', 'AdminForeignThwordController@first');
+    Route::get('/admin/foreign-thword/{id}/previous', 'AdminForeignThwordController@previous');
+    Route::get('/admin/foreign-thword/{id}/next', 'AdminForeignThwordController@next');
+    Route::get('/admin/foreign-thword/last', 'AdminForeignThwordController@last');
+
+    Route::get('/admin/thword-play/first', 'AdminThwordPlayController@first');
+    Route::get('/admin/thword-play/{id}/previous', 'AdminThwordPlayController@previous');
+    Route::get('/admin/thword-play/{id}/next', 'AdminThwordPlayController@next');
+    Route::get('/admin/thword-play/last', 'AdminThwordPlayController@last');
+
+    Route::get('/admin/thword/first', 'AdminThwordController@first');
+    Route::get('/admin/thword/{id}/previous', 'AdminThwordController@previous');
+    Route::get('/admin/thword/{id}/next', 'AdminThwordController@next');
+    Route::get('/admin/thword/last', 'AdminThwordController@last');
+
     Route::resource('/admin/anti-thword', 'AdminAntiThwordController');
     Route::resource('/admin/category', 'AdminCategoryController');
     Route::resource('/admin/foreign-thword', 'AdminForeignThwordController');
@@ -40,7 +62,6 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('/admin/foreign-thword/{id}/show', 'AdminForeignThwordController@show');
     Route::get('/admin/thword/{id}/show', 'AdminThwordController@show');
     Route::get('/admin/thword-play/{id}/show', 'AdminThwordPlayController@show');
-
 
     Route::get('admin/json/category-subjects/{categoryId}', 'AdminJsonController@categorySubjects');
 });

@@ -23,6 +23,20 @@
         <table class="table">
             <tbody>
                 <tr>
+                    <td colspan="100%">
+                        <div class="nav-btn-container" class="pull-left" style="width: auto;">
+                            {{ HTML::link('/admin/thword/first', '|<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to first']) }}
+                            {{ HTML::link('/admin/thword/'.$thwArray['thword']['id'].'/previous', '<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to previous']) }}
+                            {{ HTML::link('/admin/thword/'.$thwArray['thword']['id'].'/next', '>', ['class' => 'btn btn-primary pull-left', 'title' => 'go to next']) }}
+                            {{ HTML::link('/admin/thword/last', '>|', ['class' => 'btn btn-primary pull-left', 'title' => 'go to last']) }}
+                        </div>
+                        <div class="pull-right" style="width: auto;">
+                            {{ HTML::link('/admin/thword', 'Back', ['class' => 'btn btn-primary']) }}
+                            {{ HTML::link('/admin/thword/'.$thwArray['thword']['id'].'/edit', 'Edit', ['class' => 'btn btn-primary']) }}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
                     <td>Topic</td>
                     <td>{{ $thwArray['thword']['topic'] }}</td>
                 </tr>
@@ -97,10 +111,6 @@
             </tbody>
         </table>
     </div>
-
-    <div class="form-group">
-        {{ HTML::link('/admin/thword', 'Back', ['class' => 'btn btn-primary']) }}
-        {{ HTML::link('/admin/thword/'.$thwArray['thword']['id'].'/edit', 'Edit', ['class' => 'btn btn-primary']) }}    </div>
 
     {{ Form::close() }}
 
