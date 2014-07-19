@@ -63,6 +63,7 @@
 
     <div class="form-group">
         {{ Form::label('answers', 'Answers') }}
+        <span style="display: inline-block; float: right;">Separator: {{ Form::select('answer_separator', $answerSeparators, "\n", ['class' => '']) }}</span>
         {{ Form::textarea('answers', null, ['placeholder' => 'Answers', 'class' => 'form-control']) }}
     </div>
 

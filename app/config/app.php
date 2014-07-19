@@ -95,7 +95,8 @@ return array(
 
 	'providers' => array(
 
-        	'Creitive\Breadcrumbs\BreadcrumbsServiceProvider',
+        'Cartalyst\Sentry\SentryServiceProvider',
+        'Creitive\Breadcrumbs\BreadcrumbsServiceProvider',
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
@@ -123,8 +124,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
-		'Cartalyst\Sentry\SentryServiceProvider',
-
+        'Craigzearfoss\ThwordUtil\ThwordUtilServiceProvider',
+        'Codesleeve\AssetPipeline\AssetPipelineServiceProvider'
 	),
 
 	/*

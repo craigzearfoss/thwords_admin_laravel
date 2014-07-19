@@ -1,0 +1,23 @@
+{
+    "name": "craigzearfoss/thword-util",
+    "description": "",
+    "authors": [
+        {
+            "name": "Craig Zearfoss",
+            "email": "craigzearfoss@yahoo.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Craigzearfoss\\ThwordUtil\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}

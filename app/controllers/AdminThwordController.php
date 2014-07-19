@@ -96,13 +96,15 @@ class AdminThwordController extends \AdminController {
         $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
         $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
+        $separatorCharacters = ThwordUtil::getSeparatorCharacters();
 
         return View::make('admin.thword.edit', [
-            'thword'          => $thword,
-            'expertOptions'   => $expertOptions,
-            'categoryOptions' => $categoryOptions,
-            'subjectOptions'  => $subjectOptions,
-            'languageOptions' => $languageOptions
+            'thword'           => $thword,
+            'expertOptions'    => $expertOptions,
+            'categoryOptions'  => $categoryOptions,
+            'subjectOptions'   => $subjectOptions,
+            'languageOptions'  => $languageOptions,
+            'answerSeparators' => $separatorCharacters
         ]);
 	}
 

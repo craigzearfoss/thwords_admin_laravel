@@ -4,13 +4,14 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-        "laravelbook/ardent":   "dev-master",
-	    "laravel/framework":    "4.2.*",
-        "cartalyst/sentry":     "2.1.*",
-        "creitive/breadcrumbs": "dev-master",
-        "phpunit/phpunit":      "3.7.*",
-        "way/generators":       "2.*"
-	},
+        "laravelbook/ardent":        "dev-master",
+	    "laravel/framework":         "4.2.*",
+        "cartalyst/sentry":          "2.1.*",
+        "creitive/breadcrumbs":      "dev-master",
+        "phpunit/phpunit":           "3.7.*",
+        "way/generators":            "2.*",
+        "codesleeve/asset-pipeline": "dev-master"
+    },
 	"autoload": {
 		"classmap": [
 			"app/commands",
