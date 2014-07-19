@@ -109,4 +109,30 @@ class AdminCategoryController extends \AdminController {
 	}
 
 
+
+    /**
+     * Display the specified category.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        Breadcrumbs::addCrumb('Show', '/admin/category/show');
+
+        $category = Category::find($id);
+
+        $subjects = DB::table('thw_subjects')
+            ->select('thw_subjects.id', 'thw_subjects.name')
+            ->where('category_id', $id)
+            ->orderBy('name', 'asc')
+            ->get();
+
+        return View::make('admin.category.show', [
+            'category' => $category,
+            'subjects' => $subjects
+        ]);
+    }
+
+
 }

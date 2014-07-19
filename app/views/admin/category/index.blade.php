@@ -30,7 +30,8 @@
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
                     <td>
-                        {{ HTML::link('/admin/category/'.$category->id.'/edit', 'Edit', array('class' => 'btn btn-primary pull-left')) }}
+                        {{ HTML::link('/admin/category/'.$category->id.'/show', 'Show', array('class' => 'btn btn-primary')) }}
+                        {{ HTML::link('/admin/category/'.$category->id.'/edit', 'Edit', array('class' => 'btn btn-primary')) }}
                         <?php /*
                         {{ Form::open(['url' => '/admin/category/' . $category->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}

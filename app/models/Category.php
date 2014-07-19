@@ -34,6 +34,15 @@ class Category extends Ardent {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function subjects()
+    {
+        return $this->hasMany('Subjects');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function antithwords()
     {
         return $this->hasMany('Antithwords');

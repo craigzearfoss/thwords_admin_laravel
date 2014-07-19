@@ -36,7 +36,11 @@ class AdminSubjectController extends \AdminController {
 	{
         Breadcrumbs::addCrumb('Create', '/admin/subject/subject');
 
-        return View::make('admin.subject.create', []);
+        $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
+
+        return View::make('admin.subject.create', [
+            'categoryOptions' => $categoryOptions
+        ]);
 	}
 
 
@@ -49,7 +53,8 @@ class AdminSubjectController extends \AdminController {
 	{
         $subject = new Subject;
 
-        $subject->name = Input::get('name');
+        $subject->name        = Input::get('name');
+        $subject->category_id = Input::get('category_id');
 
         if ($success = $subject->save()) {
             return Redirect::to('/admin/subject')->with('message', 'Subject created successfully.');
@@ -71,8 +76,11 @@ class AdminSubjectController extends \AdminController {
 
         $subject = Subject::find($id);
 
+        $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
+
         return View::make('admin.subject.edit', [
-            'subject' => $subject
+            'subject'         => $subject,
+            'categoryOptions' => $categoryOptions
         ]);
 	}
 
@@ -87,7 +95,8 @@ class AdminSubjectController extends \AdminController {
 	{
         $subject = Subject::find($id);
 
-        $subject->name = Input::get('name');
+        $subject->name        = Input::get('name');
+        $subject->category_id = Input::get('category_id');
 
         if ($success = $subject->save()) {
             return Redirect::to('/admin/subject');
