@@ -40,4 +40,7 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('/admin/foreign-thword/{id}/show', 'AdminForeignThwordController@show');
     Route::get('/admin/thword/{id}/show', 'AdminThwordController@show');
     Route::get('/admin/thword-play/{id}/show', 'AdminThwordPlayController@show');
+
+
+    Route::get('admin/json/category-subjects/{categoryId}', 'AdminJsonController@categorySubjects');
 });

@@ -31,12 +31,12 @@
         {{ Form::select('expert', $expertOptions, null, ['class' => 'form-control']) }}
     </div>
 
-    <div class="form-group">
+    <div id="category-div" class="form-group">
         {{ Form::label('category_id', 'Category') }}
         {{ Form::select('category_id', $categoryOptions, null, ['class' => 'form-control']) }}
     </div>
 
-    <div class="form-group">
+    <div id="subject-div" class="form-group">
         {{ Form::label('subject_id', 'Subject') }}
         {{ Form::select('subject_id', $subjectOptions, null, ['class' => 'form-control']) }}
     </div>
