@@ -30,13 +30,13 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('topic', 'Topic') }}
-        {{ Form::text('topic', null, ['placeholder' => 'Topic', 'class' => 'form-control']) }}
+        {{ Form::label('topic', 'Term') }}
+        {{ Form::text('topic', null, ['placeholder' => 'Term', 'class' => 'form-control']) }}
     </div>
 
-    <div class="form-group" style="display: none;">
-        {{ Form::label('expert', 'Expert') }}
-        {{ Form::select('expert', $expertOptions, null, ['class' => 'form-control']) }}
+    <div class="form-group">
+        {{ Form::label('description', 'Definition') }}
+        {{ Form::text('description', null, ['placeholder' => 'Definition', 'class' => 'form-control']) }}
     </div>
 
     <div class="form-group" style="display: none;">
@@ -55,8 +55,8 @@
     </div>
 
     <div class="form-group" style="display: none;">
-        {{ Form::label('description', 'Description') }}
-        {{ Form::text('description', null, ['placeholder' => 'Description', 'class' => 'form-control']) }}
+        {{ Form::label('expert', 'Expert') }}
+        {{ Form::select('expert', $expertOptions, null, ['class' => 'form-control']) }}
     </div>
 
     <div class="form-group" style="display: none;">
@@ -75,16 +75,16 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('answers', 'Answers') }}
+        {{ Form::label('answers', 'Synonyms') }}
         <span class="pull-right" style="display: none;">
             Secondary Separator:
             {{ Form::select('secondary_separator', $secondarySeparator, \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR, ['class' => '']) }}
         </span>
         <span class="pull-right">
-            Primary Separator:
+            Separator:
             {{ Form::select('primary_separator', $primarySeparator, \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR, ['class' => '']) }}
         </span>
-        {{ Form::textarea('answers', null, ['placeholder' => 'Answers', 'class' => 'form-control']) }}
+        {{ Form::textarea('answers', null, ['placeholder' => 'Synonyms', 'class' => 'form-control']) }}
     </div>
 
     <div class="form-group">

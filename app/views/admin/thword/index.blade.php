@@ -27,7 +27,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Lang</th>
-                    <th>Topic</th>
+                    <th>Term</th>
+                    <th>Definition</th>
                 </tr>
             </thead>
 
@@ -37,6 +38,7 @@
                     <td>{{ $thword->id }}</td>
                     <td>{{ $thword->lang }}</td>
                     <td>{{ $thword->topic }}</td>
+                    <td>{{ $thword->description }}</td>
                     <td>
                         {{ HTML::link('/admin/thword/'.$thword->id.'/show', 'Show', array('class' => 'btn btn-primary')) }}
                         {{ HTML::link('/admin/thword/'.$thword->id.'/edit', 'Edit', array('class' => 'btn btn-primary')) }}

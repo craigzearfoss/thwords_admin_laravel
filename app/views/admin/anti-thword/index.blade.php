@@ -27,8 +27,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Lang</th>
-                    <th>Topic</th>
-                    <th>Description</th>
+                    <th>Term</th>
+                    <th>Definition</th>
                 </tr>
             </thead>
 

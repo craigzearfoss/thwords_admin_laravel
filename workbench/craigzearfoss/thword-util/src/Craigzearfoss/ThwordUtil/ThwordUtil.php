@@ -25,4 +25,5 @@ class ThwordUtil {
 
         return $separators;
     }
+
 }

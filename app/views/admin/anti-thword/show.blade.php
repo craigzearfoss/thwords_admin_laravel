@@ -42,11 +42,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Topic</td>
+                    <td>Term</td>
                     <td>{{ str_replace('|', ', ', $thwArray['thword']['topic']) }}</td>
                 </tr>
                 <tr>
-                    <td>Description</td>
+                    <td>Definition</td>
                     <td>{{ str_replace('|', ', ', $thwArray['thword']['description']) }}</td>
                 </tr>
                 <tr style="display: none;">
@@ -66,7 +66,7 @@
                     <td>{{ $thwArray['thword']['expert'] }}</td>
                 </tr>
                 <tr>
-                    <td>Answers</td>
+                    <td>Antonyms</td>
                     <td>
                         <?php $answers = explode('|', $thwArray['thword']['answers']); ?>
                         @foreach ($answers as $answer)

@@ -29,13 +29,13 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('topic', 'Topic') }}
-        {{ Form::text('topic', '', ['placeholder' => 'Topic', 'class' => 'form-control']) }}
+        {{ Form::label('topic', 'Term') }}
+        {{ Form::text('topic', '', ['placeholder' => 'Term', 'class' => 'form-control']) }}
     </div>
 
-    <div class="form-group" style="display: none;">
-        {{ Form::label('expert', 'Expert') }}
-        {{ Form::select('expert', $expertOptions, 0, ['class' => 'form-control']) }}
+    <div class="form-group">
+        {{ Form::label('description', 'Definition') }}
+        {{ Form::text('description', '', ['placeholder' => 'Definition', 'class' => 'form-control']) }}
     </div>
 
     <div class="form-group" style="display: none;">
@@ -53,9 +53,9 @@
         {{ Form::select('lang', $languageOptions, 'en', ['class' => 'form-control']) }}
     </div>
 
-    <div class="form-group">
-        {{ Form::label('description', 'Description') }}
-        {{ Form::text('description', '', ['placeholder' => 'Description', 'class' => 'form-control']) }}
+    <div class="form-group" style="display: none;">
+        {{ Form::label('expert', 'Expert') }}
+        {{ Form::select('expert', $expertOptions, 0, ['class' => 'form-control']) }}
     </div>
 
     <div class="form-group" style="display: none;">
@@ -74,16 +74,16 @@
     </div>
 
     <div class="form-group">
-        {{ Form::label('answers', 'Answers') }}
+        {{ Form::label('answers', 'Antonyms') }}
         <span class="pull-right" style="display: none;">
             Secondary Separator:
             {{ Form::select('secondary_separator', $secondarySeparator, \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR, ['class' => '']) }}
         </span>
         <span class="pull-right">
-            Primary Separator:
+            Separator:
             {{ Form::select('primary_separator', $primarySeparator, \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR, ['class' => '']) }}
         </span>
-        {{ Form::textarea('answers', '', ['placeholder' => 'Answers', 'class' => 'form-control']) }}
+        {{ Form::textarea('answers', '', ['placeholder' => 'Antonyms', 'class' => 'form-control']) }}
     </div>
 
     <div class="form-group">

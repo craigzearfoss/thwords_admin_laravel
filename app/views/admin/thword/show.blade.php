@@ -42,8 +42,12 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Topic</td>
+                    <td>Term</td>
                     <td>{{ $thwArray['thword']['topic'] }}</td>
+                </tr>
+                <tr>
+                    <td>Definition</td>
+                    <td>{{ $thwArray['thword']['description'] }}</td>
                 </tr>
                 <tr style="display: none;">
                     <td>Category</td>
@@ -61,12 +65,8 @@
                     <td>Expert</td>
                     <td>{{ $thwArray['thword']['expert'] }}</td>
                 </tr>
-                <tr style="display: none;">
-                    <td>Description</td>
-                    <td>{{ $thwArray['thword']['description'] }}</td>
-                </tr>
                 <tr>
-                    <td>Answers</td>
+                    <td>Synonyms</td>
                     <td>
                         <?php $answers = explode('|', $thwArray['thword']['answers']); ?>
                         @foreach ($answers as $answer)
