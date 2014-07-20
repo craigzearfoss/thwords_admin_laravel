@@ -2,7 +2,7 @@
 
 class AdminUserController extends \AdminController {
 
-    protected $subject;
+    protected $user;
 
     public function __construct()
     {
@@ -28,86 +28,86 @@ class AdminUserController extends \AdminController {
 
 
 	/**
-	 * Show the form for creating a new subject.
+	 * Show the form for creating a new user.
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-        Breadcrumbs::addCrumb('Create', '/admin/subject/subject');
+        Breadcrumbs::addCrumb('Create', '/admin/user/user');
 
-        return View::make('admin.subject.create', []);
+        return View::make('admin.user.create', []);
 	}
 
 
 	/**
-	 * Store a newly created subject in storage.
+	 * Store a newly created user in storage.
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-        $subject = new Subject;
+        $user = new User;
 
-        $subject->name = Input::get('name');
+        $user->name = Input::get('name');
 
-        if ($success = $subject->save()) {
-            return Redirect::to('/admin/subject')->with('message', 'Subject created successfully.');
+        if ($success = $user->save()) {
+            return Redirect::to('/admin/user')->with('message', 'User created successfully.');
         } else {
-            return Redirect::to('/admin/subject/create')->withErrors($subject->errors());
+            return Redirect::to('/admin/user/create')->withErrors($user->errors());
         }
 	}
 
 
 	/**
-	 * Show the form for editing the specified subject.
+	 * Show the form for editing the specified user.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-        Breadcrumbs::addCrumb('Edit', '/admin/subject/edit');
+        Breadcrumbs::addCrumb('Edit', '/admin/user/edit');
 
-        $subject = Subject::find($id);
+        $user = User::find($id);
 
-        return View::make('admin.subject.edit', [
-            'subject' => $subject
+        return View::make('admin.user.edit', [
+            'user' => $user
         ]);
 	}
 
 
 	/**
-	 * Update the specified subject in storage.
+	 * Update the specified user in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function update($id)
 	{
-        $subject = Subject::find($id);
+        $user = User::find($id);
 
-        $subject->name = Input::get('name');
+        $user->name = Input::get('name');
 
-        if ($success = $subject->save()) {
-            return Redirect::to('/admin/subject');
+        if ($success = $user->save()) {
+            return Redirect::to('/admin/user');
         } else {
-            return Redirect::to('/admin/subject/' . $id . '/edit/')->withErrors($subject->errors());
+            return Redirect::to('/admin/user/' . $id . '/edit/')->withErrors($user->errors());
         }
 	}
 
 
 	/**
-	 * Remove the specified subject from storage.
+	 * Remove the specified user from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-        Subject::destroy($id);
+        User::destroy($id);
 
-        return Redirect::to('/admin/subject');
+        return Redirect::to('/admin/user');
 	}
 
 

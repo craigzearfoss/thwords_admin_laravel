@@ -47,7 +47,8 @@ class AdminThwordPlayController extends \AdminController {
             'subjectOptions'     => $subjectOptions,
             'languageOptions'    => $languageOptions,
             'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
-            'secondarySeparator' => ThwordUtil::getSeparatorCharacters()
+            'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
+            'maxChoicesList'     => ThwordUtil::getMaxChoicesList()
         ]);
 	}
 
@@ -71,6 +72,7 @@ class AdminThwordPlayController extends \AdminController {
         $thword->bonus_question = Input::get('bonus_question');
         $thword->answers        = Input::get('answers');
         $thword->correct_answer = Input::get('correct_answer');
+        $thword->max_choices    = Input::get('max_choices');
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');
 
@@ -124,7 +126,8 @@ class AdminThwordPlayController extends \AdminController {
             'subjectOptions'     => $subjectOptions,
             'languageOptions'    => $languageOptions,
             'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
-            'secondarySeparator' => ThwordUtil::getSeparatorCharacters()
+            'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
+            'maxChoicesList'     => ThwordUtil::getMaxChoicesList()
         ]);
 	}
 
@@ -149,6 +152,7 @@ class AdminThwordPlayController extends \AdminController {
         $thword->bonus_question = Input::get('bonus_question');
         $thword->answers        = Input::get('answers');
         $thword->correct_answer = Input::get('correct_answer');
+        $thword->max_choices    = Input::get('max_choices');
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');
 

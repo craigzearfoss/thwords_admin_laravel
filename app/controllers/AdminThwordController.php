@@ -20,7 +20,7 @@ class AdminThwordController extends \AdminController {
 	public function index()
     {
         $thwords = DB::table('thw_thwords')
-            ->select('thw_thwords.id', 'thw_thwords.lang', 'thw_thwords.topic')
+            ->select('thw_thwords.id', 'thw_thwords.lang', 'thw_thwords.topic', 'thw_thwords.description')
             ->orderBy('id', 'asc')
             ->paginate(25);
 
@@ -48,7 +48,8 @@ class AdminThwordController extends \AdminController {
             'subjectOptions'     => $subjectOptions,
             'languageOptions'    => $languageOptions,
             'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
-            'secondarySeparator' => ThwordUtil::getSeparatorCharacters()
+            'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
+            'maxChoicesList'     => ThwordUtil::getMaxChoicesList()
         ]);
 	}
 
@@ -72,6 +73,7 @@ class AdminThwordController extends \AdminController {
         $thword->bonus_question = Input::get('bonus_question');
         $thword->answers        = Input::get('answers');
         $thword->correct_answer = Input::get('correct_answer');
+        $thword->max_choices    = Input::get('max_choices');
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');
 
@@ -125,7 +127,8 @@ class AdminThwordController extends \AdminController {
             'subjectOptions'     => $subjectOptions,
             'languageOptions'    => $languageOptions,
             'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
-            'secondarySeparator' => ThwordUtil::getSeparatorCharacters()
+            'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
+            'maxChoicesList'     => ThwordUtil::getMaxChoicesList()
         ]);
 	}
 
@@ -150,6 +153,7 @@ class AdminThwordController extends \AdminController {
         $thword->bonus_question = Input::get('bonus_question');
         $thword->answers        = Input::get('answers');
         $thword->correct_answer = Input::get('correct_answer');
+        $thword->max_choices    = Input::get('max_choices');
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');
 

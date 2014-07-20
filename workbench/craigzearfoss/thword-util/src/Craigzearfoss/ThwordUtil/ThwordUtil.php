@@ -6,7 +6,9 @@ class ThwordUtil {
 
     const SECONDARY_SEPARATOR = '^';
 
-    public static function getSeparatorCharacters(){
+    const DEFAULT_MAX_CHOICES = 4;
+
+    public static function getSeparatorCharacters() {
 
         $separators = array(
             '|' => '|',
@@ -26,4 +28,13 @@ class ThwordUtil {
         return $separators;
     }
 
+    public static function getMaxChoicesList() {
+
+        $maxChoices = array();
+        for ($i=2; $i<11; $i++) {
+            $maxChoices[$i] = $i;
+        }
+
+        return $maxChoices;
+    }
 }

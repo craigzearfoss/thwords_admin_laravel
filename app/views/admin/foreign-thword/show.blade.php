@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title') Show Foregin Thword @stop
+@section('title') Show Foreign Thword @stop
 
 @section('content')
 

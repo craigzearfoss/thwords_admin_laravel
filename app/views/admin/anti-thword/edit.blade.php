@@ -74,6 +74,11 @@
         {{ Form::text('correct_answer', null, ['placeholder' => 'Correct Answer', 'class' => 'form-control']) }}
     </div>
 
+    <div class="form-group" style="display: none;">
+        {{ Form::label('max_choices', 'Max Choices') }}
+        {{ Form::select('max_choices', $maxChoicesList, null, ['class' => '']) }}
+    </div>
+
     <div class="form-group">
         {{ Form::label('answers', 'Antonyms') }}
         <span class="pull-right" style="display: none;">
