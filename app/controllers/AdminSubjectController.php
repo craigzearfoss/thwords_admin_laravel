@@ -19,8 +19,9 @@ class AdminSubjectController extends \AdminController {
 	public function index()
     {
         $subjects = DB::table('thw_subjects')
-            ->select('thw_subjects.id', 'thw_subjects.name')
-            ->orderBy('name', 'asc')
+            ->select('thw_subjects.id', 'thw_subjects.name', 'thw_subjects.category_id', 'thw_categories.name AS category')
+            ->leftJoin('thw_categories', 'thw_subjects.category_id', '=', 'thw_categories.id')
+            ->orderBy('thw_subjects.name', 'asc')
             ->paginate(25);
 
         return View::make('admin.subject.index', ['subjects' => $subjects]);

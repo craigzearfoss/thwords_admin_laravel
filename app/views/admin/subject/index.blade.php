@@ -27,6 +27,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Category</th>
                 </tr>
             </thead>
 
@@ -35,6 +36,7 @@
                 <tr>
                     <td>{{ $subject->id }}</td>
                     <td>{{ $subject->name }}</td>
+                    <td>{{ $subject->category }}</td>
                     <td>
                         {{ HTML::link('/admin/subject/'.$subject->id.'/edit', 'Edit', array('class' => 'btn btn-primary')) }}
                         <?php /*

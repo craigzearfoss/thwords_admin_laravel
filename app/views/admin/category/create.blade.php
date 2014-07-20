@@ -19,7 +19,7 @@
 
     {{ Breadcrumbs::render() }}
 
-    {{ Form::open(['role' => 'form', 'url' => '/admin/subject']) }}
+    {{ Form::open(['role' => 'form', 'url' => '/admin/category']) }}
 
     <div class="form-group">
         <div class="pull-right" style="width: auto;">
