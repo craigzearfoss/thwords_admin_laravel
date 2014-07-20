@@ -42,10 +42,12 @@ class AdminThwordPlayController extends \AdminController {
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
         return View::make('admin.thword-play.create', [
-            'expertOptions'   => $expertOptions,
-            'categoryOptions' => $categoryOptions,
-            'subjectOptions'  => $subjectOptions,
-            'languageOptions' => $languageOptions
+            'expertOptions'      => $expertOptions,
+            'categoryOptions'    => $categoryOptions,
+            'subjectOptions'     => $subjectOptions,
+            'languageOptions'    => $languageOptions,
+            'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
+            'secondarySeparator' => ThwordUtil::getSeparatorCharacters()
         ]);
 	}
 
@@ -70,6 +72,16 @@ class AdminThwordPlayController extends \AdminController {
         $thword->answers        = Input::get('answers');
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');
+
+        // make sure answers have the correct separator characters
+        $primarySeparator = Input::get('primary_separator');
+        if ($primarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR) {
+            $thword->answers = str_replace($primarySeparator, '|', $thword->answers);
+        }
+        $secondarySeparator = Input::get('secondary_separator');
+        if ($secondarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR) {
+            $thword->answers = str_replace($secondarySeparator, '|', $thword->answers);
+        }
 
         if ($success = $thword->save()) {
             return Redirect::to('/admin/thword-play')->with('message', 'Thword Play created successfully.');
@@ -97,11 +109,13 @@ class AdminThwordPlayController extends \AdminController {
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
         return View::make('admin.thword-play.edit', [
-            'thword'          => $thword,
-            'expertOptions'   => $expertOptions,
-            'categoryOptions' => $categoryOptions,
-            'subjectOptions'  => $subjectOptions,
-            'languageOptions' => $languageOptions
+            'thword'             => $thword,
+            'expertOptions'      => $expertOptions,
+            'categoryOptions'    => $categoryOptions,
+            'subjectOptions'     => $subjectOptions,
+            'languageOptions'    => $languageOptions,
+            'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
+            'secondarySeparator' => ThwordUtil::getSeparatorCharacters()
         ]);
 	}
 
@@ -127,6 +141,16 @@ class AdminThwordPlayController extends \AdminController {
         $thword->answers        = Input::get('answers');
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');
+
+        // make sure answers have the correct separator characters
+        $primarySeparator = Input::get('primary_separator');
+        if ($primarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR) {
+            $thword->answers = str_replace($primarySeparator, '|', $thword->answers);
+        }
+        $secondarySeparator = Input::get('secondary_separator');
+        if ($secondarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR) {
+            $thword->answers = str_replace($secondarySeparator, '|', $thword->answers);
+        }
 
         if ($success = $thword->save()) {
             return Redirect::to('/admin/thword-play');

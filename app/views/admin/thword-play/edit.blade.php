@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class='col-lg-8 col-lg-offset-4'>
+<div class='col-lg-8 col-lg-offset-2'>
 
     @if ($errors->has())
         @foreach ($errors->all() as $error)
@@ -20,6 +20,20 @@
     {{ Breadcrumbs::render() }}
 
     {{ Form::model($thword, ['role' => 'form', 'url' => '/admin/thword-play/' . $thword->id, 'method' => 'PUT']) }}
+
+    <div class="form-group">
+        <div class="nav-btn-container" class="pull-left" style="width: auto;">
+            {{ HTML::link('/admin/thword-play/first', '|<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to first']) }}
+            {{ HTML::link('/admin/thword-play/'.$thword->id.'/previous', '<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to previous']) }}
+            {{ HTML::link('/admin/thword-play/'.$thword->id.'/next', '>', ['class' => 'btn btn-primary pull-left', 'title' => 'go to next']) }}
+            {{ HTML::link('/admin/thword-play/last', '>|', ['class' => 'btn btn-primary pull-left', 'title' => 'go to last']) }}
+        </div>
+        <div class="pull-right" style="width: auto;">
+            {{ HTML::link('/admin/thword-play', 'Cancel', ['class' => 'btn btn-primary']) }}
+            {{ HTML::link('/admin/thword-play/'.$thword->id.'/show', 'Show', ['class' => 'btn btn-primary']) }}
+            {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+        </div>
+    </div>
 
     <div class="form-group">
         {{ Form::label('topic', 'Topic') }}
@@ -63,6 +77,8 @@
 
     <div class="form-group">
         {{ Form::label('answers', 'Answers') }}
+        <span class="pull-right">Secondary Separator: {{ Form::select('secondary_separator', $secondarySeparator, '|', ['class' => '']) }}</span>
+        <span class="pull-right">Primary Separator: {{ Form::select('primary_separator', $primarySeparator, '|', ['class' => '']) }}</span>
         {{ Form::textarea('answers', null, ['placeholder' => 'Answers', 'class' => 'form-control']) }}
     </div>
 
@@ -74,12 +90,6 @@
     <div class="form-group">
         {{ Form::label('notes', 'Notes') }}
         {{ Form::textarea('notes', null, ['placeholder' => 'Notes', 'class' => 'form-control']) }}
-    </div>
-
-    <div class="form-group">
-        {{ HTML::link('/admin/thword-play', 'Cancel', ['class' => 'btn btn-primary']) }}
-        {{ HTML::link('/admin/thword-play/'.$thword->id.'/show', 'Show', ['class' => 'btn btn-primary']) }}
-        {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
     </div>
 
     {{ Form::close() }}

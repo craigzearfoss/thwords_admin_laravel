@@ -43,10 +43,12 @@ class AdminThwordController extends \AdminController {
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
         return View::make('admin.thword.create', [
-            'expertOptions'   => $expertOptions,
-            'categoryOptions' => $categoryOptions,
-            'subjectOptions'  => $subjectOptions,
-            'languageOptions' => $languageOptions
+            'expertOptions'      => $expertOptions,
+            'categoryOptions'    => $categoryOptions,
+            'subjectOptions'     => $subjectOptions,
+            'languageOptions'    => $languageOptions,
+            'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
+            'secondarySeparator' => ThwordUtil::getSeparatorCharacters()
         ]);
 	}
 
@@ -72,6 +74,16 @@ class AdminThwordController extends \AdminController {
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');
 
+        // make sure answers have the correct separator characters
+        $primarySeparator = Input::get('primary_separator');
+        if ($primarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR) {
+            $thword->answers = str_replace($primarySeparator, '|', $thword->answers);
+        }
+        $secondarySeparator = Input::get('secondary_separator');
+        if ($secondarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR) {
+            $thword->answers = str_replace($secondarySeparator, '|', $thword->answers);
+        }
+
         if ($success = $thword->save()) {
             return Redirect::to('/admin/thword')->with('message', 'Thword created successfully.');
         } else {
@@ -96,15 +108,15 @@ class AdminThwordController extends \AdminController {
         $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
         $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
-        $separatorCharacters = ThwordUtil::getSeparatorCharacters();
 
         return View::make('admin.thword.edit', [
-            'thword'          => $thword,
-            'expertOptions'   => $expertOptions,
-            'categoryOptions' => $categoryOptions,
-            'subjectOptions'  => $subjectOptions,
-            'languageOptions' => $languageOptions,
-            'answerSeparator' => $separatorCharacters,
+            'thword'             => $thword,
+            'expertOptions'      => $expertOptions,
+            'categoryOptions'    => $categoryOptions,
+            'subjectOptions'     => $subjectOptions,
+            'languageOptions'    => $languageOptions,
+            'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
+            'secondarySeparator' => ThwordUtil::getSeparatorCharacters()
         ]);
 	}
 
@@ -131,10 +143,14 @@ class AdminThwordController extends \AdminController {
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');
 
-        // make sure answers are in the correct format
-        $answerSeparator = Input::get('answer_separator');
-        if ($answerSeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::ANSWER_SEPARATOR) {
-            $thword->answers = str_replace($answerSeparator, '|', $thword->answers);
+        // make sure answers have the correct separator characters
+        $primarySeparator = Input::get('primary_separator');
+        if ($primarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR) {
+            $thword->answers = str_replace($primarySeparator, '|', $thword->answers);
+        }
+        $secondarySeparator = Input::get('secondary_separator');
+        if ($secondarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR) {
+            $thword->answers = str_replace($secondarySeparator, '|', $thword->answers);
         }
 
         if ($success = $thword->save()) {

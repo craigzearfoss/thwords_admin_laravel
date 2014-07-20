@@ -2,7 +2,9 @@
 
 class ThwordUtil {
 
-    const ANSWER_SEPARATOR = '|';
+    const PRIMARY_SEPARATOR = '|';
+
+    const SECONDARY_SEPARATOR = '^';
 
     public static function getSeparatorCharacters(){
 
