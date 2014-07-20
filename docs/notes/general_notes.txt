@@ -1,0 +1,5 @@
+Connect to AWS Server
+ssh -i thwords_useast.pem ubuntu@54.198.10.196
+
+
+scp -i thwords_useast.pem /home/craig/Documents/craig/backups/Thwords/thwords_20140720_140000.sql    ubuntu@54.198.10.196:/tmp/

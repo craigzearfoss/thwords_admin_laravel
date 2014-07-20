@@ -70,6 +70,7 @@ class AdminThwordPlayController extends \AdminController {
         $thword->bonus          = (Input::get('my_checkbox') === '1') ? 1 : 0;
         $thword->bonus_question = Input::get('bonus_question');
         $thword->answers        = Input::get('answers');
+        $thword->correct_answer = Input::get('correct_answer');
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');
 
@@ -147,6 +148,7 @@ class AdminThwordPlayController extends \AdminController {
         $thword->bonus          = (Input::get('my_checkbox') === '1') ? 1 : 0;
         $thword->bonus_question = Input::get('bonus_question');
         $thword->answers        = Input::get('answers');
+        $thword->correct_answer = Input::get('correct_answer');
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');
 

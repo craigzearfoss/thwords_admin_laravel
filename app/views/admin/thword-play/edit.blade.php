@@ -44,7 +44,7 @@
         {{ Form::select('category_id', $categoryOptions, null, ['class' => 'form-control']) }}
     </div>
 
-    <div id="subject-div" class="fo777rm-group">
+    <div id="subject-div" class="form-group">
         {{ Form::label('subject_id', 'Subject') }}
         {{ Form::select('subject_id', $subjectOptions, null, ['class' => 'form-control']) }}
     </div>
@@ -67,6 +67,11 @@
     <div class="form-group">
         {{ Form::label('bonus_question', 'Bonus Question Text (optional)') }}
         {{ Form::text('bonus_question', null, ['placeholder' => 'Bonus Question', 'class' => 'form-control']) }}
+    </div>
+
+    <div class="form-group" style="display: none;">
+        {{ Form::label('correct_answer', 'Correct Answer') }}
+        {{ Form::text('correct_answer', null, ['placeholder' => 'Correct Answer', 'class' => 'form-control']) }}
     </div>
 
     <div class="form-group">

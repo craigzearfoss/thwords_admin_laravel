@@ -68,6 +68,11 @@
         {{ Form::text('bonus_question', '', ['placeholder' => 'Bonus Question', 'class' => 'form-control']) }}
     </div>
 
+    <div class="form-group" style="display: none;">
+        {{ Form::label('correct_answer', 'Correct Answer') }}
+        {{ Form::text('correct_answer', '1', ['placeholder' => 'Correct Answer', 'class' => 'form-control']) }}
+    </div>
+
     <div class="form-group">
         {{ Form::label('answers', 'Answers') }}
         <span class="pull-right" style="display: none;">
