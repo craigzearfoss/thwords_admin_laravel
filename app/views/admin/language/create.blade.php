@@ -12,10 +12,10 @@
         @endforeach
     @endif
 
-    <h1>
+    <h2>
         <i class="fa fa-subject"></i> Create Language
         {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
-    </h1>
+    </h2>
 
     {{ Breadcrumbs::render() }}
 

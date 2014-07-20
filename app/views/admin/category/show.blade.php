@@ -6,16 +6,20 @@
 
 <div class='col-lg-8 col-lg-offset-2'>
 
+    @if (!empty($successMsg))
+        <div class='bg-success alert'>{{ $successMsg }}</div>
+    @endif
+
     @if ($errors->has())
         @foreach ($errors->all() as $error)
             <div class='bg-danger alert'>{{ $error }}</div>
         @endforeach
     @endif
 
-    <h1>
+    <h2>
         <i class="fa fa-thword"></i> Show Category
         {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
-    </h1>
+    </h2>
 
     {{ Breadcrumbs::render() }}
 

@@ -6,10 +6,10 @@
 
 <div class="col-lg-10 col-lg-offset-1">
 
-    <h1>
+    <h2>
         <i class="fa fa-language"></i> Languages
         {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
-    </h1>
+    </h2>
 
     {{ Breadcrumbs::render() }}
 

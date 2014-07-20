@@ -84,7 +84,15 @@ class AdminForeignThwordController extends \AdminController {
         }
 
         if ($success = $thword->save()) {
-            return Redirect::to('/admin/foreign-thword')->with('message', 'Foreign Thword created successfully.');
+            //return Redirect::to('/admin/foreign-thword')->with('message', 'Foreign Thword created successfully.');
+            Breadcrumbs::addCrumb('Show', '/admin/foreign-thword/show');
+
+            $thwArray = $thword->toArray();
+
+            return View::make('admin.foreign-thword.show', [
+                'thwArray'   => $thwArray,
+                'successMsg' => 'Foreign Thword was successfully created.'
+            ]);
         } else {
             return Redirect::to('/admin/foreign-thword/create')->withErrors($thword->errors());
         }
@@ -153,7 +161,15 @@ class AdminForeignThwordController extends \AdminController {
         }
 
         if ($success = $thword->save()) {
-            return Redirect::to('/admin/foreign-thword');
+            //return Redirect::to('/admin/foreign-thword');
+            Breadcrumbs::addCrumb('Show', '/admin/foreign-thword/show');
+
+            $thwArray = $thword->toArray();
+
+            return View::make('admin.foreign-thword.show', [
+                'thwArray'   => $thwArray,
+                'successMsg' => 'Foreign Thword Play was successfully updated.'
+            ]);
         } else {
             return Redirect::to('/admin/foreign-thword/' . $id . '/edit/')->withErrors($thword->errors());
         }

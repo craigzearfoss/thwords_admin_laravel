@@ -6,16 +6,20 @@
 
 <div class='col-lg-4 col-lg-offset-4'>
 
+    @if (!empty($successMsg))
+        <div class='bg-success alert'>{{ $successMsg }}</div>
+    @endif
+
     @if ($errors->has())
         @foreach ($errors->all() as $error)
             <div class='bg-danger alert'>{{ $error }}</div>
         @endforeach
     @endif
 
-    <h1>
+    <h2>
         <i class="fa fa-thword"></i> Show Anti-Thword
         {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
-    </h1>
+    </h2>
 
     {{ Breadcrumbs::render() }}
 
@@ -31,8 +35,9 @@
                             {{ HTML::link('/admin/anti-thword/last', '>|', ['class' => 'btn btn-primary pull-left', 'title' => 'go to last']) }}
                         </div>
                         <div class="pull-right" style="width: auto;">
-                            {{ HTML::link('/admin/anti-thword', 'Back', ['class' => 'btn btn-primary']) }}
-                            {{ HTML::link('/admin/anti-thword/'.$thwArray['thword']['id'].'/edit', 'Edit', ['class' => 'btn btn-primary']) }}
+                            {{ HTML::link('/admin/anti-thword/create', 'Create a New Anti-Thword', array('class' => 'btn btn-primary')) }}
+                            {{ HTML::link('/admin/anti-thword/'.$thwArray['thword']['id'].'/edit', 'Edit This Anti-Thword', ['class' => 'btn btn-primary']) }}
+                            {{ HTML::link('/admin/anti-thword', 'Anti-Thword Listing', ['class' => 'btn btn-primary']) }}
                         </div>
                     </td>
                 </tr>

@@ -6,16 +6,20 @@
 
 <div class='col-lg-8 col-lg-offset-2'>
 
+    @if (!empty($successMsg))
+        <div class='bg-success alert'>{{ $successMsg }}</div>
+    @endif
+
     @if ($errors->has())
         @foreach ($errors->all() as $error)
             <div class='bg-danger alert'>{{ $error }}</div>
         @endforeach
     @endif
 
-    <h1>
+    <h2>
         <i class="fa fa-thword"></i> Show Thword Play
         {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
-    </h1>
+    </h2>
 
     {{ Breadcrumbs::render() }}
 
@@ -31,8 +35,9 @@
                             {{ HTML::link('/admin/thword-play/last', '>|', ['class' => 'btn btn-primary pull-left', 'title' => 'go to last']) }}
                         </div>
                         <div class="pull-right" style="width: auto;">
-                            {{ HTML::link('/admin/thword-play/'.$thwArray['thword']['id'].'/edit', 'Edit', ['class' => 'btn btn-primary']) }}
-                            {{ HTML::link('/admin/thword-play', 'Back', ['class' => 'btn btn-primary']) }}
+                            {{ HTML::link('/admin/thword-play/create', 'Create a New Thword Play', array('class' => 'btn btn-primary')) }}
+                            {{ HTML::link('/admin/thword-play/'.$thwArray['thword']['id'].'/edit', 'Edit This Thword Play', ['class' => 'btn btn-primary']) }}
+                            {{ HTML::link('/admin/thword-play', 'Thword Play Listing', ['class' => 'btn btn-primary']) }}
                         </div>
                     </td>
                 </tr>

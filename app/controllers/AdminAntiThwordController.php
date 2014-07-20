@@ -84,7 +84,15 @@ class AdminAntiThwordController extends \AdminController {
         }
 
         if ($success = $thword->save()) {
-            return Redirect::to('/admin/anti-thword')->with('message', 'Anti-Thword created successfully.');
+            //return Redirect::to('/admin/anti-thword')->with('message', 'Anti-Thword created successfully.');
+            Breadcrumbs::addCrumb('Show', '/admin/anti-thword/show');
+
+            $thwArray = $thword->toArray();
+
+            return View::make('admin.anti-thword.show', [
+                'thwArray'   => $thwArray,
+                'successMsg' => 'AntiThword was successfully created.'
+            ]);
         } else {
             return Redirect::to('/admin/anti-thword/create')->withErrors($thword->errors());
         }
@@ -153,7 +161,15 @@ class AdminAntiThwordController extends \AdminController {
         }
 
         if ($success = $thword->save()) {
-            return Redirect::to('/admin/anti-thword');
+            //return Redirect::to('/admin/anti-thword');
+            Breadcrumbs::addCrumb('Show', '/admin/anti-thword/show');
+
+            $thwArray = $thword->toArray();
+
+            return View::make('admin.anti-thword.show', [
+                'thwArray'   => $thwArray,
+                'successMsg' => 'AntiThword Play was successfully updated.'
+            ]);
         } else {
             return Redirect::to('/admin/anti-thword/' . $id . '/edit/')->withErrors($thword->errors());
         }

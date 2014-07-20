@@ -85,7 +85,15 @@ class AdminThwordController extends \AdminController {
         }
 
         if ($success = $thword->save()) {
-            return Redirect::to('/admin/thword')->with('message', 'Thword created successfully.');
+            //return Redirect::to('/admin/thword')->with('message', 'Thword created successfully.');
+            Breadcrumbs::addCrumb('Show', '/admin/thword/show');
+
+            $thwArray = $thword->toArray();
+
+            return View::make('admin.thword.show', [
+                'thwArray'   => $thwArray,
+                'successMsg' => 'Thword was successfully created.'
+            ]);
         } else {
             return Redirect::to('/admin/thword/create')->withErrors($thword->errors());
         }
@@ -154,7 +162,15 @@ class AdminThwordController extends \AdminController {
         }
 
         if ($success = $thword->save()) {
-            return Redirect::to('/admin/thword');
+            //return Redirect::to('/admin/thword');
+            Breadcrumbs::addCrumb('Show', '/admin/thword/show');
+
+            $thwArray = $thword->toArray();
+
+            return View::make('admin.thword.show', [
+                'thwArray'   => $thwArray,
+                'successMsg' => 'Thword was successfully updated.'
+            ]);
         } else {
             return Redirect::to('/admin/thword/' . $id . '/edit/')->withErrors($thword->errors());
         }

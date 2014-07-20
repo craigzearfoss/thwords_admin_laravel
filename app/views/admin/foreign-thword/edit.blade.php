@@ -12,10 +12,10 @@
         @endforeach
     @endif
 
-    <h1>
+    <h2>
         <i class="fa fa-thword"></i> Edit Foreign Thword
         {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
-    </h1>
+    </h2>
 
     {{ Breadcrumbs::render() }}
 
@@ -63,8 +63,14 @@
 
     <div class="form-group">
         {{ Form::label('answers', 'Answers') }}
-        <span class="pull-right">Secondary Separator: {{ Form::select('secondary_separator', $secondarySeparator, '|', ['class' => '']) }}</span>
-        <span class="pull-right">Primary Separator: {{ Form::select('primary_separator', $primarySeparator, '|', ['class' => '']) }}</span>
+        <span class="pull-right">
+            Secondary Separator:
+            {{ Form::select('secondary_separator', $secondarySeparator, \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR, ['class' => '']) }}
+        </span>
+        <span class="pull-right">
+            Primary Separator:
+            {{ Form::select('primary_separator', $primarySeparator, \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR, ['class' => '']) }}
+        </span>
         {{ Form::textarea('answers', null, ['placeholder' => 'Answers', 'class' => 'form-control']) }}
     </div>
 

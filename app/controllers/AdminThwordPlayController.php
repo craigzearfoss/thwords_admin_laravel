@@ -84,7 +84,15 @@ class AdminThwordPlayController extends \AdminController {
         }
 
         if ($success = $thword->save()) {
-            return Redirect::to('/admin/thword-play')->with('message', 'Thword Play created successfully.');
+            //return Redirect::to('/admin/thword-play')->with('message', 'Thword Play created successfully.');
+            Breadcrumbs::addCrumb('Show', '/admin/thword-play/show');
+
+            $thwArray = $thword->toArray();
+
+            return View::make('admin.thword-play.show', [
+                'thwArray'   => $thwArray,
+                'successMsg' => 'Thword Play was successfully created.'
+            ]);
         } else {
             return Redirect::to('/admin/thword-play/create')->withErrors($thword->errors());
         }
@@ -153,7 +161,15 @@ class AdminThwordPlayController extends \AdminController {
         }
 
         if ($success = $thword->save()) {
-            return Redirect::to('/admin/thword-play');
+            //return Redirect::to('/admin/thword-play/' . $id . '/show');
+            Breadcrumbs::addCrumb('Show', '/admin/thword-play/show');
+
+            $thwArray = $thword->toArray();
+
+            return View::make('admin.thword-play.show', [
+                'thwArray'   => $thwArray,
+                'successMsg' => 'Thword Play was successfully updated.'
+            ]);
         } else {
             return Redirect::to('/admin/thword-play/' . $id . '/edit/')->withErrors($thword->errors());
         }

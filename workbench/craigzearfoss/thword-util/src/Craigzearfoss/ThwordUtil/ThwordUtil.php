@@ -9,12 +9,13 @@ class ThwordUtil {
     public static function getSeparatorCharacters(){
 
         $separators = array(
+            '|' => '|',
+            '^' =>'^',
+            '`' =>'`',
             "\n" => '\n',
             "\t" => '\t',
-            '|' => '|',
             ',' => ',',
             ';' => ';',
-            '`' =>'`',
             ':' =>':',
             '-' =>'-',
             '\\' =>'\\',
