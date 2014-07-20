@@ -14,7 +14,13 @@
     {{ Breadcrumbs::render() }}
 
     <div class="table-responsive">
+
         <?php echo $thwords->links(); ?>
+
+        <br>
+        {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
+        {{ HTML::link('/admin/foreign-thword/create', 'Create a New Foreign Thword', array('class' => 'btn btn-success')) }}
+
         <table class="table table-bordered table-striped">
 
             <thead>
@@ -47,9 +53,6 @@
         </table>
         <?php echo $thwords->links(); ?>
     </div>
-
-    {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
-    {{ HTML::link('/admin/foreign-thword/create', 'Create Foreign Thword', array('class' => 'btn btn-success pull-right')) }}
 
 </div>
 

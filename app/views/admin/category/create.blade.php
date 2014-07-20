@@ -22,13 +22,15 @@
     {{ Form::open(['role' => 'form', 'url' => '/admin/subject']) }}
 
     <div class="form-group">
-        {{ Form::label('name', 'Name') }}
-        {{ Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) }}
+        <div class="pull-right" style="width: auto;">
+            {{ HTML::link('/admin/category', 'Cancel', ['class' => 'btn btn-primary']) }}
+            {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
+        </div>
     </div>
 
     <div class="form-group">
-        {{ HTML::link('/admin/category', 'Cancel', ['class' => 'btn btn-primary']) }}
-        {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
+        {{ Form::label('name', 'Name') }}
+        {{ Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) }}
     </div>
 
     {{ Form::close() }}

@@ -22,6 +22,14 @@
     {{ Form::model($thword, ['role' => 'form', 'url' => '/admin/anti-thword/' . $thword->id, 'method' => 'PUT']) }}
 
     <div class="form-group">
+        <div class="pull-right" style="width: auto;">
+            {{ HTML::link('/admin/anti-thword', 'Cancel', ['class' => 'btn btn-primary']) }}
+            {{ HTML::link('/admin/anti-thword/'.$thword->id.'/show', 'Show', ['class' => 'btn btn-primary']) }}
+            {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+        </div>
+    </div>
+
+    <div class="form-group">
         {{ Form::label('topic', 'Topic') }}
         {{ Form::text('topic', null, ['placeholder' => 'Topic', 'class' => 'form-control']) }}
     </div>
@@ -82,12 +90,6 @@
     <div class="form-group">
         {{ Form::label('notes', 'Notes') }}
         {{ Form::textarea('notes', null, ['placeholder' => 'Notes', 'class' => 'form-control']) }}
-    </div>
-
-    <div class="form-group">
-        {{ HTML::link('/admin/anti-thword', 'Cancel', ['class' => 'btn btn-primary']) }}
-        {{ HTML::link('/admin/anti-thword/'.$thword->id.'/show', 'Show', ['class' => 'btn btn-primary']) }}
-        {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
     </div>
 
     {{ Form::close() }}

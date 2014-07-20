@@ -22,6 +22,13 @@
     {{ Form::open(['role' => 'form', 'url' => '/admin/thword']) }}
 
     <div class="form-group">
+        <div class="pull-right" style="width: auto;">
+            {{ HTML::link('/admin/thword', 'Cancel', ['class' => 'btn btn-primary']) }}
+            {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+        </div>
+    </div>
+
+    <div class="form-group">
         {{ Form::label('topic', 'Topic') }}
         {{ Form::text('topic', '', ['placeholder' => 'Topic', 'class' => 'form-control']) }}
     </div>
@@ -82,11 +89,6 @@
     <div class="form-group">
         {{ Form::label('notes', 'Notes') }}
         {{ Form::textarea('notes', '', ['placeholder' => 'Notes', 'class' => 'form-control']) }}
-    </div>
-
-    <div class="form-group">
-        {{ HTML::link('/admin/thword', 'Cancel', ['class' => 'btn btn-primary']) }}
-        {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
     </div>
 
     {{ Form::close() }}

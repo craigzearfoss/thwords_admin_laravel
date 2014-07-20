@@ -14,7 +14,13 @@
     {{ Breadcrumbs::render() }}
 
     <div class="table-responsive">
+
         <?php echo $subjects->links(); ?>
+
+        <br>
+        {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
+        {{ HTML::link('/admin/subject/create', 'Create a New Subject', array('class' => 'btn btn-success')) }}
+
         <table class="table table-bordered table-striped">
 
             <thead>

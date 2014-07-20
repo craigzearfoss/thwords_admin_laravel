@@ -22,6 +22,13 @@
     {{ Form::open(['role' => 'form', 'url' => '/admin/subject']) }}
 
     <div class="form-group">
+        <div class="pull-right" style="width: auto;">
+            {{ HTML::link('/admin/subject', 'Cancel', ['class' => 'btn btn-primary']) }}
+            {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
+        </div>
+    </div>
+
+    <div class="form-group">
         {{ Form::label('name', 'Name') }}
         {{ Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) }}
     </div>
@@ -29,11 +36,6 @@
     <div class="form-group">
         {{ Form::label('category_id', 'Category') }}
         {{ Form::select('category_id', $categoryOptions, 99, ['class' => 'form-control']) }}
-    </div>
-
-    <div class="form-group">
-        {{ HTML::link('/admin/subject', 'Cancel', ['class' => 'btn btn-primary']) }}
-        {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
     </div>
 
     {{ Form::close() }}

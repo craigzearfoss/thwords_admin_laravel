@@ -22,12 +22,6 @@
     {{ Form::model($thword, ['role' => 'form', 'url' => '/admin/thword-play/' . $thword->id, 'method' => 'PUT']) }}
 
     <div class="form-group">
-        <div class="nav-btn-container" class="pull-left" style="width: auto;">
-            {{ HTML::link('/admin/thword-play/first', '|<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to first']) }}
-            {{ HTML::link('/admin/thword-play/'.$thword->id.'/previous', '<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to previous']) }}
-            {{ HTML::link('/admin/thword-play/'.$thword->id.'/next', '>', ['class' => 'btn btn-primary pull-left', 'title' => 'go to next']) }}
-            {{ HTML::link('/admin/thword-play/last', '>|', ['class' => 'btn btn-primary pull-left', 'title' => 'go to last']) }}
-        </div>
         <div class="pull-right" style="width: auto;">
             {{ HTML::link('/admin/thword-play', 'Cancel', ['class' => 'btn btn-primary']) }}
             {{ HTML::link('/admin/thword-play/'.$thword->id.'/show', 'Show', ['class' => 'btn btn-primary']) }}
@@ -50,7 +44,7 @@
         {{ Form::select('category_id', $categoryOptions, null, ['class' => 'form-control']) }}
     </div>
 
-    <div id="subject-div" class="form-group">
+    <div id="subject-div" class="fo777rm-group">
         {{ Form::label('subject_id', 'Subject') }}
         {{ Form::select('subject_id', $subjectOptions, null, ['class' => 'form-control']) }}
     </div>

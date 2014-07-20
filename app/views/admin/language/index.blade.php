@@ -14,7 +14,13 @@
     {{ Breadcrumbs::render() }}
 
     <div class="table-responsive">
+
         <?php echo $languages->links(); ?>
+
+        <br>
+        {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
+        {{ HTML::link('/admin/language/create', 'Create a New Language', array('class' => 'btn btn-success')) }}
+
         <table class="table table-bordered table-striped">
 
             <thead>
@@ -50,9 +56,6 @@
         </table>
         <?php echo $languages->links(); ?>
     </div>
-
-    {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
-    {{ HTML::link('/admin/language/create', 'Create Language', array('class' => 'btn btn-success pull-right')) }}
 
 </div>
 

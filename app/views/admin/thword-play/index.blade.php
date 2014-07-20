@@ -17,8 +17,9 @@
 
         <?php echo $thwords->links(); ?>
 
+        <br>
         {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
-        {{ HTML::link('/admin/thword-play/create', 'Create Thword Play', array('class' => 'btn btn-success')) }}
+        {{ HTML::link('/admin/thword-play/create', 'Create a New Thword Play', array('class' => 'btn btn-success')) }}
 
         <table class="table table-bordered table-striped">
 

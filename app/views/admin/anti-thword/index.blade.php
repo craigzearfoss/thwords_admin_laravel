@@ -14,7 +14,13 @@
     {{ Breadcrumbs::render() }}
 
     <div class="table-responsive">
+
         <?php echo $thwords->links(); ?>
+
+        <br>
+        {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
+        {{ HTML::link('/admin/anti-thword/create', 'Create a New Anti-Thword', array('class' => 'btn btn-success')) }}
+
         <table class="table table-bordered table-striped">
 
             <thead>
@@ -49,9 +55,6 @@
         </table>
         <?php echo $thwords->links(); ?>
     </div>
-
-    {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
-    {{ HTML::link('/admin/anti-thword/create', 'Create Anti-Thword', array('class' => 'btn btn-success pull-right')) }}
 
 </div>
 

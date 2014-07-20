@@ -67,7 +67,7 @@ class AdminAntiThwordController extends \AdminController {
         $thword->expert         = Input::get('expert');
         $thword->topic          = Input::get('topic');
         $thword->description    = Input::get('description');
-        $thword->bonus          = Input::get('bonus');
+        $thword->bonus          = (Input::get('my_checkbox') === '1') ? 1 : 0;
         $thword->bonus_question = Input::get('bonus_question');
         $thword->answers        = Input::get('answers');
         $thword->source         = Input::get('source');
@@ -144,7 +144,7 @@ class AdminAntiThwordController extends \AdminController {
         $thword->expert         = Input::get('expert');
         $thword->topic          = Input::get('topic');
         $thword->description    = Input::get('description');
-        $thword->bonus          = Input::get('bonus');
+        $thword->bonus          = (Input::get('my_checkbox') === '1') ? 1 : 0;
         $thword->bonus_question = Input::get('bonus_question');
         $thword->answers        = Input::get('answers');
         $thword->source         = Input::get('source');

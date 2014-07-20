@@ -22,6 +22,13 @@
     {{ Form::open(['role' => 'form', 'url' => '/admin/language']) }}
 
     <div class="form-group">
+        <div class="pull-right" style="width: auto;">
+            {{ HTML::link('/admin/language', 'Cancel', ['class' => 'btn btn-primary']) }}
+            {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
+        </div>
+    </div>
+
+    <div class="form-group">
         {{ Form::label('name', 'Name') }}
         {{ Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) }}
     </div>
@@ -39,11 +46,6 @@
     <div class="form-group">
         {{ Form::label('spoken_in', 'Spoken In') }}
         {{ Form::text('spoken_in', null, ['placeholder' => 'Spoken In', 'class' => 'form-control']) }}
-    </div>
-
-    <div class="form-group">
-        {{ HTML::link('/admin/language', 'Cancel', ['class' => 'btn btn-primary']) }}
-        {{ Form::submit('Create', ['class' => 'btn btn-primary']) }}
     </div>
 
     {{ Form::close() }}

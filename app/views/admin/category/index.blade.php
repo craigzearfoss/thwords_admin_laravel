@@ -14,7 +14,13 @@
     {{ Breadcrumbs::render() }}
 
     <div class="table-responsive">
+
         <?php echo $categories->links(); ?>
+
+        <br>
+        {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
+        {{ HTML::link('/admin/category/create', 'Create a New Category', array('class' => 'btn btn-success')) }}
+
         <table class="table table-bordered table-striped">
 
             <thead>
@@ -45,9 +51,6 @@
         </table>
         <?php echo $categories->links(); ?>
     </div>
-
-    {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
-    {{ HTML::link('/admin/category/create', 'Create Category', array('class' => 'btn btn-success pull-right')) }}
 
 </div>
 
