@@ -23,20 +23,20 @@
         <div class="panel-heading">Admin Menu</div>
         <div class="panel-body">
 
-            <ul>
+            <ul class="nav nav-pills nav-stacked">
                 <li>{{ HTML::link('/admin/anti-thword', 'Anti-Thwords', array()) }}</li>
                 <li>{{ HTML::link('/admin/foreign-thword', 'Foreign Thwords', array()) }}</li>
                 <li>{{ HTML::link('/admin/thword', 'Thwords', array())}}</li>
                 <li>{{ HTML::link('/admin/thword-play', 'Thword Plays', array()) }}</li>
             </ul>
-            <ul>
+            <ul class="nav nav-pills nav-stacked">
                 <li>{{ HTML::link('/admin/category', 'Categories', array()) }}</li>
                 <li>{{ HTML::link('/admin/language', 'Languages', array()) }}</li>
                 <li>{{ HTML::link('/admin/result', 'Results', array()) }}</li>
                 <li>{{ HTML::link('/admin/subject', 'Subjects', array()) }}</li>
             </ul>
 
-            <ul>
+            <ul class="nav nav-pills nav-stacked">
                 <li>{{ HTML::link('/admin/user', 'Users', array()) }}</li>
             </ul>
 
