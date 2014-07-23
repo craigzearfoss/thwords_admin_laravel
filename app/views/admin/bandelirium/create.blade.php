@@ -97,7 +97,7 @@
         {{ Form::textarea('answers', '', ['placeholder' => 'Answer(s)', 'class' => 'form-control']) }}
     </div>
 
-    <div class="form-group" style="display: none;">
+    <div class="form-group">
         {{ Form::label('details', 'Details (Shown when answer is displayed.)') }}
         {{ Form::textarea('details', '', ['placeholder' => 'Details', 'class' => 'form-control']) }}
     </div>
