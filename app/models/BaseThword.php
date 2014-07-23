@@ -28,7 +28,7 @@ class BaseThword extends Ardent {
         'description'    => 'max:250',
         'bonus'          => 'boolean',
         'bonus_question' => 'max:250',
-        'answers'        => 'required|min:12',
+        'answers'        => 'required|min:1',
         'source'         => 'url|max:250',
         'notes'          => 'max:250'
     );
