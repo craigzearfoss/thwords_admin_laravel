@@ -39,9 +39,9 @@
         {{ Form::textarea('topic', null, ['placeholder' => 'Question', 'class' => 'form-control', 'rows' => 3]) }}
     </div>
 
-    <div class="form-group" style="display: none;">
-        {{ Form::label('description', 'Description') }}
-        {{ Form::text('description', null, ['placeholder' => 'Description', 'class' => 'form-control']) }}
+    <div class="form-group">
+        {{ Form::label('description', 'Envelope') }}
+        {{ Form::text('description', null, ['placeholder' => 'Envelope', 'class' => 'form-control']) }}
     </div>
 
     <div class="form-group">

@@ -49,8 +49,8 @@
                     <td>Question</td>
                     <td>{{ $thwArray['thword']['topic'] }}</td>
                 </tr>
-                <tr style="display: none;">
-                    <td>Description</td>
+                <tr>
+                    <td>Envelope</td>
                     <td>{{ $thwArray['thword']['description'] }}</td>
                 </tr>
                 <tr>
