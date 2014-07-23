@@ -28,6 +28,19 @@ class ThwordUtil {
         return $separators;
     }
 
+    public static function getCorrectAnswerList() {
+
+        $answers = array();
+        $answers[-2] = 'Sort';
+        $answers[-1] = 'Type-in';
+        $answers[0] = 'All Correct';
+        for ($i=1; $i<11; $i++) {
+            $answers[$i] = $i;
+        }
+
+        return $answers;
+    }
+
     public static function getLevelList() {
 
         $levels = array();

@@ -77,7 +77,7 @@
 
     <div class="form-group">
         {{ Form::label('correct_answer', 'Correct Answer') }}
-        {{ Form::text('correct_answer', null, ['placeholder' => 'Correct Answer', 'class' => 'form-control']) }}
+        {{ Form::select('correct_answer', $correctAnswerList, null, ['class' => 'form-control']) }}
     </div>
 
     <div class="form-group">

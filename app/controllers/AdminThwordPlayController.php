@@ -47,6 +47,7 @@ class AdminThwordPlayController extends \AdminController {
             'languageOptions'    => $languageOptions,
             'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
             'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
+            'correctAnswerList'  =>ThwordUtil::getCorrectAnswerList(),
             'maxChoicesList'     => ThwordUtil::getMaxChoicesList()
         ]);
 	}
@@ -127,6 +128,7 @@ class AdminThwordPlayController extends \AdminController {
             'languageOptions'    => $languageOptions,
             'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
             'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
+            'correctAnswerList'  =>ThwordUtil::getCorrectAnswerList(),
             'maxChoicesList'     => ThwordUtil::getMaxChoicesList()
         ]);
 	}
