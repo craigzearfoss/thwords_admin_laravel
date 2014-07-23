@@ -58,8 +58,8 @@
                     <td>{{ $thwArray['thword']['lang'] }}</td>
                 </tr>
                 <tr>
-                    <td>Expert</td>
-                    <td>{{ $thwArray['thword']['expert'] }}</td>
+                    <td>Level</td>
+                    <td>{{ $thwArray['thword']['level'] }}</td>
                 </tr>
                 <tr>
                     <td>Description</td>
@@ -94,6 +94,10 @@
                 <tr>
                     <td>Bonus Question</td>
                     <td>{{ $thwArray['thword']['bonus_question'] }}</td>
+                </tr>
+                <tr>
+                    <td>Details</td>
+                    <td>{{ $thwArray['thword']['details'] }}</td>
                 </tr>
                 <tr>
                     <td>Source</td>

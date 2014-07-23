@@ -35,8 +35,9 @@
     </div>
 
     <div class="form-group" style="display: none;">
-        {{ Form::label('expert', 'Expert') }}
-        {{ Form::select('expert', $expertOptions, null, ['class' => 'form-control']) }}
+        {{ Form::label('level', 'Level') }}
+        {{ Form::text('level', null, ['placeholder' => '', 'class' => 'form-control']) }}
+        <?php /*{{ Form::select('level', $levelOptions, null, ['class' => 'form-control']) }} */ ?>
     </div>
 
     <div class="form-group">
@@ -90,6 +91,16 @@
             {{ Form::select('primary_separator', $primarySeparator, \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR, ['class' => '']) }}
         </span>
         {{ Form::textarea('answers', null, ['placeholder' => 'Answers', 'class' => 'form-control']) }}
+    </div>
+
+    <div class="form-group" style="display: none;">
+        {{ Form::label('details', 'Details (Shown when answer is displayed.)') }}
+        {{ Form::textarea('details', null, ['placeholder' => 'Details', 'class' => 'form-control']) }}
+    </div>
+
+    <div class="form-group" style="display: none;">
+        {{ Form::label('details', 'Details (Shown when answer is displayed.)') }}
+        {{ Form::textarea('details', '', ['placeholder' => 'Details', 'class' => 'form-control']) }}
     </div>
 
     <div class="form-group">

@@ -36,13 +36,12 @@ class AdminAntiThwordController extends \AdminController {
 	{
         Breadcrumbs::addCrumb('Create', '/admin/anti-thword/create');
 
-        $expertOptions = array(0=>0, 1=>1, 2=>2, 3=>3, 4=>4, 5=>5);
         $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
         $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
         return View::make('admin.anti-thword.create', [
-            'expertOptions'      => $expertOptions,
+            'levelOptions'       => ThwordUtil::getLevelList(),
             'categoryOptions'    => $categoryOptions,
             'subjectOptions'     => $subjectOptions,
             'languageOptions'    => $languageOptions,
@@ -65,13 +64,14 @@ class AdminAntiThwordController extends \AdminController {
         $thword->category_id    = Input::get('category_id');
         $thword->subject_id     = Input::get('subject_id');
         $thword->lang           = Input::get('lang');
-        $thword->expert         = Input::get('expert');
+        $thword->level          = Input::get('level');
         $thword->topic          = Input::get('topic');
         $thword->description    = Input::get('description');
         $thword->bonus          = (Input::get('my_checkbox') === '1') ? 1 : 0;
         $thword->bonus_question = Input::get('bonus_question');
         $thword->answers        = Input::get('answers');
         $thword->correct_answer = Input::get('correct_answer');
+        $thword->details        = Input::get('details');
         $thword->max_choices    = Input::get('max_choices');
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');
@@ -114,14 +114,13 @@ class AdminAntiThwordController extends \AdminController {
 
         $thword = Antithword::find($id);
 
-        $expertOptions = array(0=>0, 1=>1, 2=>2, 3=>3, 4=>4, 5=>5);
         $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
         $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
         return View::make('admin.anti-thword.edit', [
             'thword'             => $thword,
-            'expertOptions'      => $expertOptions,
+            'levelOptions'       => ThwordUtil::getLevelList(),
             'categoryOptions'    => $categoryOptions,
             'subjectOptions'     => $subjectOptions,
             'languageOptions'    => $languageOptions,
@@ -142,16 +141,18 @@ class AdminAntiThwordController extends \AdminController {
 	{
         $thword = Antithword::find($id);
 
+        $thword->parent_id      = null;
         $thword->category_id    = Input::get('category_id');
         $thword->subject_id     = Input::get('subject_id');
         $thword->lang           = Input::get('lang');
-        $thword->expert         = Input::get('expert');
+        $thword->level          = Input::get('level');
         $thword->topic          = Input::get('topic');
         $thword->description    = Input::get('description');
         $thword->bonus          = (Input::get('my_checkbox') === '1') ? 1 : 0;
         $thword->bonus_question = Input::get('bonus_question');
         $thword->answers        = Input::get('answers');
         $thword->correct_answer = Input::get('correct_answer');
+        $thword->details        = Input::get('details');
         $thword->max_choices    = Input::get('max_choices');
         $thword->source         = Input::get('source');
         $thword->notes          = Input::get('notes');

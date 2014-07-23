@@ -28,6 +28,16 @@ class ThwordUtil {
         return $separators;
     }
 
+    public static function getLevelList() {
+
+        $levels = array();
+        for ($i=1; $i<6; $i++) {
+            $levels[$i] = $i;
+        }
+
+        return $levels;
+    }
+
     public static function getMaxChoicesList() {
 
         $maxChoices = array();

@@ -62,8 +62,8 @@
                     <td>{{ $thwArray['thword']['lang'] }}</td>
                 </tr>
                 <tr style="display: none;">
-                    <td>Expert</td>
-                    <td>{{ $thwArray['thword']['expert'] }}</td>
+                    <td>Level</td>
+                    <td>{{ $thwArray['thword']['level'] }}</td>
                 </tr>
                 <tr>
                     <td>Synonyms</td>

@@ -23,7 +23,7 @@ class BaseThword extends Ardent {
         'category_id'    => 'required|integer|exists:thw_categories,id',
         'subject_id'     => 'required|integer|exists:thw_subjects,id',
         'lang'           => 'required|exists:thw_languages,code1',
-        'expert'         => 'integer|digits_between:0,5',
+        'level'         => 'integer|digits_between:0,5',
         'topic'          => 'required|max:100',
         'description'    => 'max:100',
         'bonus'          => 'boolean',
