@@ -45,12 +45,12 @@
 
     <div class="form-group" style="display: none;">
         {{ Form::label('category_id', 'Category') }}
-        {{ Form::select('category_id', $categoryOptions, 99, ['class' => 'form-control']) }}
+        {{ Form::select('category_id', $categoryOptions, 4, ['class' => 'form-control']) }}
     </div>
 
     <div class="form-group" style="display: none;">
         {{ Form::label('subject_id', 'Subject') }}
-        {{ Form::select('subject_id', $subjectOptions, 999, ['class' => 'form-control']) }}
+        {{ Form::select('subject_id', $subjectOptions, 2, ['class' => 'form-control']) }}
     </div>
 
     <div class="form-group" style="display: none;">
