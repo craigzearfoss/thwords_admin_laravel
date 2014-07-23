@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title') Edit Foreign Thword @stop
+@section('title') Edit Bandelirium @stop
 
 @section('content')
 
@@ -13,30 +13,35 @@
     @endif
 
     <h2>
-        <i class="fa fa-thword"></i> Edit Foreign Thword
+        <i class="fa fa-bandelirium"></i> Edit Bandelirium
         {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
     </h2>
 
     {{ Breadcrumbs::render() }}
 
-    {{ Form::model($thword, ['role' => 'form', 'url' => '/admin/foreign-thword/' . $thword->id, 'method' => 'PUT']) }}
+    {{ Form::model($thword, ['role' => 'form', 'url' => '/admin/bandelirium/' . $thword->id, 'method' => 'PUT']) }}
 
     <div class="form-group">
         <div class="pull-right" style="width: auto;">
-            {{ HTML::link('/admin/foreign-thword', 'Cancel', ['class' => 'btn btn-primary']) }}
-            {{ HTML::link('/admin/foreign-thword/'.$thword->id.'/show', 'Show', ['class' => 'btn btn-primary']) }}
+            {{ HTML::link('/admin/bandelirium', 'Cancel', ['class' => 'btn btn-primary']) }}
+            {{ HTML::link('/admin/bandelirium/'.$thword->id.'/show', 'Show', ['class' => 'btn btn-primary']) }}
             {{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
         </div>
     </div>
 
     <div class="form-group">
-        {{ Form::label('topic', 'Topic') }}
-        {{ Form::text('topic', null, ['placeholder' => 'Topic', 'class' => 'form-control']) }}
+        {{ Form::label('parent_id', 'Parent ID') }}
+        {{ Form::text('parent_id', null, ['placeholder' => 'Parent ID', 'class' => 'form-control']) }}
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('topic', 'Question') }}
+        {{ Form::textarea('topic', null, ['placeholder' => 'Question', 'class' => 'form-control', 'rows' => 3]) }}
     </div>
 
     <div class="form-group" style="display: none;">
-        {{ Form::label('expert', 'Expert') }}
-        {{ Form::select('expert', $expertOptions, null, ['class' => 'form-control']) }}
+        {{ Form::label('description', 'Description') }}
+        {{ Form::text('description', null, ['placeholder' => 'Description', 'class' => 'form-control']) }}
     </div>
 
     <div class="form-group">
@@ -49,47 +54,53 @@
         {{ Form::select('subject_id', $subjectOptions, null, ['class' => 'form-control']) }}
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="display: none;">
         {{ Form::label('lang', 'Language') }}
         {{ Form::select('lang', $languageOptions, null, ['class' => 'form-control']) }}
     </div>
 
-    <div class="form-group">
-        {{ Form::label('description', 'Description') }}
-        {{ Form::text('description', null, ['placeholder' => 'Description', 'class' => 'form-control']) }}
-    </div>
-
-    <div class="form-group">
-        {{ Form::label('bonus', 'Bonus Question?') }}
-        {{ Form::checkbox('bonus', 1, null, ['class' => 'form-control']) }}
-    </div>
-
-    <div class="form-group">
-        {{ Form::label('bonus_question', 'Bonus Question Text (optional)') }}
-        {{ Form::text('bonus_question', null, ['placeholder' => 'Bonus Question', 'class' => 'form-control']) }}
+    <div class="form-group" style="display: none;">
+        {{ Form::label('level', 'Level') }}
+        {{ Form::text('level', null, ['placeholder' => '', 'class' => 'form-control']) }}
+        <?php /*{{ Form::select('level', $levelOptions, null, ['class' => 'form-control']) }} */ ?>
     </div>
 
     <div class="form-group" style="display: none;">
+        {{ Form::label('bonus', 'Bonus') }}
+        {{ Form::checkbox('bonus', 1, null, ['class' => 'form-control']) }}
+    </div>
+
+    <div class="form-group" style="display: none;">
+        {{ Form::label('bonus_question', 'Bonus Question') }}
+        {{ Form::text('bonus_question', null, ['placeholder' => 'Bonus Question', 'class' => 'form-control']) }}
+    </div>
+
+    <div class="form-group">
         {{ Form::label('correct_answer', 'Correct Answer') }}
         {{ Form::text('correct_answer', null, ['placeholder' => 'Correct Answer', 'class' => 'form-control']) }}
     </div>
 
-    <div class="form-group" style="display: none;">
+    <div class="form-group">
         {{ Form::label('max_choices', 'Max Choices') }}
         {{ Form::select('max_choices', $maxChoicesList, null, ['class' => '']) }}
     </div>
 
     <div class="form-group">
-        {{ Form::label('answers', 'Answers') }}
-        <span class="pull-right">
+        {{ Form::label('answers', 'Answer(s)') }}
+        <span class="pull-right" style="display: none;">
             Secondary Separator:
             {{ Form::select('secondary_separator', $secondarySeparator, \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR, ['class' => '']) }}
         </span>
         <span class="pull-right">
-            Primary Separator:
+            Separator:
             {{ Form::select('primary_separator', $primarySeparator, \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR, ['class' => '']) }}
         </span>
-        {{ Form::textarea('answers', null, ['placeholder' => 'Answers', 'class' => 'form-control']) }}
+        {{ Form::textarea('answers', null, ['placeholder' => 'Synonyms', 'class' => 'form-control']) }}
+    </div>
+
+    <div class="form-group">
+        {{ Form::label('details', 'Details (Shown when answer is displayed.)') }}
+        {{ Form::textarea('details', null, ['placeholder' => 'Details', 'class' => 'form-control']) }}
     </div>
 
     <div class="form-group">

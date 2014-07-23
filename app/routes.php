@@ -46,6 +46,11 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('/admin/thword/{id}/next', 'AdminThwordController@next');
     Route::get('/admin/thword/last', 'AdminThwordController@last');
 
+    Route::get('/admin/bandelirium/first', 'AdminBandeliriumController@first');
+    Route::get('/admin/bandelirium/{id}/previous', 'AdminBandeliriumController@previous');
+    Route::get('/admin/bandelirium/{id}/next', 'AdminBandeliriumController@next');
+    Route::get('/admin/bandelirium/last', 'AdminBandeliriumController@last');
+
     Route::resource('/admin/anti-thword', 'AdminAntiThwordController');
     Route::resource('/admin/category', 'AdminCategoryController');
     Route::resource('/admin/foreign-thword', 'AdminForeignThwordController');
@@ -55,6 +60,7 @@ Route::group(array('before' => 'auth'), function(){
     Route::resource('/admin/thword', 'AdminThwordController');
     Route::resource('/admin/thword', 'AdminThwordController');
     Route::resource('/admin/thword-play', 'AdminThwordPlayController');
+    Route::resource('/admin/bandelirium', 'AdminBandeliriumController');
     Route::resource('/admin/user', 'AdminUserController');
 
     Route::get('/admin/anti-thword/{id}/show', 'AdminAntiThwordController@show');
@@ -62,6 +68,7 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('/admin/foreign-thword/{id}/show', 'AdminForeignThwordController@show');
     Route::get('/admin/thword/{id}/show', 'AdminThwordController@show');
     Route::get('/admin/thword-play/{id}/show', 'AdminThwordPlayController@show');
+    Route::get('/admin/bandelirium/{id}/show', 'AdminBandeliriumController@show');
 
     Route::get('admin/json/category-subjects/{categoryId}', 'AdminJsonController@categorySubjects');
 });

@@ -28,6 +28,7 @@
                 <li>{{ HTML::link('/admin/foreign-thword', 'Foreign Thwords', array()) }}</li>
                 <li>{{ HTML::link('/admin/thword', 'Thwords', array())}}</li>
                 <li>{{ HTML::link('/admin/thword-play', 'Thword Plays', array()) }}</li>
+                <li>{{ HTML::link('/admin/bandelirium', 'Bandeliriums', array()) }}</li>
             </ul>
             <ul class="nav nav-pills nav-stacked">
                 <li>{{ HTML::link('/admin/category', 'Categories', array()) }}</li>

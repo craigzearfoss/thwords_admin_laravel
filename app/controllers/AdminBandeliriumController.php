@@ -1,6 +1,6 @@
 <?php
 
-class AdminThwordController extends \AdminController {
+class AdminBandeliriumController extends \AdminController {
 
     protected $subject;
 
@@ -8,40 +8,40 @@ class AdminThwordController extends \AdminController {
     {
         parent::__construct();
 
-        Breadcrumbs::addCrumb('Thwords', '/admin/thword');
+        Breadcrumbs::addCrumb('Bandeliriums', '/admin/bandelirium');
     }
 
 
 	/**
-	 * Display a listing of the thword.
+	 * Display a listing of the bandelirium.
 	 *
 	 * @return Response
 	 */
 	public function index()
     {
-        $thwords = DB::table('thw_thwords')
-            ->select('thw_thwords.id', 'thw_thwords.lang', 'thw_thwords.topic', 'thw_thwords.description')
+        $thwords = DB::table('thw_bandeliriums')
+            ->select('thw_bandeliriums.id', 'thw_bandeliriums.topic', 'thw_bandeliriums.description')
             ->orderBy('id', 'asc')
             ->paginate(25);
 
-        return View::make('admin.thword.index', ['thwords' => $thwords]);
+        return View::make('admin.bandelirium.index', ['thwords' => $thwords]);
 	}
 
 
 	/**
-	 * Show the form for creating a new thword.
+	 * Show the form for creating a new bandelirium.
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-        Breadcrumbs::addCrumb('Create', '/admin/thword/create');
+        Breadcrumbs::addCrumb('Create', '/admin/bandelirium/create');
 
         $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
         $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
-        return View::make('admin.thword.create', [
+        return View::make('admin.bandelirium.create', [
             'levelOptions'       => ThwordUtil::getLevelList(),
             'categoryOptions'    => $categoryOptions,
             'subjectOptions'     => $subjectOptions,
@@ -54,15 +54,17 @@ class AdminThwordController extends \AdminController {
 
 
 	/**
-	 * Store a newly created thword in storage.
+	 * Store a newly created bandelirium in storage.
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-        $thword = new Thword;
+        $thword = new Bandelirium;
 
-        $thword->parent_id      = null;
+        $parentId = Input::get('parent_id');
+
+        $thword->parent_id      = (!empty($parentId)) ? $parentId : null;
         $thword->category_id    = Input::get('category_id');
         $thword->subject_id     = Input::get('subject_id');
         $thword->lang           = Input::get('lang');
@@ -89,38 +91,38 @@ class AdminThwordController extends \AdminController {
         }
 
         if ($success = $thword->save()) {
-            //return Redirect::to('/admin/thword')->with('message', 'Thword created successfully.');
-            Breadcrumbs::addCrumb('Show', '/admin/thword/show');
+            //return Redirect::to('/admin/bandelirium')->with('message', 'Bandelirium created successfully.');
+            Breadcrumbs::addCrumb('Show', '/admin/bandelirium/show');
 
             $thwArray = $thword->toArray();
 
-            return View::make('admin.thword.show', [
+            return View::make('admin.bandelirium.show', [
                 'thwArray'   => $thwArray,
-                'successMsg' => 'Thword was successfully created.'
+                'successMsg' => 'Bandelirium was successfully created.'
             ]);
         } else {
-            return Redirect::to('/admin/thword/create')->withErrors($thword->errors());
+            return Redirect::to('/admin/bandelirium/create')->withErrors($thword->errors());
         }
 	}
 
 
 	/**
-	 * Show the form for editing the specified thword.
+	 * Show the form for editing the specified bandelirium.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-        Breadcrumbs::addCrumb('Edit', '/admin/thword/edit');
+        Breadcrumbs::addCrumb('Edit', '/admin/bandelirium/edit');
 
-        $thword = Thword::find($id);
+        $thword = Bandelirium::find($id);
 
         $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
         $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
-        return View::make('admin.thword.edit', [
+        return View::make('admin.bandelirium.edit', [
             'thword'             => $thword,
             'levelOptions'       => ThwordUtil::getLevelList(),
             'categoryOptions'    => $categoryOptions,
@@ -134,16 +136,18 @@ class AdminThwordController extends \AdminController {
 
 
 	/**
-	 * Update the specified thword in storage.
+	 * Update the specified bandelirium in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function update($id)
 	{
-        $thword = Thword::find($id);
+        $thword = Bandelirium::find($id);
 
-        $thword->parent_id      = null;
+        $parentId = Input::get('parent_id');
+
+        $thword->parent_id      = !empty($parentId) ? $parentId : null;
         $thword->category_id    = Input::get('category_id');
         $thword->subject_id     = Input::get('subject_id');
         $thword->lang           = Input::get('lang');
@@ -171,48 +175,48 @@ class AdminThwordController extends \AdminController {
 
         if ($success = $thword->save()) {
             //return Redirect::to('/admin/thword');
-            Breadcrumbs::addCrumb('Show', '/admin/thword/show');
+            Breadcrumbs::addCrumb('Show', '/admin/bandelirium/show');
 
             $thwArray = $thword->toArray();
 
-            return View::make('admin.thword.show', [
+            return View::make('admin.bandelirium.show', [
                 'thwArray'   => $thwArray,
-                'successMsg' => 'Thword was successfully updated.'
+                'successMsg' => 'Bandelirium was successfully updated.'
             ]);
         } else {
-            return Redirect::to('/admin/thword/' . $id . '/edit/')->withErrors($thword->errors());
+            return Redirect::to('/admin/bandelirium/' . $id . '/edit/')->withErrors($thword->errors());
         }
 	}
 
 
 	/**
-	 * Remove the specified thword from storage.
+	 * Remove the specified bandelirium from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-        Thword::destroy($id);
+        Bandelirium::destroy($id);
 
         return Redirect::to('/admin/thword');
 	}
 
 
     /**
-     * Display the specified thword.
+     * Display the specified bandelirium.
      *
      * @param  int  $id
      * @return Response
      */
     public function show($id)
     {
-        Breadcrumbs::addCrumb('Show', '/admin/thword/show');
+        Breadcrumbs::addCrumb('Show', '/admin/bandelirium/show');
 
-        $thword = Thword::find($id);
+        $thword = Bandelirium::find($id);
         $thwArray = $thword->toArray();
 
-        return View::make('admin.thword.show', [
+        return View::make('admin.bandelirium.show', [
             'thwArray' => $thwArray
         ]);
     }
@@ -225,74 +229,74 @@ class AdminThwordController extends \AdminController {
      */
     public function first()
     {
-        $thword = DB::table('thw_thwords')
-            ->select('thw_thwords.id')
+        $thword = DB::table('thw_bandeliriums')
+            ->select('thw_bandeliriums.id')
             ->orderBy('id', 'asc')
             ->first();
 
-        return Redirect::to('/admin/thword/' . $thword->id . '/show');
+        return Redirect::to('/admin/bandelirium/' . $thword->id . '/show');
     }
 
 
     /**
-     * Redirect to the previous thword.
+     * Redirect to the previous bandelirium.
      *
      * @param  int  $id
      * @return Response
      */
     public function previous($id)
     {
-        $thword = DB::table('thw_thwords')
-            ->select('thw_thwords.id')
+        $thword = DB::table('thw_bandeliriums')
+            ->select('thw_bandeliriums.id')
             ->where('id', '<', $id)
             ->orderBy('id', 'desc')
             ->first();
 
         if (!empty($thword)) {
-            return Redirect::to('/admin/thword/' . $thword->id . '/show');
+            return Redirect::to('/admin/bandelirium/' . $thword->id . '/show');
         } else {
-            // next thword not found
-            return Redirect::to('/admin/thword/' . $id . '/show');
+            // next bandelirium not found
+            return Redirect::to('/admin/bandelirium/' . $id . '/show');
         }
     }
 
 
     /**
-     * Redirect to the next thword.
+     * Redirect to the next bandelirium.
      *
      * @param  int  $id
      * @return Response
      */
     public function next($id)
     {
-        $thword = DB::table('thw_thwords')
-            ->select('thw_thwords.id')
+        $thword = DB::table('thw_bandeliriums')
+            ->select('thw_bandeliriums.id')
             ->where('id', '>', $id)
             ->orderBy('id', 'asc')
             ->first();
 
         if (!empty($thword)) {
-            return Redirect::to('/admin/thword/' . $thword->id . '/show');
+            return Redirect::to('/admin/bandelirium/' . $thword->id . '/show');
         } else {
             // next thword not found
-            return Redirect::to('/admin/thword/' . $id . '/show');
+            return Redirect::to('/admin/bandelirium/' . $id . '/show');
         }
     }
 
 
     /**
-     * Redirect to the last thword.
+     * Redirect to the last bandelirium.
      *
      * @return Response
      */
     public function last()
     {
-        $thword = DB::table('thw_thwords')
-            ->select('thw_thwords.id')
+        $thword = DB::table('thw_bandeliriums')
+            ->select('thw_bandeliriums.id')
             ->orderBy('id', 'desc')
             ->first();
 
-        return Redirect::to('/admin/thword/' . $thword->id . '/show');
+        return Redirect::to('/admin/bandelirium/' . $thword->id . '/show');
     }
 
 
