@@ -42,6 +42,10 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>ID</td>
+                    <td>{{ $thwArray['thword']['id'] }}</td>
+                </tr>
+                <tr>
                     <td>Parent ID</td>
                     <td>{{ $thwArray['thword']['parent_id'] }}</td>
                 </tr>

@@ -26,6 +26,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Envelope</th>
                     <th>Question</th>
                 </tr>
             </thead>
@@ -34,6 +35,7 @@
             @foreach ($thwords as $thword)
                 <tr>
                     <td>{{ $thword->id }}</td>
+                    <td>{{ $thword->description }}</td>
                     <td>{{ $thword->topic }}</td>
                     <td>
                         {{ HTML::link('/admin/bandelirium/'.$thword->id.'/show', 'Show', array('class' => 'btn btn-primary')) }}
