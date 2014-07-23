@@ -24,10 +24,10 @@ class BaseThword extends Ardent {
         'subject_id'     => 'required|integer|exists:thw_subjects,id',
         'lang'           => 'required|exists:thw_languages,code1',
         'level'         => 'integer|digits_between:0,5',
-        'topic'          => 'required|max:100',
-        'description'    => 'max:100',
+        'topic'          => 'required|max:250',
+        'description'    => 'max:250',
         'bonus'          => 'boolean',
-        'bonus_question' => 'max:100',
+        'bonus_question' => 'max:250',
         'answers'        => 'required|min:12',
         'source'         => 'url|max:250',
         'notes'          => 'max:250'
