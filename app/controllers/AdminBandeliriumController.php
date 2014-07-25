@@ -1,14 +1,18 @@
 <?php
 
+App::bind('Bandelirium', 'Bandelirium');
+
 class AdminBandeliriumController extends \AdminController {
 
-    protected $subject;
+    protected $bandelirium;
 
-    public function __construct()
+    public function __construct(Bandelirium $bandelirium)
     {
         parent::__construct();
 
         Breadcrumbs::addCrumb('Bandeliriums', '/admin/bandelirium');
+
+        $this->bandelirium = $bandelirium;
     }
 
 

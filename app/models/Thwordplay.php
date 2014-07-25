@@ -8,4 +8,22 @@ class Thwordplay extends \BaseThword {
      * @var string
      */
     protected $table = 'thw_thwordplays';
+
+    public function findRandom() {
+
+        $sql = "SELECT t.*
+                FROM (SELECT ROUND(RAND() * (SELECT MAX(id) FROM thw_thwordplays)) num, @num:=@num+1 FROM (SELECT @num:=0) AS a, thw_thwordplays LIMIT 1) AS b,
+                thw_thwordplays AS t
+                WHERE b.num = t.id";
+
+        $cnt = 0;
+        while (!($thword = DB::select(DB::raw($sql))) && ($cnt < 10)) {
+            // try 10 times to get results and then give up
+            $cnt = $cnt + 1;
+        }
+
+        return $thword;
+    }
+
+
 }

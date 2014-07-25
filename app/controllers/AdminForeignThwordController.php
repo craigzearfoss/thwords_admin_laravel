@@ -1,14 +1,18 @@
 <?php
 
+App::bind('Foreignthword', 'Foreignthword');
+
 class AdminForeignThwordController extends \AdminController {
 
-    protected $subject;
+    protected $foreignthword;
 
-    public function __construct()
+    public function __construct(Foreignthword $foreignthword)
     {
         parent::__construct();
 
         Breadcrumbs::addCrumb('Foreign Thwords', '/admin/foreign-thword');
+
+        $this->foreignthword = $foreignthword;
     }
 
 	/**

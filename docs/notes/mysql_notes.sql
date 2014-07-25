@@ -12,3 +12,11 @@ ssh -i thwords_useast.pem ubuntu@54.198.10.196
 
 # IMPORT
 mysql -u root -p thwords < /tmp/thwords_20140720_140000.sql
+
+
+# FIND SEQUENCE GAPS
+SELECT a.id+1 AS start, MIN(b.id) - 1 AS end
+    FROM thw_thwords AS a, thw_thwords AS b
+    WHERE a.id < b.id
+    GROUP BY a.id
+    HAVING start < MIN(b.id)

@@ -1,14 +1,16 @@
 <?php
 
+App::bind('Thword', 'Thword');
+
 class AdminThwordController extends \AdminController {
 
-    protected $subject;
-
-    public function __construct()
+    public function __construct(Thword $thword)
     {
         parent::__construct();
 
         Breadcrumbs::addCrumb('Thwords', '/admin/thword');
+
+        $this->thword = $thword;
     }
 
 

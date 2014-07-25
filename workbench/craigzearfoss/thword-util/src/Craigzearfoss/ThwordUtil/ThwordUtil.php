@@ -60,4 +60,15 @@ class ThwordUtil {
 
         return $maxChoices;
     }
+
+    public function getRandomThword() {
+        $sql = "SELECT t.*
+            FROM (SELECT ROUND(RAND() * (SELECT MAX(id) FROM thw_thwords)) num, @num:=@num+1 FROM (SELECT @num:=0) AS a, thw_thwords LIMIT 1) AS b,
+            thw_thwords AS t
+            WHERE b.num = t.id";
+
+        DB::select(DB::raw($sql));
+die ($sql); die;
+            //DB::select()
+    }
 }

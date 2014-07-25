@@ -1,14 +1,18 @@
 <?php
 
+App::bind('Thwordplay', 'Thwordplay');
+
 class AdminThwordPlayController extends \AdminController {
 
-    protected $subject;
+    protected $thwordplay;
 
-    public function __construct()
+    public function __construct(Thwordplay $thwordplay)
     {
         parent::__construct();
 
         Breadcrumbs::addCrumb('Thword Plays', '/admin/thword-play');
+
+        $this->thwordplay = $thwordplay;
     }
 
 	/**

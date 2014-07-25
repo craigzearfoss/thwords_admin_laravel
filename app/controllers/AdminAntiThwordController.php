@@ -1,14 +1,18 @@
 <?php
 
+App::bind('Antithword', 'Antithword');
+
 class AdminAntiThwordController extends \AdminController {
 
-    protected $subject;
+    protected $antithword;
 
-    public function __construct()
+    public function __construct(Antithword $antithword)
     {
         parent::__construct();
 
         Breadcrumbs::addCrumb('Anti-Thwords', '/admin/anti-thword');
+
+        $this->antithword = $antithword;
     }
 
 	/**
