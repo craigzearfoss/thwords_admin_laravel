@@ -22,7 +22,7 @@ class Foreignthword extends BaseThword {
             $cnt = $cnt + 1;
         }
 
-        return $thword;
+        return isset($thword[0]) ? $thword[0] : $thword;
     }
 
 

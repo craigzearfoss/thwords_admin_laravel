@@ -23,6 +23,9 @@ class ThwordController extends \BaseController {
             $thword = $this->thword->find($key);
         }
 
-        return Response::json($thword);
+        $play = ThwordUtil::generatePlay($thword, \Craigzearfoss\ThwordUtil\ThwordUtil::GAME_THWORDS);
+die;
+
+        return Response::json($play);
     }
 }

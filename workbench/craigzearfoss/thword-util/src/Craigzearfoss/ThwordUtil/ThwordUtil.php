@@ -1,5 +1,7 @@
 <?php namespace Craigzearfoss\ThwordUtil;
 
+//App::bind('Thword', 'Thword');
+
 class ThwordUtil {
 
     const PRIMARY_SEPARATOR = '|';
@@ -7,6 +9,15 @@ class ThwordUtil {
     const SECONDARY_SEPARATOR = '^';
 
     const DEFAULT_MAX_CHOICES = 4;
+
+    const GAME_THWORDS = 1;
+    const GAME_ANTI_THWORDS = 2;
+    const GAME_FOREIGN_THWORDS = 3;
+    const GAME_THWORD_PLAYS = 4;
+    const GAME_BANDELIRIUM = 5;
+
+    const MAX_THWORDS = 4;
+    const MAX_CHARS = 24;
 
     public static function getSeparatorCharacters() {
 
@@ -61,14 +72,42 @@ class ThwordUtil {
         return $maxChoices;
     }
 
-    public function getRandomThword() {
-        $sql = "SELECT t.*
-            FROM (SELECT ROUND(RAND() * (SELECT MAX(id) FROM thw_thwords)) num, @num:=@num+1 FROM (SELECT @num:=0) AS a, thw_thwords LIMIT 1) AS b,
-            thw_thwords AS t
-            WHERE b.num = t.id";
+    public function generatePlay($thword, $game = 'thwords') {
 
-        DB::select(DB::raw($sql));
-die ($sql); die;
-            //DB::select()
+        $play = array(
+            'term' => $thword->topic,
+            'lang' => $thword->lang,
+            'level' => $thword->level,
+            'points' => 0,
+            'max_choices' => $thword->max_choices,
+            'answers' => array(),
+        );
+
+        // get up to max_choices (or max characters) answers for the play
+        $answers = explode('|', $thword->answers);
+        $numAnswers = count($answers);
+        $numChars = 0;
+        $ids = array();
+        while ((count($ids) < $play['max_choices']) && ($numChars <= self::MAX_CHARS)) {
+            $found = false;
+            $attempts = 0;
+            while (($found == false) && ($attempts < 10)) {
+                $id = mt_rand(0, $numAnswers - 1);
+                if (!in_array($id, $ids)) {
+                    $ids[] = $id;
+                    $found = true;
+                    $play['answers'][] = $answers[$id];
+                }
+                $attempts = $attempts + 1;
+            }
+        }
+
+        // get the tiles
+        $charsetModel = new \Charset();
+        $play['tiles'] = $charsetModel->getTiles($thword->lang);
+
+        var_dump($thword); echo '<hr>'; var_dump($play); die;
+
+        return $play;
     }
 }
