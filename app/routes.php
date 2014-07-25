@@ -70,5 +70,10 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('/admin/thword-play/{id}/show', 'AdminThwordPlayController@show');
     Route::get('/admin/bandelirium/{id}/show', 'AdminBandeliriumController@show');
 
+    Route::get('/json/anti-thword/{key}', 'AntiThwordController@json');
+    Route::get('/json/bandelirum/{key}', 'BandeliriumController@json');
+    Route::get('/json/foreign-thword/{key}', 'ForeignThwordController@json');
+    Route::get('/json/thword/{key}', 'ThwordController@json');
+    Route::get('/json/thword-play/{key}', 'ThwordPlayController@json');
     Route::get('admin/json/category-subjects/{categoryId}', 'AdminJsonController@categorySubjects');
 });
