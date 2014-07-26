@@ -103,10 +103,4 @@ class Bandelirium extends \BaseThword {
         return isset($thword[0]) ? $thword[0] : $thword;
     }
 
-
-    public function getFieldMappings() {
-
-        return $this->fieldMappings;
-    }
-
 }

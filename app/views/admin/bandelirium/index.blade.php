@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
-@section('title') Bandeliriums @stop
+@section('title') {{ $thwordData['name'] }} @stop
 
 @section('content')
 
 <div class="col-lg-10 col-lg-offset-1">
 
     <h2>
-        <i class="fa fa-subject"></i> Bandeliriums
+        <i class="fa fa-subject"></i> {{ $thwordData['name'] }}
         {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
     </h2>
 
@@ -19,7 +19,7 @@
 
         <br>
         {{ HTML::link('/admin', 'Back to Admin Home', array('class' => 'btn btn-primary')) }}
-        {{ HTML::link('/admin/bandelirium/create', 'Create a New Bandelirium', array('class' => 'btn btn-success')) }}
+        {{ HTML::link('/admin/'.$thwordData['url'].'/create', 'Create a New '.$thwordData['name'], array('class' => 'btn btn-success')) }}
 
         <table class="table table-bordered table-striped">
 
@@ -38,10 +38,10 @@
                     <td>{{ $thword->description }}</td>
                     <td>{{ $thword->topic }}</td>
                     <td>
-                        {{ HTML::link('/admin/bandelirium/'.$thword->id.'/show', 'Show', array('class' => 'btn btn-primary')) }}
-                        {{ HTML::link('/admin/bandelirium/'.$thword->id.'/edit', 'Edit', array('class' => 'btn btn-primary')) }}
+                        {{ HTML::link('/admin/'.$thwordData['url'].'/'.$thword->id.'/show', 'Show', array('class' => 'btn btn-primary')) }}
+                        {{ HTML::link('/admin/'.$thwordData['url'].'/'.$thword->id.'/edit', 'Edit', array('class' => 'btn btn-primary')) }}
                         <?php /*
-                        {{ Form::open(['url' => '/admin/bandelirium/' . $thword->id, 'method' => 'DELETE']) }}
+                        {{ Form::open(['url' => '/admin/'.$thwordData['url'].'/' . $thword->id, 'method' => 'DELETE']) }}
                         {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {{ Form::close() }}
                         */ ?>

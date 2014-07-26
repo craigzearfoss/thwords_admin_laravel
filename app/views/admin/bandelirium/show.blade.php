@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title') Show {{ $thword['name'] }} @stop
+@section('title') Show {{ $thwordData['name'] }} @stop
 
 @section('content')
 
@@ -17,7 +17,7 @@
     @endif
 
     <h2>
-        <i class="fa fa-{{ $thword['url'] }}"></i> Show {{ $thword['name'] }}
+        <i class="fa fa-{{ $thwordData['url'] }}"></i> Show {{ $thwordData['name'] }}
         {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
     </h2>
 
@@ -29,77 +29,77 @@
                 <tr>
                     <td colspan="100%">
                         <div class="nav-btn-container" class="pull-left" style="width: auto;">
-                            {{ HTML::link('/admin/'.$thword['url'].'/first', '|<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to first']) }}
-                            {{ HTML::link('/admin/'.$thword['url'].'/'.$thword['data']['thword']['id'].'/previous', '<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to previous']) }}
-                            {{ HTML::link('/admin/'.$thword['url'].'/'.$thword['data']['thword']['id'].'/next', '>', ['class' => 'btn btn-primary pull-left', 'title' => 'go to next']) }}
-                            {{ HTML::link('/admin/'.$thword['url'].'/last', '>|', ['class' => 'btn btn-primary pull-left', 'title' => 'go to last']) }}
+                            {{ HTML::link('/admin/'.$thwordData['url'].'/first', '|<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to first']) }}
+                            {{ HTML::link('/admin/'.$thwordData['url'].'/'.$thwordData['data']['thword']['id'].'/previous', '<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to previous']) }}
+                            {{ HTML::link('/admin/'.$thwordData['url'].'/'.$thwordData['data']['thword']['id'].'/next', '>', ['class' => 'btn btn-primary pull-left', 'title' => 'go to next']) }}
+                            {{ HTML::link('/admin/'.$thwordData['url'].'/last', '>|', ['class' => 'btn btn-primary pull-left', 'title' => 'go to last']) }}
                         </div>
                         <div class="pull-right" style="width: auto;">
-                            {{ HTML::link('/admin/'.$thword['url'].'/create', 'Create a '.$thword['name'], array('class' => 'btn btn-primary')) }}
-                            {{ HTML::link('/admin/'.$thword['url'].'/'.$thword['data']['thword']['id'].'/edit', 'Edit This '.$thword['name'], ['class' => 'btn btn-primary']) }}
-                            {{ HTML::link('/admin/'.$thword['url'].'', $thword['name'].' Listing', ['class' => 'btn btn-primary']) }}
+                            {{ HTML::link('/admin/'.$thwordData['url'].'/create', 'Create a '.$thwordData['name'], array('class' => 'btn btn-primary')) }}
+                            {{ HTML::link('/admin/'.$thwordData['url'].'/'.$thwordData['data']['thword']['id'].'/edit', 'Edit This '.$thwordData['name'], ['class' => 'btn btn-primary']) }}
+                            {{ HTML::link('/admin/'.$thwordData['url'].'', $thwordData['name'].' Listing', ['class' => 'btn btn-primary']) }}
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>ID</td>
-                    <td>{{ $thword['data']['thword']['id'] }}</td>
+                    <td>{{ $thwordData['data']['thword']['id'] }}</td>
                 </tr>
 
-                @if ($thword['field']['parent_id']['display'])
+                @if ($thwordData['field']['parent_id']['display'])
                     <tr>
-                        <td>{{ $thword['field']['parent_id']['label'] }}</td>
-                        <td>{{ $thword['data']['thword']['parent_id'] }}</td>
+                        <td>{{ $thwordData['field']['parent_id']['label'] }}</td>
+                        <td>{{ $thwordData['data']['thword']['parent_id'] }}</td>
                     </tr>
                 @endif
 
-                @if ($thword['field']['category_id']['display'])
+                @if ($thwordData['field']['category_id']['display'])
                     <tr>
-                        <td>{{ $thword['field']['category_id']['label'] }}</td>
-                        <td>{{ $thword['data']['category']['name'] }}</td>
+                        <td>{{ $thwordData['field']['category_id']['label'] }}</td>
+                        <td>{{ $thwordData['data']['category']['name'] }}</td>
                     </tr>
                 @endif
 
-                @if ($thword['field']['subject_id']['display'])
+                @if ($thwordData['field']['subject_id']['display'])
                     <tr>
-                        <td>{{ $thword['field']['subject_id']['label'] }}</td>
-                        <td>{{ $thword['data']['subject']['name'] }}</td>
+                        <td>{{ $thwordData['field']['subject_id']['label'] }}</td>
+                        <td>{{ $thwordData['data']['subject']['name'] }}</td>
                     </tr>
                 @endif
 
-                @if ($thword['field']['topic']['display'])
+                @if ($thwordData['field']['lang']['display'])
                     <tr>
-                        <td>{{ $thword['field']['topic']['label'] }}</td>
-                        <td>{{ $thword['data']['thword']['topic'] }}</td>
+                        <td>{{ $thwordData['field']['lang']['label'] }}</td>
+                        <td>{{ $thwordData['data']['thword']['lang'] }}</td>
                     </tr>
                 @endif
 
-                @if ($thword['field']['description']['display'])
+                @if ($thwordData['field']['level']['display'])
                     <tr>
-                        <td>{{ $thword['field']['description']['label'] }}</td>
-                        <td>{{ $thword['data']['thword']['description'] }}</td>
+                        <td>ddd{{ $thwordData['field']['level']['label'] }}</td>
+                        <td>{{ $thwordData['data']['thword']['level'] }}</td>
                     </tr>
                 @endif
 
-                @if ($thword['field']['lang']['display'])
+                @if ($thwordData['field']['topic']['display'])
                     <tr>
-                        <td>{{ $thword['field']['lang']['label'] }}</td>
-                        <td>{{ $thword['data']['thword']['lang'] }}</td>
+                        <td>{{ $thwordData['field']['topic']['label'] }}</td>
+                        <td>{{ $thwordData['data']['thword']['topic'] }}</td>
                     </tr>
                 @endif
 
-                @if ($thword['field']['level']['display'])
+                @if ($thwordData['field']['description']['display'])
                     <tr>
-                        <td>ddd{{ $thword['field']['level']['label'] }}</td>
-                        <td>{{ $thword['data']['thword']['level'] }}</td>
+                        <td>{{ $thwordData['field']['description']['label'] }}</td>
+                        <td>{{ $thwordData['data']['thword']['description'] }}</td>
                     </tr>
                 @endif
 
-                @if ($thword['field']['answers']['display'])
+                @if ($thwordData['field']['answers']['display'])
                     <tr>
-                        <td>{{ $thword['field']['answers']['label'] }}</td>
+                        <td>{{ $thwordData['field']['answers']['label'] }}</td>
                         <td>
-                            <?php $answers = explode('|', $thword['data']['thword']['answers']); ?>
+                            <?php $answers = explode('|', $thwordData['data']['thword']['answers']); ?>
                             @foreach ($answers as $answer)
                                 <li>
                                 @if (strpos($answer, '^') !== false)
@@ -114,25 +114,25 @@
                     </tr>
                 @endif
 
-                @if ($thword['field']['correct_answer']['display'])
+                @if ($thwordData['field']['correct_answer']['display'])
                     <tr>
-                        <td>{{ $thword['field']['correct_answer']['label'] }}</td>
-                        <td>{{ $thword['data']['thword']['correct_answer'] }}</td>
+                        <td>{{ $thwordData['field']['correct_answer']['label'] }}</td>
+                        <td>{{ $thwordData['data']['thword']['correct_answer'] }}</td>
                     </tr>
                 @endif
 
-                @if ($thword['field']['max_choices']['display'])
+                @if ($thwordData['field']['max_choices']['display'])
                     <tr>
-                        <td>{{ $thword['field']['max_choices']['label'] }}</td>
-                        <td>{{ $thword['data']['thword']['max_choices'] }}</td>
+                        <td>{{ $thwordData['field']['max_choices']['label'] }}</td>
+                        <td>{{ $thwordData['data']['thword']['max_choices'] }}</td>
                     </tr>
                 @endif
 
-                @if ($thword['field']['bonus']['display'])
+                @if ($thwordData['field']['bonus']['display'])
                     <tr>
-                        <td>{{ $thword['field']['bonus']['label'] }}</td>
+                        <td>{{ $thwordData['field']['bonus']['label'] }}</td>
                         <td>
-                            @if ($thword['data']['thword']['bonus'])
+                            @if ($thwordData['data']['thword']['bonus'])
                             YES
                             @else
                             NO
@@ -141,43 +141,43 @@
                     </tr>
                 @endif
 
-                @if ($thword['field']['bonus_question']['display'])
+                @if ($thwordData['field']['bonus_question']['display'])
                     <tr>
-                        <td>{{ $thword['field']['bonus_question']['label'] }}</td>
-                        <td>{{ $thword['data']['thword']['bonus_question'] }}</td>
+                        <td>{{ $thwordData['field']['bonus_question']['label'] }}</td>
+                        <td>{{ $thwordData['data']['thword']['bonus_question'] }}</td>
                     </tr>
                 @endif
 
-                @if ($thword['field']['details']['display'])
+                @if ($thwordData['field']['details']['display'])
                     <tr>
-                        <td>{{ $thword['field']['details']['label'] }}</td>
-                        <td>{{ $thword['data']['thword']['details'] }}</td>
+                        <td>{{ $thwordData['field']['details']['label'] }}</td>
+                        <td>{{ $thwordData['data']['thword']['details'] }}</td>
                     </tr>
                 @endif
 
-                @if ($thword['field']['source']['display'])
+                @if ($thwordData['field']['source']['display'])
                     <tr>
-                        <td>{{ $thword['field']['source']['label'] }}</td>
+                        <td>{{ $thwordData['field']['source']['label'] }}</td>
                         <td>
-                            {{ HTML::link($thword['data']['thword']['source'], $thword['data']['thword']['source'], ['target' => '_blank']) }}
+                            {{ HTML::link($thwordData['data']['thword']['source'], $thwordData['data']['thword']['source'], ['target' => '_blank']) }}
                         </td>
                     </tr>
                 @endif
 
-                @if ($thword['field']['notes']['display'])
+                @if ($thwordData['field']['notes']['display'])
                     <tr>
-                        <td>{{ $thword['field']['notes']['label'] }}</td>
-                        <td>{{ $thword['data']['thword']['notes'] }}</td>
+                        <td>{{ $thwordData['field']['notes']['label'] }}</td>
+                        <td>{{ $thwordData['data']['thword']['notes'] }}</td>
                     </tr>
                 @endif
 
                 <tr>
                     <td>Created At</td>
-                    <td>{{ $thword['data']['thword']['created_at'] }}</td>
+                    <td>{{ $thwordData['data']['thword']['created_at'] }}</td>
                 </tr>
                 <tr>
                     <td>Updated At</td>
-                    <td>{{ $thword['data']['thword']['updated_at'] }}</td>
+                    <td>{{ $thwordData['data']['thword']['updated_at'] }}</td>
                 </tr>
             </tbody>
         </table>

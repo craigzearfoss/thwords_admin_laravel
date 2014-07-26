@@ -21,7 +21,7 @@ class AdminBandeliriumController extends \AdminController {
         $this->template      = 'bandelirium';
         $this->url           = 'bandelirium';
 
-        Breadcrumbs::addCrumb($this->name . 's', '/admin/' . $this->url);
+        Breadcrumbs::addCrumb($this->name, '/admin/' . $this->url);
     }
 
 
@@ -41,7 +41,14 @@ class AdminBandeliriumController extends \AdminController {
             ->orderBy('id', 'asc')
             ->paginate(25);
 
-        return View::make('admin.' . $this->template . '.index', ['thwords' => $thwords]);
+        return View::make('admin.' . $this->template . '.index', [
+            'thwords'    => $thwords,
+            'thwordData' => array(
+                'name'  => $this->name,
+                'url'   => $this->url,
+                'field' => $this->fieldMappings
+            )
+        ]);
 	}
 
 
@@ -67,7 +74,7 @@ class AdminBandeliriumController extends \AdminController {
             'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
             'correctAnswerList'  =>ThwordUtil::getCorrectAnswerList(),
             'maxChoicesList'     => ThwordUtil::getMaxChoicesList(),
-            'thword'             => array(
+            'thwordData'         => array(
                 'name'  => $this->name,
                 'url'   => $this->url,
                 'field' => $this->fieldMappings
@@ -83,48 +90,65 @@ class AdminBandeliriumController extends \AdminController {
 	 */
 	public function store()
 	{
-        $thword = new Bandelirium;
+        $parentId      = Input::get('parent_id');
+        $categoryId    = Input::get('category_id');
+        $subjectId     = Input::get('subject_id');
+        $lang          = Input::get('lang');
+        $level         = Input::get('level');
+        $topic         = Input::get('topic');
+        $description   = Input::get('description');
+        $answers       = Input::get('answers');
+        $correctAnswer = Input::get('correct_answer');
+        $maxChoices    = Input::get('max_choices');
+        $bonus         = (Input::get('my_checkbox') === '1') ? 1 : 0;
+        $bonusQuestion = Input::get('bonus_question');
+        $details       = Input::get('details');
+        $source        = Input::get('source');
+        $notes         = Input::get('notes');
 
-        $parentId = Input::get('parent_id');
-
-        $thword->parent_id      = (!empty($parentId)) ? $parentId : null;
-        $thword->category_id    = Input::get('category_id');
-        $thword->subject_id     = Input::get('subject_id');
-        $thword->lang           = Input::get('lang');
-        $thword->level          = Input::get('level');
-        $thword->topic          = Input::get('topic');
-        $thword->description    = Input::get('description');
-        $thword->bonus          = (Input::get('my_checkbox') === '1') ? 1 : 0;
-        $thword->bonus_question = Input::get('bonus_question');
-        $thword->answers        = Input::get('answers');
-        $thword->correct_answer = Input::get('correct_answer');
-        $thword->details        = Input::get('details');
-        $thword->max_choices    = Input::get('max_choices');
-        $thword->source         = Input::get('source');
-        $thword->notes          = Input::get('notes');
+        $this->thword->parent_id      = (!empty($parentId)) ? $parentId : null;
+        $this->thword->category_id    = isset($categoryId) ? $categoryId : $this->fieldMappings['category_id']['default'];
+        $this->thword->subject_id     = isset($subjectId) ? $subjectId : $this->fieldMappings['subject_id']['default'];
+        $this->thword->lang           = isset($lang) ? $lang : $this->fieldMappings['lang']['default'];
+        $this->thword->level          = isset($level) ? $level : $this->fieldMappings['level']['default'];
+        $this->thword->topic          = isset($topic) ? $topic : $this->fieldMappings['topic']['default'];
+        $this->thword->description    = isset($description) ? $description : $this->fieldMappings['description']['default'];
+        $this->thword->answers        = isset($answers) ? $answers : $this->fieldMappings['answers']['default'];
+        $this->thword->correct_answer = isset($correctAnswer) ? $correctAnswer : $this->fieldMappings['correct_answer']['default'];
+        $this->thword->max_choices    = isset($maxChoices) ? $maxChoices : $this->fieldMappings['max_choices']['default'];
+        $this->thword->bonus          = $bonus;
+        $this->thword->bonus_question = isset($bonusQuestion) ? $bonusQuestion : $this->fieldMappings['bonus_question']['default'];
+        $this->thword->details        = isset($details) ? $details : $this->fieldMappings['details']['default'];
+        $this->thword->source         = isset($source) ? $source : $this->fieldMappings['source']['default'];
+        $this->thword->notes          = isset($notes) ? $notes : $this->fieldMappings['notes']['default'];
 
         // make sure answers have the correct separator characters
         $primarySeparator = Input::get('primary_separator');
         if ($primarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR) {
-            $thword->answers = str_replace($primarySeparator, '|', $thword->answers);
+            $this->thword->answers = str_replace($primarySeparator, '|', $this->thword->answers);
         }
         $secondarySeparator = Input::get('secondary_separator');
         if ($secondarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR) {
-            $thword->answers = str_replace($secondarySeparator, '|', $thword->answers);
+            $this->thword->answers = str_replace($secondarySeparator, '|', $this->thword->answers);
         }
 
-        if ($success = $thword->save()) {
+        if ($success = $this->thword->save()) {
             //return Redirect::to('/admin/' . $this->url)->with('message', $this->name . ' created successfully.');
             Breadcrumbs::addCrumb('Show', '/admin/' . $this->url . '/show');
 
-            $thwArray = $thword->toArray();
+            $thwArray = $this->thword->toArray();
 
             return View::make('admin.' . $this->template . '.show', [
-                'thwArray'   => $thwArray,
-                'successMsg' => $this->name . ' was successfully created.'
+                'successMsg' => $this->name . ' was successfully created.',
+                'thwordData' => array(
+                    'name'  => $this->name,
+                    'url'   => $this->url,
+                    'data'  => $thwArray,
+                    'field' => $this->fieldMappings
+                )
             ]);
         } else {
-            return Redirect::to('/admin/' . $this->url . '/create')->withErrors($thword->errors());
+            return Redirect::to('/admin/' . $this->url . '/create')->withErrors($this->thword->errors());
         }
 	}
 
@@ -153,8 +177,14 @@ class AdminBandeliriumController extends \AdminController {
             'languageOptions'    => $languageOptions,
             'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
             'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
-            'correctAnswerList'  =>ThwordUtil::getCorrectAnswerList(),
-            'maxChoicesList'     => ThwordUtil::getMaxChoicesList()
+            'correctAnswerList'  => ThwordUtil::getCorrectAnswerList(),
+            'maxChoicesList'     => ThwordUtil::getMaxChoicesList(),
+            'thwordData' => array(
+                'name'  => $this->name,
+                'url'   => $this->url,
+                'data'  => $thword->toArray(),
+                'field' => $this->fieldMappings
+            )
         ]);
 	}
 
@@ -167,25 +197,39 @@ class AdminBandeliriumController extends \AdminController {
 	 */
 	public function update($id)
 	{
-        $thword = Bandelirium::find($id);
+        $thword = $this->thword->find($id);
 
-        $parentId = Input::get('parent_id');
+        $parentId      = Input::get('parent_id');
+        $categoryId    = Input::get('category_id');
+        $subjectId     = Input::get('subject_id');
+        $lang          = Input::get('lang');
+        $level         = Input::get('level');
+        $topic         = Input::get('topic');
+        $description   = Input::get('description');
+        $answers       = Input::get('answers');
+        $correctAnswer = Input::get('correct_answer');
+        $maxChoices    = Input::get('max_choices');
+        $bonus         = (Input::get('my_checkbox') === '1') ? 1 : 0;
+        $bonusQuestion = Input::get('bonus_question');
+        $details       = Input::get('details');
+        $source        = Input::get('source');
+        $notes         = Input::get('notes');
 
-        $thword->parent_id      = !empty($parentId) ? $parentId : null;
-        $thword->category_id    = Input::get('category_id');
-        $thword->subject_id     = Input::get('subject_id');
-        $thword->lang           = Input::get('lang');
-        $thword->level          = Input::get('level');
-        $thword->topic          = Input::get('topic');
-        $thword->description    = Input::get('description');
-        $thword->bonus          = (Input::get('my_checkbox') === '1') ? 1 : 0;
-        $thword->bonus_question = Input::get('bonus_question');
-        $thword->answers        = Input::get('answers');
-        $thword->correct_answer = Input::get('correct_answer');
-        $thword->details        = Input::get('details');
-        $thword->max_choices    = Input::get('max_choices');
-        $thword->source         = Input::get('source');
-        $thword->notes          = Input::get('notes');
+        $thword->parent_id      = (!empty($parentId)) ? $parentId : null;
+        $thword->category_id    = isset($categoryId) ? $categoryId : $this->fieldMappings['category_id']['default'];
+        $thword->subject_id     = isset($subjectId) ? $subjectId : $this->fieldMappings['subject_id']['default'];
+        $thword->lang           = isset($lang) ? $lang : $this->fieldMappings['lang']['default'];
+        $thword->level          = isset($level) ? $level : $this->fieldMappings['level']['default'];
+        $thword->topic          = isset($topic) ? $topic : $this->fieldMappings['topic']['default'];
+        $thword->description    = isset($description) ? $description : $this->fieldMappings['description']['default'];
+        $thword->answers        = isset($answers) ? $answers : $this->fieldMappings['answers']['default'];
+        $thword->correct_answer = isset($correctAnswer) ? $correctAnswer : $this->fieldMappings['correct_answer']['default'];
+        $thword->max_choices    = isset($maxChoices) ? $maxChoices : $this->fieldMappings['max_choices']['default'];
+        $thword->bonus          = $bonus;
+        $thword->bonus_question = isset($bonusQuestion) ? $bonusQuestion : $this->fieldMappings['bonus_question']['default'];
+        $thword->details        = isset($details) ? $details : $this->fieldMappings['details']['default'];
+        $thword->source         = isset($source) ? $source : $this->fieldMappings['source']['default'];
+        $thword->notes          = isset($notes) ? $notes : $this->fieldMappings['notes']['default'];
 
         // make sure answers have the correct separator characters
         $primarySeparator = Input::get('primary_separator');
@@ -204,8 +248,13 @@ class AdminBandeliriumController extends \AdminController {
             $thwArray = $thword->toArray();
 
             return View::make('admin.' . $this->template . '.show', [
-                'thwArray'   => $thwArray,
-                'successMsg' => $this->name . ' was successfully updated.'
+                'successMsg' => $this->name . ' was successfully updated.',
+                'thwordData' => array(
+                    'name'  => $this->name,
+                    'url'   => $this->url,
+                    'data'  => $thwArray,
+                    'field' => $this->fieldMappings
+                )
             ]);
         } else {
             return Redirect::to('/admin/' . $this->url . '/' . $id . '/edit/')->withErrors($thword->errors());
@@ -221,7 +270,7 @@ class AdminBandeliriumController extends \AdminController {
 	 */
 	public function destroy($id)
 	{
-        Bandelirium::destroy($id);
+        $this->thword->destroy($id);
 
         return Redirect::to('/admin/thword');
 	}
@@ -244,7 +293,7 @@ class AdminBandeliriumController extends \AdminController {
         }
 
         return View::make('admin.' . $this->template . '.show', [
-            'thword' => array(
+            'thwordData' => array(
                 'name'  => $this->name,
                 'url'   => $this->url,
                 'data'  => $thwArray,
