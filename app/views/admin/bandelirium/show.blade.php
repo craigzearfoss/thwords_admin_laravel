@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title') Show Bandelirium @stop
+@section('title') Show {{ $thword['name'] }} @stop
 
 @section('content')
 
@@ -17,7 +17,7 @@
     @endif
 
     <h2>
-        <i class="fa fa-bandelirium"></i> Show Bandelirium
+        <i class="fa fa-{{ $thword['url'] }}"></i> Show {{ $thword['name'] }}
         {{ HTML::link('/logout', 'Logout', array('class' => 'btn btn-warning pull-right'))}}
     </h2>
 
@@ -29,109 +29,155 @@
                 <tr>
                     <td colspan="100%">
                         <div class="nav-btn-container" class="pull-left" style="width: auto;">
-                            {{ HTML::link('/admin/bandelirium/first', '|<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to first']) }}
-                            {{ HTML::link('/admin/bandelirium/'.$thwArray['thword']['id'].'/previous', '<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to previous']) }}
-                            {{ HTML::link('/admin/bandelirium/'.$thwArray['thword']['id'].'/next', '>', ['class' => 'btn btn-primary pull-left', 'title' => 'go to next']) }}
-                            {{ HTML::link('/admin/bandelirium/last', '>|', ['class' => 'btn btn-primary pull-left', 'title' => 'go to last']) }}
+                            {{ HTML::link('/admin/'.$thword['url'].'/first', '|<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to first']) }}
+                            {{ HTML::link('/admin/'.$thword['url'].'/'.$thword['data']['thword']['id'].'/previous', '<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to previous']) }}
+                            {{ HTML::link('/admin/'.$thword['url'].'/'.$thword['data']['thword']['id'].'/next', '>', ['class' => 'btn btn-primary pull-left', 'title' => 'go to next']) }}
+                            {{ HTML::link('/admin/'.$thword['url'].'/last', '>|', ['class' => 'btn btn-primary pull-left', 'title' => 'go to last']) }}
                         </div>
                         <div class="pull-right" style="width: auto;">
-                            {{ HTML::link('/admin/bandelirium/create', 'Create a New Thword', array('class' => 'btn btn-primary')) }}
-                            {{ HTML::link('/admin/bandelirium/'.$thwArray['thword']['id'].'/edit', 'Edit This Bandelirium', ['class' => 'btn btn-primary']) }}
-                            {{ HTML::link('/admin/bandelirium', 'Bandelirium Listing', ['class' => 'btn btn-primary']) }}
+                            {{ HTML::link('/admin/'.$thword['url'].'/create', 'Create a '.$thword['name'], array('class' => 'btn btn-primary')) }}
+                            {{ HTML::link('/admin/'.$thword['url'].'/'.$thword['data']['thword']['id'].'/edit', 'Edit This '.$thword['name'], ['class' => 'btn btn-primary']) }}
+                            {{ HTML::link('/admin/'.$thword['url'].'', $thword['name'].' Listing', ['class' => 'btn btn-primary']) }}
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>ID</td>
-                    <td>{{ $thwArray['thword']['id'] }}</td>
+                    <td>{{ $thword['data']['thword']['id'] }}</td>
                 </tr>
-                <tr>
-                    <td>Parent ID</td>
-                    <td>{{ $thwArray['thword']['parent_id'] }}</td>
-                </tr>
-                <tr>
-                    <td>Question</td>
-                    <td>{{ $thwArray['thword']['topic'] }}</td>
-                </tr>
-                <tr>
-                    <td>Envelope</td>
-                    <td>{{ $thwArray['thword']['description'] }}</td>
-                </tr>
-                <tr>
-                    <td>Category</td>
-                    <td>{{ $thwArray['category']['name'] }}</td>
-                </tr>
-                <tr>
-                    <td>Subject</td>
-                    <td>{{ $thwArray['subject']['name'] }}</td>
-                </tr>
-                <tr style="display: none;">
-                    <td>Language</td>
-                    <td>{{ $thwArray['thword']['lang'] }}</td>
-                </tr>
-                <tr style="display: none;">
-                    <td>Level</td>
-                    <td>{{ $thwArray['thword']['level'] }}</td>
-                </tr>
-                <tr>
-                    <td>Answer(s)</td>
-                    <td>
-                        <?php $answers = explode('|', $thwArray['thword']['answers']); ?>
-                        @foreach ($answers as $answer)
-                            <li>
-                            @if (strpos($answer, '^') !== false)
-                                {{ str_replace('^', ' (', $answer) }})
-                            @else
-                                {{ $answer }}
-                            @endif
-                            </li>
-                        @endforeach
 
-                    </td>
-                </tr>
-                <tr style="display: none;">
-                    <td>Bonus</td>
-                    <td>
-                        @if ($thwArray['thword']['bonus'])
+                @if ($thword['field']['parent_id']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['parent_id']['label'] }}</td>
+                        <td>{{ $thword['data']['thword']['parent_id'] }}</td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['category_id']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['category_id']['label'] }}</td>
+                        <td>{{ $thword['data']['category']['name'] }}</td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['subject_id']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['subject_id']['label'] }}</td>
+                        <td>{{ $thword['data']['subject']['name'] }}</td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['topic']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['topic']['label'] }}</td>
+                        <td>{{ $thword['data']['thword']['topic'] }}</td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['description']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['description']['label'] }}</td>
+                        <td>{{ $thword['data']['thword']['description'] }}</td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['lang']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['lang']['label'] }}</td>
+                        <td>{{ $thword['data']['thword']['lang'] }}</td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['level']['display'])
+                    <tr>
+                        <td>ddd{{ $thword['field']['level']['label'] }}</td>
+                        <td>{{ $thword['data']['thword']['level'] }}</td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['answers']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['answers']['label'] }}</td>
+                        <td>
+                            <?php $answers = explode('|', $thword['data']['thword']['answers']); ?>
+                            @foreach ($answers as $answer)
+                                <li>
+                                @if (strpos($answer, '^') !== false)
+                                    {{ str_replace('^', ' (', $answer) }})
+                                @else
+                                    {{ $answer }}
+                                @endif
+                                </li>
+                            @endforeach
+
+                        </td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['correct_answer']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['correct_answer']['label'] }}</td>
+                        <td>{{ $thword['data']['thword']['correct_answer'] }}</td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['max_choices']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['max_choices']['label'] }}</td>
+                        <td>{{ $thword['data']['thword']['max_choices'] }}</td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['bonus']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['bonus']['label'] }}</td>
+                        <td>
+                            @if ($thword['data']['thword']['bonus'])
                             YES
-                        @else
+                            @else
                             NO
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <td>Correct Answer</td>
-                    <td>{{ $thwArray['thword']['correct_answer'] }}</td>
-                </tr>
-                <tr>
-                    <td>Max Choices</td>
-                    <td>{{ $thwArray['thword']['max_choices'] }}</td>
-                </tr>
-                <tr style="display: none;">
-                    <td>Bonus Question</td>
-                    <td>{{ $thwArray['thword']['bonus_question'] }}</td>
-                </tr>
-                <tr>
-                    <td>Details</td>
-                    <td>{{ $thwArray['thword']['details'] }}</td>
-                </tr>
-                <tr>
-                    <td>Source</td>
-                    <td>
-                        {{ HTML::link($thwArray['thword']['source'], $thwArray['thword']['source'], ['target' => '_blank']) }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>Notes</td>
-                    <td>{{ $thwArray['thword']['notes'] }}</td>
-                </tr>
+                            @endif
+                        </td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['bonus_question']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['bonus_question']['label'] }}</td>
+                        <td>{{ $thword['data']['thword']['bonus_question'] }}</td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['details']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['details']['label'] }}</td>
+                        <td>{{ $thword['data']['thword']['details'] }}</td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['source']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['source']['label'] }}</td>
+                        <td>
+                            {{ HTML::link($thword['data']['thword']['source'], $thword['data']['thword']['source'], ['target' => '_blank']) }}
+                        </td>
+                    </tr>
+                @endif
+
+                @if ($thword['field']['notes']['display'])
+                    <tr>
+                        <td>{{ $thword['field']['notes']['label'] }}</td>
+                        <td>{{ $thword['data']['thword']['notes'] }}</td>
+                    </tr>
+                @endif
+
                 <tr>
                     <td>Created At</td>
-                    <td>{{ $thwArray['thword']['created_at'] }}</td>
+                    <td>{{ $thword['data']['thword']['created_at'] }}</td>
                 </tr>
                 <tr>
                     <td>Updated At</td>
-                    <td>{{ $thwArray['thword']['updated_at'] }}</td>
+                    <td>{{ $thword['data']['thword']['updated_at'] }}</td>
                 </tr>
             </tbody>
         </table>

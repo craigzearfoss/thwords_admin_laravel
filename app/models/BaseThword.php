@@ -63,6 +63,6 @@ class BaseThword extends Ardent {
             'subject'  => $this->subject()->first()->attributes
         );
 
-        return isset($thword[0]) ? $thword[0] : $thword;
+        return $thwArray;
     }
 }

@@ -4,48 +4,61 @@ App::bind('Bandelirium', 'Bandelirium');
 
 class AdminBandeliriumController extends \AdminController {
 
-    protected $bandelirium;
+    protected $thword;
+
+    protected $table;
+
+    protected $fieldMappings;
 
     public function __construct(Bandelirium $bandelirium)
     {
         parent::__construct();
 
-        Breadcrumbs::addCrumb('Bandeliriums', '/admin/bandelirium');
+        $this->name          = 'Bandelirium';
+        $this->thword        = $bandelirium;
+        $this->table         = 'thw_bandeliriums';
+        $this->fieldMappings = $this->thword->getFieldMappings();
+        $this->template      = 'bandelirium';
+        $this->url           = 'bandelirium';
 
-        $this->bandelirium = $bandelirium;
+        Breadcrumbs::addCrumb($this->name . 's', '/admin/' . $this->url);
     }
 
 
 	/**
-	 * Display a listing of the bandelirium.
+	 * Display a listing of the thword.
 	 *
 	 * @return Response
 	 */
 	public function index()
     {
-        $thwords = DB::table('thw_bandeliriums')
-            ->select('thw_bandeliriums.id', 'thw_bandeliriums.topic', 'thw_bandeliriums.description')
+        $thwords = DB::table($this->table)
+            ->select(
+                $this->table . '.id',
+                $this->table . '.topic',
+                $this->table . '.description'
+            )
             ->orderBy('id', 'asc')
             ->paginate(25);
 
-        return View::make('admin.bandelirium.index', ['thwords' => $thwords]);
+        return View::make('admin.' . $this->template . '.index', ['thwords' => $thwords]);
 	}
 
 
 	/**
-	 * Show the form for creating a new bandelirium.
+	 * Show the form for creating a new thword.
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-        Breadcrumbs::addCrumb('Create', '/admin/bandelirium/create');
+        Breadcrumbs::addCrumb('Create', '/admin/' . $this->url . '/create');
 
         $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
         $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
-        return View::make('admin.bandelirium.create', [
+        return View::make('admin.' .  $this->template . '.create', [
             'levelOptions'       => ThwordUtil::getLevelList(),
             'categoryOptions'    => $categoryOptions,
             'subjectOptions'     => $subjectOptions,
@@ -53,13 +66,18 @@ class AdminBandeliriumController extends \AdminController {
             'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
             'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
             'correctAnswerList'  =>ThwordUtil::getCorrectAnswerList(),
-            'maxChoicesList'     => ThwordUtil::getMaxChoicesList()
+            'maxChoicesList'     => ThwordUtil::getMaxChoicesList(),
+            'thword'             => array(
+                'name'  => $this->name,
+                'url'   => $this->url,
+                'field' => $this->fieldMappings
+            )
         ]);
 	}
 
 
 	/**
-	 * Store a newly created bandelirium in storage.
+	 * Store a newly created thword in storage.
 	 *
 	 * @return Response
 	 */
@@ -96,38 +114,38 @@ class AdminBandeliriumController extends \AdminController {
         }
 
         if ($success = $thword->save()) {
-            //return Redirect::to('/admin/bandelirium')->with('message', 'Bandelirium created successfully.');
-            Breadcrumbs::addCrumb('Show', '/admin/bandelirium/show');
+            //return Redirect::to('/admin/' . $this->url)->with('message', $this->name . ' created successfully.');
+            Breadcrumbs::addCrumb('Show', '/admin/' . $this->url . '/show');
 
             $thwArray = $thword->toArray();
 
-            return View::make('admin.bandelirium.show', [
+            return View::make('admin.' . $this->template . '.show', [
                 'thwArray'   => $thwArray,
-                'successMsg' => 'Bandelirium was successfully created.'
+                'successMsg' => $this->name . ' was successfully created.'
             ]);
         } else {
-            return Redirect::to('/admin/bandelirium/create')->withErrors($thword->errors());
+            return Redirect::to('/admin/' . $this->url . '/create')->withErrors($thword->errors());
         }
 	}
 
 
 	/**
-	 * Show the form for editing the specified bandelirium.
+	 * Show the form for editing the specified thword.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-        Breadcrumbs::addCrumb('Edit', '/admin/bandelirium/edit');
+        Breadcrumbs::addCrumb('Edit', '/admin/' . $this->url . '/edit');
 
-        $thword = Bandelirium::find($id);
+        $thword = $this->thword->find($id);
 
         $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
         $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
-        return View::make('admin.bandelirium.edit', [
+        return View::make('admin.' . $this->template . '.edit', [
             'thword'             => $thword,
             'levelOptions'       => ThwordUtil::getLevelList(),
             'categoryOptions'    => $categoryOptions,
@@ -142,7 +160,7 @@ class AdminBandeliriumController extends \AdminController {
 
 
 	/**
-	 * Update the specified bandelirium in storage.
+	 * Update the specified thword in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -181,22 +199,22 @@ class AdminBandeliriumController extends \AdminController {
 
         if ($success = $thword->save()) {
             //return Redirect::to('/admin/thword');
-            Breadcrumbs::addCrumb('Show', '/admin/bandelirium/show');
+            Breadcrumbs::addCrumb('Show', '/admin/' . $this->url . '/show');
 
             $thwArray = $thword->toArray();
 
-            return View::make('admin.bandelirium.show', [
+            return View::make('admin.' . $this->template . '.show', [
                 'thwArray'   => $thwArray,
-                'successMsg' => 'Bandelirium was successfully updated.'
+                'successMsg' => $this->name . ' was successfully updated.'
             ]);
         } else {
-            return Redirect::to('/admin/bandelirium/' . $id . '/edit/')->withErrors($thword->errors());
+            return Redirect::to('/admin/' . $this->url . '/' . $id . '/edit/')->withErrors($thword->errors());
         }
 	}
 
 
 	/**
-	 * Remove the specified bandelirium from storage.
+	 * Remove the specified thword from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -210,20 +228,28 @@ class AdminBandeliriumController extends \AdminController {
 
 
     /**
-     * Display the specified bandelirium.
+     * Display the specified thword.
      *
      * @param  int  $id
      * @return Response
      */
     public function show($id)
     {
-        Breadcrumbs::addCrumb('Show', '/admin/bandelirium/show');
+        Breadcrumbs::addCrumb('Show', '/admin/' . $this->url . '/show');
 
-        $thword = Bandelirium::find($id);
-        $thwArray = $thword->toArray();
+        if (!$thword = $this->thword->find($id)) {
+            $thwArray = array();
+        } else {
+            $thwArray = $thword->toArray();
+        }
 
-        return View::make('admin.bandelirium.show', [
-            'thwArray' => $thwArray
+        return View::make('admin.' . $this->template . '.show', [
+            'thword' => array(
+                'name'  => $this->name,
+                'url'   => $this->url,
+                'data'  => $thwArray,
+                'field' => $this->fieldMappings
+            )
         ]);
     }
 
@@ -235,74 +261,74 @@ class AdminBandeliriumController extends \AdminController {
      */
     public function first()
     {
-        $thword = DB::table('thw_bandeliriums')
-            ->select('thw_bandeliriums.id')
+        $thword = DB::table($this->table)
+            ->select($this->table . '.id')
             ->orderBy('id', 'asc')
             ->first();
 
-        return Redirect::to('/admin/bandelirium/' . $thword->id . '/show');
+        return Redirect::to('/admin/' . $this->url . '/' . $thword->id . '/show');
     }
 
 
     /**
-     * Redirect to the previous bandelirium.
+     * Redirect to the previous thword.
      *
      * @param  int  $id
      * @return Response
      */
     public function previous($id)
     {
-        $thword = DB::table('thw_bandeliriums')
-            ->select('thw_bandeliriums.id')
+        $thword = DB::table($this->table)
+            ->select($this->table . '.id')
             ->where('id', '<', $id)
             ->orderBy('id', 'desc')
             ->first();
 
         if (!empty($thword)) {
-            return Redirect::to('/admin/bandelirium/' . $thword->id . '/show');
+            return Redirect::to('/admin/' . $this->url . '/' . $thword->id . '/show');
         } else {
-            // next bandelirium not found
-            return Redirect::to('/admin/bandelirium/' . $id . '/show');
+            // next thword not found
+            return Redirect::to('/admin/' . $this->url . '/' . $id . '/show');
         }
     }
 
 
     /**
-     * Redirect to the next bandelirium.
+     * Redirect to the next thword.
      *
      * @param  int  $id
      * @return Response
      */
     public function next($id)
     {
-        $thword = DB::table('thw_bandeliriums')
-            ->select('thw_bandeliriums.id')
+        $thword = DB::table($this->table)
+            ->select($this->table . '.id')
             ->where('id', '>', $id)
             ->orderBy('id', 'asc')
             ->first();
 
         if (!empty($thword)) {
-            return Redirect::to('/admin/bandelirium/' . $thword->id . '/show');
+            return Redirect::to('/admin/' . $this->url . '/' . $thword->id . '/show');
         } else {
             // next thword not found
-            return Redirect::to('/admin/bandelirium/' . $id . '/show');
+            return Redirect::to('/admin/' . $this->url . '/' . $id . '/show');
         }
     }
 
 
     /**
-     * Redirect to the last bandelirium.
+     * Redirect to the last thword.
      *
      * @return Response
      */
     public function last()
     {
-        $thword = DB::table('thw_bandeliriums')
-            ->select('thw_bandeliriums.id')
+        $thword = DB::table($this->table)
+            ->select($this->table . '.id')
             ->orderBy('id', 'desc')
             ->first();
 
-        return Redirect::to('/admin/bandelirium/' . $thword->id . '/show');
+        return Redirect::to('/admin/' . $this->url . '/' . $thword->id . '/show');
     }
 
 

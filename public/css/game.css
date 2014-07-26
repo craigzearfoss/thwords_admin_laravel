@@ -296,7 +296,7 @@ section footer {
 
 #container-header {
     background:#352a38;
-    height: 350px;
+    height: 30px;
     width:100%;
 }
 
@@ -318,8 +318,23 @@ img {
 #nav,
 #masthead,
 #content,
-#colophon {
+#colophon,
+#content-start,
+#content-post,
+#content-stats {
+    max-width: 40em;
     margin: 0 3.3%;
+    text-align: center;
+    display: auto;
+}
+#nav.hide,
+#masthead.hide,
+#content.hide,
+#colophon.hide
+#content-start.hide,
+#content-post.hide,
+#content-stats.hide {
+    display: none;
 }
 
 /* Float Clearing http://nicolasgallagher.com/micro-clearfix-hack */
@@ -370,8 +385,23 @@ img {
     #nav,
     #masthead,
     #content,
-    #colophon {
+    #colophon
+    #content-start,
+    #content-post,
+    #content-stats {
         margin: 0 5.5%;
+        max-width: 40em;
+        text-align: center;
+        display: auto;
+    }
+    #nav.hide,
+    #masthead.hide,
+    #content.hide,
+    #colophon.hide
+    #content-start.hide,
+    #content-post.hide,
+    #content-stats.hide {
+        display: none;
     }
 
 
@@ -411,3 +441,23 @@ img {
 
 }
 
+.nav-btn {
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: block;
+    padding: 10px 15px;
+    position: relative;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1.42857;
+    background-color: #428BCA;
+    color: #FFFFFF;
+}
+.nav-btn:focus {
+    background-color: #428BCA;
+    color: #FFFFFF;
+}
+
+.nav-btn.start {
+    margin: 0 auto;
+}

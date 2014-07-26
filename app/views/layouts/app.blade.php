@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app=thwordGame>
+<html ng-app=thwordPlay>
 <head>
     <meta charset="utf-8">
 
@@ -31,8 +31,17 @@
 
     @yield('content')
 
+    <!-- general libraries -->
+    <script src="/vendor/underscore.js"></script>
+    <script src="/vendor/jquery.js"></script> <!-- jQuery before angular so angular can augment element with it -->
+
+    <!-- angular + modules -->
     <script src="/vendor/angular/angular.js"></script>
-    <script src="/js/master.js"></script>
+    <script src="/vendor/angular/angular-route.js"></script>
+    <script src="/vendor/angular/angular-resource.js"></script>
+
+    <script src="/js/main.js"></script>
+
 
 </body>
 </html>
