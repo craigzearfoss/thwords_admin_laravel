@@ -66,14 +66,14 @@ class AdminBandeliriumController extends \AdminController {
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
         return View::make('admin.' .  $this->template . '.create', [
-            'levelOptions'       => ThwordUtil::getLevelList(),
+            'levelOptions'       => $this->thword->getLevelList(),
             'categoryOptions'    => $categoryOptions,
             'subjectOptions'     => $subjectOptions,
             'languageOptions'    => $languageOptions,
-            'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
-            'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
-            'correctAnswerList'  =>ThwordUtil::getCorrectAnswerList(),
-            'maxChoicesList'     => ThwordUtil::getMaxChoicesList(),
+            'primarySeparator'   => $this->thword->getSeparatorCharacters(),
+            'secondarySeparator' => $this->thword->getSeparatorCharacters(),
+            'correctAnswerList'  => $this->thword->getCorrectAnswerList(),
+            'maxChoicesList'     => $this->thword->getMaxChoicesList(),
             'thwordData'         => array(
                 'name'  => $this->name,
                 'url'   => $this->url,
@@ -124,11 +124,11 @@ class AdminBandeliriumController extends \AdminController {
 
         // make sure answers have the correct separator characters
         $primarySeparator = Input::get('primary_separator');
-        if ($primarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR) {
+        if ($primarySeparator != \BaseThword::PRIMARY_SEPARATOR) {
             $this->thword->answers = str_replace($primarySeparator, '|', $this->thword->answers);
         }
         $secondarySeparator = Input::get('secondary_separator');
-        if ($secondarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR) {
+        if ($secondarySeparator != \BaseThword::SCONDARY_SEPARATOR) {
             $this->thword->answers = str_replace($secondarySeparator, '|', $this->thword->answers);
         }
 
@@ -171,14 +171,14 @@ class AdminBandeliriumController extends \AdminController {
 
         return View::make('admin.' . $this->template . '.edit', [
             'thword'             => $thword,
-            'levelOptions'       => ThwordUtil::getLevelList(),
+            'levelOptions'       => $this->thword->getLevelList(),
             'categoryOptions'    => $categoryOptions,
             'subjectOptions'     => $subjectOptions,
             'languageOptions'    => $languageOptions,
-            'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
-            'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
-            'correctAnswerList'  => ThwordUtil::getCorrectAnswerList(),
-            'maxChoicesList'     => ThwordUtil::getMaxChoicesList(),
+            'primarySeparator'   => $this->thword->getSeparatorCharacters(),
+            'secondarySeparator' => $this->thword->getSeparatorCharacters(),
+            'correctAnswerList'  => $this->thword->getCorrectAnswerList(),
+            'maxChoicesList'     => $this->thword->getMaxChoicesList(),
             'thwordData' => array(
                 'name'  => $this->name,
                 'url'   => $this->url,
@@ -233,11 +233,11 @@ class AdminBandeliriumController extends \AdminController {
 
         // make sure answers have the correct separator characters
         $primarySeparator = Input::get('primary_separator');
-        if ($primarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR) {
+        if ($primarySeparator != \BaseThword::PRIMARY_SEPARATOR) {
             $thword->answers = str_replace($primarySeparator, '|', $thword->answers);
         }
         $secondarySeparator = Input::get('secondary_separator');
-        if ($secondarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR) {
+        if ($secondarySeparator != \BaseThword::SECONDARY_SEPARATOR) {
             $thword->answers = str_replace($secondarySeparator, '|', $thword->answers);
         }
 

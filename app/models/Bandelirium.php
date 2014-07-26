@@ -62,7 +62,7 @@ class Bandelirium extends \BaseThword {
         ),
         'correct_answer' => array(
             'display' => true,
-            'label' => 'Correct Answer',
+            'label' => 'Correct Answer(s)',
             'default' => 1
         ),
         'max_choices' => array(
