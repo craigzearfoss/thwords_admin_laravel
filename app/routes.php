@@ -11,15 +11,18 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
-
 Route::get('login', 'HomeController@getLogin');
 Route::post('login', 'HomeController@postLogin');
 //Route::get('register', 'HomeController@getRegister');
 //Route::post('register', 'HomeController@postRegister');
+
+Route::get('/', 'GameController@index');
+Route::get('/landing', 'GameController@landing');
+Route::get('/home', 'GameController@home');
+Route::get('/about/{game}', 'GameController@about');
+Route::get('/play/{game}', 'GameController@play');
+
+
 
 Route::group(array('before' => 'auth'), function(){
     Route::get('admin', 'AdminController@index');
