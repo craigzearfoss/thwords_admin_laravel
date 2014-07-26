@@ -23,8 +23,7 @@ class ThwordController extends \BaseController {
             $thword = $this->thword->find($key);
         }
 
-        $play = ThwordUtil::generatePlay($thword, \Craigzearfoss\ThwordUtil\ThwordUtil::GAME_THWORDS);
-die;
+        $play = ThwordUtil::generateLetterPlay($thword);
 
         return Response::json($play);
     }

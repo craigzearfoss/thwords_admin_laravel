@@ -274,11 +274,11 @@ class Charset extends Ardent {
 
                 $baseChar = $this->getBaseChar($char);
 
-                $charset[$char] = array(
-                    'upper' => $char,
-                    'lower' => mb_strtolower($char),
-                    'base' => $baseChar,
-                    'value' => $this->getCharValue($baseChar)
+                $charset[] = array(
+                    'b' => $baseChar,
+                    'u' => $char,
+                    'l' => mb_strtolower($char),
+                    'v' => $this->getCharValue($baseChar)
                 );
             }
         }
@@ -286,7 +286,7 @@ class Charset extends Ardent {
         return $charset;
     }
 
-    public function getTiles($code = 'en') {
+    public function getTiles($code = 'en', $includeDigits = false) {
 
         $code = strtolower($code);
         $tiles = array();
@@ -294,33 +294,38 @@ class Charset extends Ardent {
         if (isset($this->charSets[$code])) {
 
             // add all the characters from the character set
+            $usedBaseChars = array();
             $chars = self::mb_str_to_array($this->charSets[$code]['upper']['chars']);
             foreach ($chars as $char) {
 
                 $baseChar = $this->getBaseChar($char, 'upper');
 
-                if (!isset($tiles[$baseChar])) {
-                    $tiles[$baseChar] = array(
-                        'upper' => array($char),
-                        'lower' => array(mb_strtolower($char)),
-                        'base' => $baseChar,
-                        'value' => $this->getCharValue($baseChar)
+                if (!in_array($baseChar, $usedBaseChars)) {
+                    $tiles[] = array(
+                        'b' => $baseChar,
+                        'u' => $char,
+                        'l' => mb_strtolower($char),
+                        'v' => $this->getCharValue($baseChar)
                     );
-                } else {
-                    $tiles[$baseChar]['upper'][] = $char;
-                    $tiles[$baseChar]['lower'][] = mb_strtolower($char);
+
+                    $usedBaseChars[] = $baseChar;
                 }
             }
 
             // add extra characters
             foreach ($this->charValues as $char => $value) {
-                if (!isset($tiles[$char])) {
-                    $tiles[$char] = array(
-                        'upper' => $char,
-                        'lower' => $char,
-                        'base' => $char,
-                        'value' => $value
+
+                if ((!is_numeric($char) || $includeDigits)
+                    && !in_array($char, $usedBaseChars)) {
+
+                    $tiles[] = array(
+                        'b' => $char,
+                        'u' => $char,
+                        'l' => $char,
+                        'v' => $value
                     );
+
+                    $usedBaseChars[] = $baseChar;
                 }
             }
 
