@@ -110,7 +110,7 @@
     @if ($thwordData['field']['points']['display'])
         <div class="form-group">
             {{ Form::label('points', $thwordData['field']['points']['label']) }}
-            {{ Form::select('points', $correctAnswerList, explode('|', $thword->points), ['class' => 'form-control') }}
+            {{ Form::select('points', $correctAnswerList, explode('|', $thword->points), ['class' => 'form-control']) }}
         </div>
     @endif
 
