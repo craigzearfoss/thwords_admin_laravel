@@ -82,11 +82,11 @@
             {{ Form::label('answers', $thwordData['field']['answers']['label']) }}
             <span class="pull-right">
                 Secondary Separator:
-                {{ Form::select('secondary_separator', $secondarySeparator, \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR, ['class' => '']) }}
+                {{ Form::select('secondary_separator', $secondarySeparator, \BaseThword::SECONDARY_SEPARATOR, ['class' => '']) }}
             </span>
             <span class="pull-right">
                 Separator:
-                {{ Form::select('primary_separator', $primarySeparator, \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR, ['class' => '']) }}
+                {{ Form::select('primary_separator', $primarySeparator, \BaseThword::PRIMARY_SEPARATOR, ['class' => '']) }}
             </span>
             {{ Form::textarea('answers', $thwordData['field']['answers']['default'], ['placeholder' => $thwordData['field']['answers']['label'], 'class' => 'form-control']) }}
         </div>
@@ -103,6 +103,13 @@
         <div class="form-group">
             {{ Form::label('max_choices', $thwordData['field']['max_choices']['label']) }}
             {{ Form::select('max_choices', $maxChoicesList, $thwordData['field']['max_choices']['default'], ['class' => '']) }}
+        </div>
+    @endif
+
+    @if ($thwordData['field']['points']['display'])
+        <div class="form-group">
+            {{ Form::label('points', $thwordData['field']['points']['label']) }}
+            {{ Form::select('points', $pointsList, explode('|', $thwordData['field']['points']['default']), ['class' => 'form-control']) }}
         </div>
     @endif
 

@@ -142,6 +142,13 @@
                     </tr>
                 @endif
 
+                @if ($thwordData['field']['points']['display'])
+                    <tr>
+                        <td>{{ $thwordData['field']['points']['label'] }}</td>
+                        <td>{{ $thwordData['data']['thword']['points'] }}</td>
+                    </tr>
+                @endif
+
                 @if ($thwordData['field']['bonus']['display'])
                     <tr>
                         <td>{{ $thwordData['field']['bonus']['label'] }}</td>

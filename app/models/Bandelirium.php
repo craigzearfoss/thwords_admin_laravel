@@ -70,6 +70,11 @@ class Bandelirium extends \BaseThword {
             'label' => 'Max Choices',
             'default' => 4
         ),
+        'points' => array(
+            'display' => true,
+            'label' => 'Points',
+            'default' => 1
+        ),
         'details' => array(
             'display' => true,
             'label' => 'Details (Shown when answer is displayed.)',

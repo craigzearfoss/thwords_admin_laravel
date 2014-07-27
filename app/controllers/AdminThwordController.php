@@ -70,6 +70,7 @@ class AdminThwordController extends \AdminController {
             'secondarySeparator' => $this->thword->getSeparatorCharacters(),
             'correctAnswerList'  => $this->thword->getCorrectAnswerList(),
             'maxChoicesList'     => $this->thword->getMaxChoicesList(),
+            'pointsList'         => $this->thword->getPointsList(),
             'thwordData'         => array(
                 'name'  => $this->name,
                 'url'   => $this->url,
@@ -96,6 +97,7 @@ class AdminThwordController extends \AdminController {
         $answers       = Input::get('answers');
         $correctAnswer = Input::get('correct_answer');
         $maxChoices    = Input::get('max_choices');
+        $points        = Input::get('points');
         $bonus         = (Input::get('my_checkbox') === '1') ? 1 : 0;
         $bonusQuestion = Input::get('bonus_question');
         $details       = Input::get('details');
@@ -112,6 +114,7 @@ class AdminThwordController extends \AdminController {
         $this->thword->answers        = isset($answers) ? $answers : $this->fieldMappings['answers']['default'];
         $this->thword->correct_answer = isset($correctAnswer) ? implode('|', $correctAnswer) : $this->fieldMappings['correct_answer']['default'];
         $this->thword->max_choices    = isset($maxChoices) ? $maxChoices : $this->fieldMappings['max_choices']['default'];
+        $this->thword->points          = isset($points) ? $points : $this->fieldMappings['points']['default'];
         $this->thword->bonus          = $bonus;
         $this->thword->bonus_question = isset($bonusQuestion) ? $bonusQuestion : $this->fieldMappings['bonus_question']['default'];
         $this->thword->details        = isset($details) ? $details : $this->fieldMappings['details']['default'];
@@ -175,6 +178,7 @@ class AdminThwordController extends \AdminController {
             'secondarySeparator' => $this->thword->getSeparatorCharacters(),
             'correctAnswerList'  => $this->thword->getCorrectAnswerList(),
             'maxChoicesList'     => $this->thword->getMaxChoicesList(),
+            'pointsList'         => $this->thword->getPointsList(),
             'thwordData' => array(
                 'name'  => $this->name,
                 'url'   => $this->url,
@@ -205,6 +209,7 @@ class AdminThwordController extends \AdminController {
         $answers       = Input::get('answers');
         $correctAnswer = Input::get('correct_answer');
         $maxChoices    = Input::get('max_choices');
+        $points        = Input::get('points');
         $bonus         = (Input::get('my_checkbox') === '1') ? 1 : 0;
         $bonusQuestion = Input::get('bonus_question');
         $details       = Input::get('details');
@@ -221,6 +226,7 @@ class AdminThwordController extends \AdminController {
         $thword->answers        = isset($answers) ? $answers : $this->fieldMappings['answers']['default'];
         $thword->correct_answer = isset($correctAnswer) ? implode('|', $correctAnswer) : $this->fieldMappings['correct_answer']['default'];
         $thword->max_choices    = isset($maxChoices) ? $maxChoices : $this->fieldMappings['max_choices']['default'];
+        $thword->points         = isset($points) ? $points : $this->fieldMappings['points']['default'];
         $thword->bonus          = $bonus;
         $thword->bonus_question = isset($bonusQuestion) ? $bonusQuestion : $this->fieldMappings['bonus_question']['default'];
         $thword->details        = isset($details) ? $details : $this->fieldMappings['details']['default'];

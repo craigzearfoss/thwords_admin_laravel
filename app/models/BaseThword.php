@@ -86,6 +86,11 @@ class BaseThword extends Ardent {
             'label' => 'Max Choices',
             'default' => 4
         ),
+        'points' => array(
+            'display' => true,
+            'label' => 'Points',
+            'default' => 1
+        ),
         'details' => array(
             'display' => true,
             'label' => 'Details (Shown when answer is displayed.)',
@@ -198,6 +203,17 @@ class BaseThword extends Ardent {
         }
 
         return $maxChoices;
+    }
+
+
+    public static function getPointsList() {
+
+        $points = array();
+        for ($i=0; $i<11; $i++) {
+            $points[$i] = $i;
+        }
+
+        return $points;
     }
 
 

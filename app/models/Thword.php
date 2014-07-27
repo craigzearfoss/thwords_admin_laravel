@@ -70,6 +70,11 @@ class Thword extends \BaseThword {
             'label' => 'Max Choices',
             'default' => 4
         ),
+        'points' => array(
+            'display' => true,
+            'label' => 'Points',
+            'default' => 1
+        ),
         'details' => array(
             'display' => false,
             'label' => 'Details (Shown when answer is displayed.)',
