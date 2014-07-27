@@ -49,6 +49,11 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('/admin/thword/{id}/next', 'AdminThwordController@next');
     Route::get('/admin/thword/last', 'AdminThwordController@last');
 
+    Route::get('/admin/q-thword/first', 'AdminQthwordController@first');
+    Route::get('/admin/q-thword/{id}/previous', 'AdminQthwordController@previous');
+    Route::get('/admin/q-thword/{id}/next', 'AdminQthwordController@next');
+    Route::get('/admin/q-thword/last', 'AdminQthwordController@last');
+
     Route::get('/admin/bandelirium/first', 'AdminBandeliriumController@first');
     Route::get('/admin/bandelirium/{id}/previous', 'AdminBandeliriumController@previous');
     Route::get('/admin/bandelirium/{id}/next', 'AdminBandeliriumController@next');
@@ -61,7 +66,7 @@ Route::group(array('before' => 'auth'), function(){
     Route::resource('/admin/result', 'AdminResultController');
     Route::resource('/admin/subject', 'AdminSubjectController');
     Route::resource('/admin/thword', 'AdminThwordController');
-    Route::resource('/admin/thword', 'AdminThwordController');
+    Route::resource('/admin/q-thword', 'AdminQThwordController');
     Route::resource('/admin/thword-play', 'AdminThwordPlayController');
     Route::resource('/admin/bandelirium', 'AdminBandeliriumController');
     Route::resource('/admin/user', 'AdminUserController');
@@ -71,12 +76,14 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('/admin/foreign-thword/{id}/show', 'AdminForeignThwordController@show');
     Route::get('/admin/thword/{id}/show', 'AdminThwordController@show');
     Route::get('/admin/thword-play/{id}/show', 'AdminThwordPlayController@show');
+    Route::get('/admin/q-thword/{id}/show', 'AdminQThwordController@show');
     Route::get('/admin/bandelirium/{id}/show', 'AdminBandeliriumController@show');
 
     Route::get('/json/anti-thword/{key}', 'AntiThwordController@json');
     Route::get('/json/bandelirum/{key}', 'BandeliriumController@json');
     Route::get('/json/foreign-thword/{key}', 'ForeignThwordController@json');
     Route::get('/json/thword/{key}', 'ThwordController@json');
+    Route::get('/json/q-thword/{key}', 'QThwordController@json');
     Route::get('/json/thword-play/{key}', 'ThwordPlayController@json');
     Route::get('admin/json/category-subjects/{categoryId}', 'AdminJsonController@categorySubjects');
 });
