@@ -16,12 +16,12 @@ class Bandelirium extends \BaseThword {
             'default' => null
         ),
         'category_id' => array(
-            'display' => true,
+            'display' => false,
             'label' => 'Category',
             'default' => 4
         ),
         'subject_id' => array(
-            'display' => true,
+            'display' => false,
             'label' => 'Subject',
             'default' => 2
         ),
