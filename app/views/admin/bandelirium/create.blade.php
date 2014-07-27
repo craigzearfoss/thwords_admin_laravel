@@ -31,49 +31,49 @@
     @if ($thwordData['field']['parent_id']['display'])
         <div class="form-group">
             {{ Form::label('parent_id', $thwordData['field']['parent_id']['label']) }}
-            {{ Form::text('parent_id', '', ['placeholder' => $thwordData['field']['parent_id']['label'], 'class' => 'form-control']) }}
+            {{ Form::text('parent_id', $thwordData['field']['parent_id']['default'], ['placeholder' => $thwordData['field']['parent_id']['label'], 'class' => 'form-control']) }}
         </div>
     @endif
 
     @if ($thwordData['field']['category_id']['display'])
         <div class="form-group">
             {{ Form::label('category_id', $thwordData['field']['category_id']['label']) }}
-            {{ Form::select('category_id', $categoryOptions, 4, ['class' => 'form-control']) }}
+            {{ Form::select('category_id', $categoryOptions, $thwordData['field']['category_id']['default'], ['class' => 'form-control']) }}
         </div>
     @endif
 
     @if ($thwordData['field']['subject_id']['display'])
         <div class="form-group">
             {{ Form::label('subject_id', $thwordData['field']['subject_id']['label']) }}
-            {{ Form::select('subject_id', $subjectOptions, 2, ['class' => 'form-control']) }}
+            {{ Form::select('subject_id', $subjectOptions, $thwordData['field']['subject_id']['default'], ['class' => 'form-control']) }}
         </div>
     @endif
 
     @if ($thwordData['field']['lang']['display'])
         <div class="form-group">
             {{ Form::label('lang', $thwordData['field']['lang']['label']) }}
-            {{ Form::select('lang', $languageOptions, 'en', ['class' => 'form-control']) }}
+            {{ Form::select('lang', $languageOptions, $thwordData['field']['lang']['default'], ['class' => 'form-control']) }}
         </div>
     @endif
 
     @if ($thwordData['field']['level']['display'])
         <div class="form-group">
             {{ Form::label('level', $thwordData['field']['level']['label']) }}
-            {{ Form::select('level', $levelOptions, 0, ['class' => 'form-control']) }}
+            {{ Form::select('level', $levelOptions, $thwordData['field']['level']['default'], ['class' => 'form-control']) }}
         </div>
     @endif
 
     @if ($thwordData['field']['topic']['display'])
         <div class="form-group">
             {{ Form::label('topic', $thwordData['field']['topic']['label']) }}
-            {{ Form::textarea('topic', null, ['placeholder' => $thwordData['field']['topic']['label'], 'class' => 'form-control', 'rows' => 3]) }}
+            {{ Form::textarea('topic', $thwordData['field']['topic']['default'], ['placeholder' => $thwordData['field']['topic']['label'], 'class' => 'form-control', 'rows' => 3]) }}
         </div>
     @endif
 
     @if ($thwordData['field']['description']['display'])
         <div class="form-group">
             {{ Form::label('description', $thwordData['field']['description']['label']) }}
-            {{ Form::text('description', '', ['placeholder' => $thwordData['field']['description']['label'], 'class' => 'form-control']) }}
+            {{ Form::text('description', $thwordData['field']['description']['default'], ['placeholder' => $thwordData['field']['description']['label'], 'class' => 'form-control']) }}
         </div>
     @endif
 
@@ -88,56 +88,56 @@
                 Separator:
                 {{ Form::select('primary_separator', $primarySeparator, \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR, ['class' => '']) }}
             </span>
-            {{ Form::textarea('answers', '', ['placeholder' => $thwordData['field']['answers']['label'], 'class' => 'form-control']) }}
+            {{ Form::textarea('answers', $thwordData['field']['answers']['default'], ['placeholder' => $thwordData['field']['answers']['label'], 'class' => 'form-control']) }}
         </div>
     @endif
 
     @if ($thwordData['field']['correct_answer']['display'])
         <div class="form-group">
             {{ Form::label('correct_answer', $thwordData['field']['correct_answer']['label']) }}
-            {{ Form::select('correct_answer', $correctAnswerList, 1, ['class' => 'form-control']) }}
+            {{ Form::select('correct_answer[]', $correctAnswerList, explode('|', $thwordData['field']['correct_answer']['default']), ['class' => 'form-control', 'multiple' => true, 'id' => 'correct_answer']) }}
         </div>
     @endif
 
     @if ($thwordData['field']['max_choices']['display'])
         <div class="form-group">
             {{ Form::label('max_choices', $thwordData['field']['max_choices']['label']) }}
-            {{ Form::select('max_choices', $maxChoicesList, \Craigzearfoss\ThwordUtil\ThwordUtil::DEFAULT_MAX_CHOICES, ['class' => '']) }}
+            {{ Form::select('max_choices', $maxChoicesList, $thwordData['field']['max_choices']['default'], ['class' => '']) }}
         </div>
     @endif
 
     @if ($thwordData['field']['bonus']['display'])
         <div class="form-group">
             {{ Form::label('bonus', $thwordData['field']['bonus']['label']) }}
-            {{ Form::checkbox('bonus', 1, false, ['class' => 'form-control']) }}
+            {{ Form::checkbox('bonus', 1, $thwordData['field']['bonus']['default'], ['class' => 'form-control']) }}
         </div>
     @endif
 
     @if ($thwordData['field']['bonus_question']['display'])
         <div class="form-group" style="display: none;">
             {{ Form::label('bonus_question', $thwordData['field']['bonus_question']['label']) }}
-            {{ Form::text('bonus_question', '', ['placeholder' => $thwordData['field']['bonus_question']['label'], 'class' => 'form-control']) }}
+            {{ Form::text('bonus_question', $thwordData['field']['bonus_question']['default'], ['placeholder' => $thwordData['field']['bonus_question']['label'], 'class' => 'form-control']) }}
         </div>
     @endif
 
     @if ($thwordData['field']['details']['display'])
         <div class="form-group">
             {{ Form::label('details', $thwordData['field']['details']['label']) }}
-            {{ Form::textarea('details', '', ['placeholder' => $thwordData['field']['details']['label'], 'class' => 'form-control']) }}
+            {{ Form::textarea('details', $thwordData['field']['details']['default'], ['placeholder' => $thwordData['field']['details']['label'], 'class' => 'form-control']) }}
         </div>
     @endif
 
     @if ($thwordData['field']['source']['display'])
         <div class="form-group">
             {{ Form::label('source', $thwordData['field']['source']['label']) }}
-            {{ Form::text('source', '', ['placeholder' => $thwordData['field']['source']['label'], 'class' => 'form-control']) }}
+            {{ Form::text('source', $thwordData['field']['source']['default'], ['placeholder' => $thwordData['field']['source']['label'], 'class' => 'form-control']) }}
         </div>
     @endif
 
     @if ($thwordData['field']['notes']['display'])
         <div class="form-group">
             {{ Form::label('notes', $thwordData['field']['notes']['label']) }}
-            {{ Form::textarea('notes', '', ['placeholder' => $thwordData['field']['notes']['label'], 'class' => 'form-control']) }}
+            {{ Form::textarea('notes', $thwordData['field']['notes']['default'], ['placeholder' => $thwordData['field']['notes']['label'], 'class' => 'form-control']) }}
         </div>
     @endif
 

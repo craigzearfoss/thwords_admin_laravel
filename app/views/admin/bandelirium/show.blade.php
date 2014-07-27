@@ -117,7 +117,21 @@
                 @if ($thwordData['field']['correct_answer']['display'])
                     <tr>
                         <td>{{ $thwordData['field']['correct_answer']['label'] }}</td>
-                        <td>{{ $thwordData['data']['thword']['correct_answer'] }}</td>
+                        <td>
+                            @foreach ($thwordData['data']['thword']['correct_answer'] as $correctAnswer)
+                                @if ($correctAnswer == -3)
+                                    <li>Scramble</li>
+                                @elseif ($correctAnswer == -2)
+                                    <li>Sort</li>
+                                @elseif ($correctAnswer == -1)
+                                    <li>Type-in</li>
+                                @elseif ($correctAnswer == 0)
+                                    <li>All are correct</li>
+                                @else
+                                    <li>{{ $correctAnswer }}</li>
+                                @endif
+                            @endforeach
+                        </td>
                     </tr>
                 @endif
 

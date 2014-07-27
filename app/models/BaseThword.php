@@ -34,12 +34,12 @@ class BaseThword extends Ardent {
         'category_id' => array(
             'display' => true,
             'label' => 'Category',
-            'default' => 999
+            'default' => 99
         ),
         'subject_id' => array(
             'display' => true,
             'label' => 'Subject',
-            'default' => 9999
+            'default' => 999
         ),
         'lang' => array(
             'display' => true,
@@ -79,7 +79,7 @@ class BaseThword extends Ardent {
         'correct_answer' => array(
             'display' => true,
             'label' => 'Correct Answer(s)',
-            'default' => 1
+            'default' => 1  // for multiple answers separate the with a vertical bar
         ),
         'max_choices' => array(
             'display' => true,
@@ -89,7 +89,7 @@ class BaseThword extends Ardent {
         'details' => array(
             'display' => true,
             'label' => 'Details (Shown when answer is displayed.)',
-            'default' => 0
+            'default' => ''
         ),
         'source' => array(
             'display' => true,
@@ -99,7 +99,7 @@ class BaseThword extends Ardent {
         'notes' => array(
             'display' => true,
             'label' => 'Notes (For internal reference. This is never displayed.)',
-            'default' => 0
+            'default' => ''
         )
     );
 
@@ -211,6 +211,8 @@ class BaseThword extends Ardent {
             'category' => $this->category()->first()->attributes,
             'subject'  => $this->subject()->first()->attributes
         );
+
+        $thwArray['thword']['correct_answer'] = explode('|', $thwArray['thword']['correct_answer']);
 
         return $thwArray;
     }

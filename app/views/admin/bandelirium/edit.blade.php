@@ -96,7 +96,7 @@
     @if ($thwordData['field']['correct_answer']['display'])
         <div class="form-group">
             {{ Form::label('correct_answer', $thwordData['field']['correct_answer']['label']) }}
-            {{ Form::select('correct_answer', $correctAnswerList, null, ['class' => 'form-control']) }}
+            {{ Form::select('correct_answer[]', $correctAnswerList, explode('|', $thword->correct_answer), ['class' => 'form-control', 'multiple' => true, 'id' => 'correct_answer']) }}
         </div>
     @endif
 

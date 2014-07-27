@@ -114,7 +114,7 @@ class AdminBandeliriumController extends \AdminController {
         $this->thword->topic          = isset($topic) ? $topic : $this->fieldMappings['topic']['default'];
         $this->thword->description    = isset($description) ? $description : $this->fieldMappings['description']['default'];
         $this->thword->answers        = isset($answers) ? $answers : $this->fieldMappings['answers']['default'];
-        $this->thword->correct_answer = isset($correctAnswer) ? $correctAnswer : $this->fieldMappings['correct_answer']['default'];
+        $this->thword->correct_answer = isset($correctAnswer) ? implode('|', $correctAnswer) : $this->fieldMappings['correct_answer']['default'];
         $this->thword->max_choices    = isset($maxChoices) ? $maxChoices : $this->fieldMappings['max_choices']['default'];
         $this->thword->bonus          = $bonus;
         $this->thword->bonus_question = isset($bonusQuestion) ? $bonusQuestion : $this->fieldMappings['bonus_question']['default'];
@@ -223,7 +223,7 @@ class AdminBandeliriumController extends \AdminController {
         $thword->topic          = isset($topic) ? $topic : $this->fieldMappings['topic']['default'];
         $thword->description    = isset($description) ? $description : $this->fieldMappings['description']['default'];
         $thword->answers        = isset($answers) ? $answers : $this->fieldMappings['answers']['default'];
-        $thword->correct_answer = isset($correctAnswer) ? $correctAnswer : $this->fieldMappings['correct_answer']['default'];
+        $thword->correct_answer = isset($correctAnswer) ? implode('|', $correctAnswer) : $this->fieldMappings['correct_answer']['default'];
         $thword->max_choices    = isset($maxChoices) ? $maxChoices : $this->fieldMappings['max_choices']['default'];
         $thword->bonus          = $bonus;
         $thword->bonus_question = isset($bonusQuestion) ? $bonusQuestion : $this->fieldMappings['bonus_question']['default'];

@@ -39,7 +39,35 @@ $(document).ready(function(){
 
             $("#subject-div").show();
         }
-    })
+    });
+
+    $("#correct_answer").bind("change", function() {
+        var ids = $(this).val();
+        if (ids.length > 1) {
+            var breakLoop = false;
+            for (var i=0; i<ids.length; i++) {
+                if (ids[i] < 1) {
+                    switch (parseInt(ids[i])) {
+                        case 0:
+                            alert('If you select "All Correct" you cannot select any other values.')
+                            break;
+                        case -1:
+                            alert('If you select "Type-in" you cannot select any other values.')
+                            break;
+                        case -2:
+                            alert('If you select "Sort" you cannot select any other values.')
+                            break;
+                        case -3:
+                            alert('If you select "Scramble" you cannot select any other values.')
+                            break;
+                    }
+                    $(this).val('')
+                    breakLoop = true;
+                }
+                if (breakLoop) break;
+            }
+        }
+    });
 
 });
 
