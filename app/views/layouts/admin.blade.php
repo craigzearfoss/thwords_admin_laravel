@@ -16,6 +16,7 @@
     @yield('content')
     {{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js') }}
     {{ HTML::script('//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js') }}
-    {{ javascript_include_tag() }}
+    {{ HTML::script('/js/admin.js') }}
+    <?php /* {{ javascript_include_tag() }} */ ?>
 </body>
 </html>
