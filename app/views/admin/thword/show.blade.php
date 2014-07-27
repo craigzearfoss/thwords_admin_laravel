@@ -28,7 +28,7 @@
             <tbody>
                 <tr>
                     <td colspan="100%">
-                        <div class="nav-btn-container" class="pull-left" style="width: auto;">
+                        <div class="nav-btn-container pull-left" style="width: auto;">
                             {{ HTML::link('/admin/'.$thwordData['url'].'/first', '|<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to first']) }}
                             {{ HTML::link('/admin/'.$thwordData['url'].'/'.$thwordData['data']['thword']['id'].'/previous', '<', ['class' => 'btn btn-primary pull-left', 'title' => 'go to previous']) }}
                             {{ HTML::link('/admin/'.$thwordData['url'].'/'.$thwordData['data']['thword']['id'].'/next', '>', ['class' => 'btn btn-primary pull-left', 'title' => 'go to next']) }}
@@ -203,8 +203,6 @@
             </tbody>
         </table>
     </div>
-
-    {{ Form::close() }}
 
 </div>
 
