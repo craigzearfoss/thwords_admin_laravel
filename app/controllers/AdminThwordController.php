@@ -4,203 +4,272 @@ App::bind('Thword', 'Thword');
 
 class AdminThwordController extends \AdminController {
 
+    protected $thword;
+
+    protected $table;
+
+    protected $fieldMappings;
+
     public function __construct(Thword $thword)
     {
         parent::__construct();
 
-        Breadcrumbs::addCrumb('Thwords', '/admin/thword');
+        $this->name          = 'Thword';
+        $this->thword        = $thword;
+        $this->table         = 'thw_thwords';
+        $this->fieldMappings = $this->thword->getFieldMappings();
+        $this->template      = 'thword';
+        $this->url           = 'thword';
 
-        $this->thword = $thword;
+        Breadcrumbs::addCrumb($this->name, '/admin/' . $this->url);
     }
 
 
-	/**
-	 * Display a listing of the thword.
-	 *
-	 * @return Response
-	 */
-	public function index()
+    /**
+     * Display a listing of the thword.
+     *
+     * @return Response
+     */
+    public function index()
     {
-        $thwords = DB::table('thw_thwords')
-            ->select('thw_thwords.id', 'thw_thwords.lang', 'thw_thwords.topic', 'thw_thwords.description')
+        $thwords = DB::table($this->table)
+            ->select($this->table . '.*')
             ->orderBy('id', 'asc')
             ->paginate(25);
 
-        return View::make('admin.thword.index', ['thwords' => $thwords]);
-	}
+        return View::make('admin.' . $this->template . '.index', [
+            'thwords'    => $thwords,
+            'thwordData' => array(
+                'name'  => $this->name,
+                'url'   => $this->url,
+                'field' => $this->fieldMappings
+            )
+        ]);
+    }
 
 
-	/**
-	 * Show the form for creating a new thword.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-        Breadcrumbs::addCrumb('Create', '/admin/thword/create');
+    /**
+     * Show the form for creating a new thword.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        Breadcrumbs::addCrumb('Create', '/admin/' . $this->url . '/create');
 
         $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
         $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
-        return View::make('admin.thword.create', [
-            'levelOptions'       => ThwordUtil::getLevelList(),
+        return View::make('admin.' .  $this->template . '.create', [
+            'levelOptions'       => $this->thword->getLevelList(),
             'categoryOptions'    => $categoryOptions,
             'subjectOptions'     => $subjectOptions,
             'languageOptions'    => $languageOptions,
-            'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
-            'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
-            'correctAnswerList'  =>ThwordUtil::getCorrectAnswerList(),
-            'maxChoicesList'     => ThwordUtil::getMaxChoicesList()
+            'primarySeparator'   => $this->thword->getSeparatorCharacters(),
+            'secondarySeparator' => $this->thword->getSeparatorCharacters(),
+            'correctAnswerList'  => $this->thword->getCorrectAnswerList(),
+            'maxChoicesList'     => $this->thword->getMaxChoicesList(),
+            'thwordData'         => array(
+                'name'  => $this->name,
+                'url'   => $this->url,
+                'field' => $this->fieldMappings
+            )
         ]);
-	}
+    }
 
 
-	/**
-	 * Store a newly created thword in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-        $thword = new Thword;
+    /**
+     * Store a newly created thword in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        $parentId      = Input::get('parent_id');
+        $categoryId    = Input::get('category_id');
+        $subjectId     = Input::get('subject_id');
+        $lang          = Input::get('lang');
+        $level         = Input::get('level');
+        $topic         = Input::get('topic');
+        $description   = Input::get('description');
+        $answers       = Input::get('answers');
+        $correctAnswer = Input::get('correct_answer');
+        $maxChoices    = Input::get('max_choices');
+        $bonus         = (Input::get('my_checkbox') === '1') ? 1 : 0;
+        $bonusQuestion = Input::get('bonus_question');
+        $details       = Input::get('details');
+        $source        = Input::get('source');
+        $notes         = Input::get('notes');
 
-        $thword->parent_id      = null;
-        $thword->category_id    = Input::get('category_id');
-        $thword->subject_id     = Input::get('subject_id');
-        $thword->lang           = Input::get('lang');
-        $thword->level          = Input::get('level');
-        $thword->topic          = Input::get('topic');
-        $thword->description    = Input::get('description');
-        $thword->bonus          = (Input::get('my_checkbox') === '1') ? 1 : 0;
-        $thword->bonus_question = Input::get('bonus_question');
-        $thword->answers        = Input::get('answers');
-        $thword->correct_answer = Input::get('correct_answer');
-        $thword->details        = Input::get('details');
-        $thword->max_choices    = Input::get('max_choices');
-        $thword->source         = Input::get('source');
-        $thword->notes          = Input::get('notes');
+        $this->thword->parent_id      = (!empty($parentId)) ? $parentId : null;
+        $this->thword->category_id    = isset($categoryId) ? $categoryId : $this->fieldMappings['category_id']['default'];
+        $this->thword->subject_id     = isset($subjectId) ? $subjectId : $this->fieldMappings['subject_id']['default'];
+        $this->thword->lang           = isset($lang) ? $lang : $this->fieldMappings['lang']['default'];
+        $this->thword->level          = isset($level) ? $level : $this->fieldMappings['level']['default'];
+        $this->thword->topic          = isset($topic) ? $topic : $this->fieldMappings['topic']['default'];
+        $this->thword->description    = isset($description) ? $description : $this->fieldMappings['description']['default'];
+        $this->thword->answers        = isset($answers) ? $answers : $this->fieldMappings['answers']['default'];
+        $this->thword->correct_answer = isset($correctAnswer) ? implode('|', $correctAnswer) : $this->fieldMappings['correct_answer']['default'];
+        $this->thword->max_choices    = isset($maxChoices) ? $maxChoices : $this->fieldMappings['max_choices']['default'];
+        $this->thword->bonus          = $bonus;
+        $this->thword->bonus_question = isset($bonusQuestion) ? $bonusQuestion : $this->fieldMappings['bonus_question']['default'];
+        $this->thword->details        = isset($details) ? $details : $this->fieldMappings['details']['default'];
+        $this->thword->source         = isset($source) ? $source : $this->fieldMappings['source']['default'];
+        $this->thword->notes          = isset($notes) ? $notes : $this->fieldMappings['notes']['default'];
 
         // make sure answers have the correct separator characters
         $primarySeparator = Input::get('primary_separator');
-        if ($primarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR) {
-            $thword->answers = str_replace($primarySeparator, '|', $thword->answers);
+        if ($primarySeparator != \BaseThword::PRIMARY_SEPARATOR) {
+            $this->thword->answers = str_replace($primarySeparator, '|', $this->thword->answers);
         }
         $secondarySeparator = Input::get('secondary_separator');
-        if ($secondarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR) {
-            $thword->answers = str_replace($secondarySeparator, '|', $thword->answers);
+        if ($secondarySeparator != \BaseThword::SCONDARY_SEPARATOR) {
+            $this->thword->answers = str_replace($secondarySeparator, '|', $this->thword->answers);
         }
 
-        if ($success = $thword->save()) {
-            //return Redirect::to('/admin/thword')->with('message', 'Thword created successfully.');
-            Breadcrumbs::addCrumb('Show', '/admin/thword/show');
+        if ($success = $this->thword->save()) {
+            //return Redirect::to('/admin/' . $this->url)->with('message', $this->name . ' created successfully.');
+            Breadcrumbs::addCrumb('Show', '/admin/' . $this->url . '/show');
 
-            $thwArray = $thword->toArray();
+            $thwArray = $this->thword->toArray();
 
-            return View::make('admin.thword.show', [
-                'thwArray'   => $thwArray,
-                'successMsg' => 'Thword was successfully created.'
+            return View::make('admin.' . $this->template . '.show', [
+                'successMsg' => $this->name . ' was successfully created.',
+                'thwordData' => array(
+                    'name'  => $this->name,
+                    'url'   => $this->url,
+                    'data'  => $thwArray,
+                    'field' => $this->fieldMappings
+                )
             ]);
         } else {
-            return Redirect::to('/admin/thword/create')->withErrors($thword->errors());
+            return Redirect::to('/admin/' . $this->url . '/create')->withErrors($this->thword->errors());
         }
-	}
+    }
 
 
-	/**
-	 * Show the form for editing the specified thword.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-        Breadcrumbs::addCrumb('Edit', '/admin/thword/edit');
+    /**
+     * Show the form for editing the specified thword.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        Breadcrumbs::addCrumb('Edit', '/admin/' . $this->url . '/edit');
 
-        $thword = Thword::find($id);
+        $thword = $this->thword->find($id);
 
         $categoryOptions = DB::table('thw_categories')->orderBy('name', 'asc')->lists('name','id');
         $subjectOptions = DB::table('thw_subjects')->orderBy('name', 'asc')->lists('name','id');
         $languageOptions = DB::table('thw_languages')->orderBy('name', 'asc')->lists('name','code1');
 
-        return View::make('admin.thword.edit', [
+        return View::make('admin.' . $this->template . '.edit', [
             'thword'             => $thword,
-            'levelOptions'       => ThwordUtil::getLevelList(),
+            'levelOptions'       => $this->thword->getLevelList(),
             'categoryOptions'    => $categoryOptions,
             'subjectOptions'     => $subjectOptions,
             'languageOptions'    => $languageOptions,
-            'primarySeparator'   => ThwordUtil::getSeparatorCharacters(),
-            'secondarySeparator' => ThwordUtil::getSeparatorCharacters(),
-            'correctAnswerList'  =>ThwordUtil::getCorrectAnswerList(),
-            'maxChoicesList'     => ThwordUtil::getMaxChoicesList()
+            'primarySeparator'   => $this->thword->getSeparatorCharacters(),
+            'secondarySeparator' => $this->thword->getSeparatorCharacters(),
+            'correctAnswerList'  => $this->thword->getCorrectAnswerList(),
+            'maxChoicesList'     => $this->thword->getMaxChoicesList(),
+            'thwordData' => array(
+                'name'  => $this->name,
+                'url'   => $this->url,
+                'data'  => $thword->toArray(),
+                'field' => $this->fieldMappings
+            )
         ]);
-	}
+    }
 
 
-	/**
-	 * Update the specified thword in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-        $thword = Thword::find($id);
+    /**
+     * Update the specified thword in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update($id)
+    {
+        $thword = $this->thword->find($id);
 
-        $thword->parent_id      = null;
-        $thword->category_id    = Input::get('category_id');
-        $thword->subject_id     = Input::get('subject_id');
-        $thword->lang           = Input::get('lang');
-        $thword->level          = Input::get('level');
-        $thword->topic          = Input::get('topic');
-        $thword->description    = Input::get('description');
-        $thword->bonus          = (Input::get('my_checkbox') === '1') ? 1 : 0;
-        $thword->bonus_question = Input::get('bonus_question');
-        $thword->answers        = Input::get('answers');
-        $thword->correct_answer = Input::get('correct_answer');
-        $thword->details        = Input::get('details');
-        $thword->max_choices    = Input::get('max_choices');
-        $thword->source         = Input::get('source');
-        $thword->notes          = Input::get('notes');
+        $parentId      = Input::get('parent_id');
+        $categoryId    = Input::get('category_id');
+        $subjectId     = Input::get('subject_id');
+        $lang          = Input::get('lang');
+        $level         = Input::get('level');
+        $topic         = Input::get('topic');
+        $description   = Input::get('description');
+        $answers       = Input::get('answers');
+        $correctAnswer = Input::get('correct_answer');
+        $maxChoices    = Input::get('max_choices');
+        $bonus         = (Input::get('my_checkbox') === '1') ? 1 : 0;
+        $bonusQuestion = Input::get('bonus_question');
+        $details       = Input::get('details');
+        $source        = Input::get('source');
+        $notes         = Input::get('notes');
+
+        $thword->parent_id      = (!empty($parentId)) ? $parentId : null;
+        $thword->category_id    = isset($categoryId) ? $categoryId : $this->fieldMappings['category_id']['default'];
+        $thword->subject_id     = isset($subjectId) ? $subjectId : $this->fieldMappings['subject_id']['default'];
+        $thword->lang           = isset($lang) ? $lang : $this->fieldMappings['lang']['default'];
+        $thword->level          = isset($level) ? $level : $this->fieldMappings['level']['default'];
+        $thword->topic          = isset($topic) ? $topic : $this->fieldMappings['topic']['default'];
+        $thword->description    = isset($description) ? $description : $this->fieldMappings['description']['default'];
+        $thword->answers        = isset($answers) ? $answers : $this->fieldMappings['answers']['default'];
+        $thword->correct_answer = isset($correctAnswer) ? implode('|', $correctAnswer) : $this->fieldMappings['correct_answer']['default'];
+        $thword->max_choices    = isset($maxChoices) ? $maxChoices : $this->fieldMappings['max_choices']['default'];
+        $thword->bonus          = $bonus;
+        $thword->bonus_question = isset($bonusQuestion) ? $bonusQuestion : $this->fieldMappings['bonus_question']['default'];
+        $thword->details        = isset($details) ? $details : $this->fieldMappings['details']['default'];
+        $thword->source         = isset($source) ? $source : $this->fieldMappings['source']['default'];
+        $thword->notes          = isset($notes) ? $notes : $this->fieldMappings['notes']['default'];
 
         // make sure answers have the correct separator characters
         $primarySeparator = Input::get('primary_separator');
-        if ($primarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::PRIMARY_SEPARATOR) {
+        if ($primarySeparator != \BaseThword::PRIMARY_SEPARATOR) {
             $thword->answers = str_replace($primarySeparator, '|', $thword->answers);
         }
         $secondarySeparator = Input::get('secondary_separator');
-        if ($secondarySeparator != \Craigzearfoss\ThwordUtil\ThwordUtil::SECONDARY_SEPARATOR) {
+        if ($secondarySeparator != \BaseThword::SECONDARY_SEPARATOR) {
             $thword->answers = str_replace($secondarySeparator, '|', $thword->answers);
         }
 
         if ($success = $thword->save()) {
             //return Redirect::to('/admin/thword');
-            Breadcrumbs::addCrumb('Show', '/admin/thword/show');
+            Breadcrumbs::addCrumb('Show', '/admin/' . $this->url . '/show');
 
             $thwArray = $thword->toArray();
 
-            return View::make('admin.thword.show', [
-                'thwArray'   => $thwArray,
-                'successMsg' => 'Thword was successfully updated.'
+            return View::make('admin.' . $this->template . '.show', [
+                'successMsg' => $this->name . ' was successfully updated.',
+                'thwordData' => array(
+                    'name'  => $this->name,
+                    'url'   => $this->url,
+                    'data'  => $thwArray,
+                    'field' => $this->fieldMappings
+                )
             ]);
         } else {
-            return Redirect::to('/admin/thword/' . $id . '/edit/')->withErrors($thword->errors());
+            return Redirect::to('/admin/' . $this->url . '/' . $id . '/edit/')->withErrors($thword->errors());
         }
-	}
+    }
 
 
-	/**
-	 * Remove the specified thword from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-        Thword::destroy($id);
+    /**
+     * Remove the specified thword from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $this->thword->destroy($id);
 
         return Redirect::to('/admin/thword');
-	}
+    }
 
 
     /**
@@ -211,13 +280,21 @@ class AdminThwordController extends \AdminController {
      */
     public function show($id)
     {
-        Breadcrumbs::addCrumb('Show', '/admin/thword/show');
+        Breadcrumbs::addCrumb('Show', '/admin/' . $this->url . '/show');
 
-        $thword = Thword::find($id);
-        $thwArray = $thword->toArray();
+        if (!$thword = $this->thword->find($id)) {
+            $thwArray = array();
+        } else {
+            $thwArray = $thword->toArray();
+        }
 
-        return View::make('admin.thword.show', [
-            'thwArray' => $thwArray
+        return View::make('admin.' . $this->template . '.show', [
+            'thwordData' => array(
+                'name'  => $this->name,
+                'url'   => $this->url,
+                'data'  => $thwArray,
+                'field' => $this->fieldMappings
+            )
         ]);
     }
 
@@ -229,12 +306,12 @@ class AdminThwordController extends \AdminController {
      */
     public function first()
     {
-        $thword = DB::table('thw_thwords')
-            ->select('thw_thwords.id')
+        $thword = DB::table($this->table)
+            ->select($this->table . '.id')
             ->orderBy('id', 'asc')
             ->first();
 
-        return Redirect::to('/admin/thword/' . $thword->id . '/show');
+        return Redirect::to('/admin/' . $this->url . '/' . $thword->id . '/show');
     }
 
 
@@ -246,17 +323,17 @@ class AdminThwordController extends \AdminController {
      */
     public function previous($id)
     {
-        $thword = DB::table('thw_thwords')
-            ->select('thw_thwords.id')
+        $thword = DB::table($this->table)
+            ->select($this->table . '.id')
             ->where('id', '<', $id)
             ->orderBy('id', 'desc')
             ->first();
 
         if (!empty($thword)) {
-            return Redirect::to('/admin/thword/' . $thword->id . '/show');
+            return Redirect::to('/admin/' . $this->url . '/' . $thword->id . '/show');
         } else {
             // next thword not found
-            return Redirect::to('/admin/thword/' . $id . '/show');
+            return Redirect::to('/admin/' . $this->url . '/' . $id . '/show');
         }
     }
 
@@ -269,17 +346,17 @@ class AdminThwordController extends \AdminController {
      */
     public function next($id)
     {
-        $thword = DB::table('thw_thwords')
-            ->select('thw_thwords.id')
+        $thword = DB::table($this->table)
+            ->select($this->table . '.id')
             ->where('id', '>', $id)
             ->orderBy('id', 'asc')
             ->first();
 
         if (!empty($thword)) {
-            return Redirect::to('/admin/thword/' . $thword->id . '/show');
+            return Redirect::to('/admin/' . $this->url . '/' . $thword->id . '/show');
         } else {
             // next thword not found
-            return Redirect::to('/admin/thword/' . $id . '/show');
+            return Redirect::to('/admin/' . $this->url . '/' . $id . '/show');
         }
     }
 
@@ -291,12 +368,12 @@ class AdminThwordController extends \AdminController {
      */
     public function last()
     {
-        $thword = DB::table('thw_thwords')
-            ->select('thw_thwords.id')
+        $thword = DB::table($this->table)
+            ->select($this->table . '.id')
             ->orderBy('id', 'desc')
             ->first();
 
-        return Redirect::to('/admin/thword/' . $thword->id . '/show');
+        return Redirect::to('/admin/' . $this->url . '/' . $thword->id . '/show');
     }
 
 

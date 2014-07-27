@@ -9,6 +9,84 @@ class Thwordplay extends \BaseThword {
      */
     protected $table = 'thw_thwordplays';
 
+    protected $fieldMappings = array(
+        'parent_id' => array(
+            'display' => false,
+            'label' => 'Parent',
+            'default' => null
+        ),
+        'category_id' => array(
+            'display' => true,
+            'label' => 'Category',
+            'default' => 99
+        ),
+        'subject_id' => array(
+            'display' => true,
+            'label' => 'Subject',
+            'default' => 999
+        ),
+        'lang' => array(
+            'display' => false,
+            'label' => 'Language',
+            'default' => 'en'
+        ),
+        'level' => array(
+            'display' => false,
+            'label' => 'Level',
+            'default' => 0
+        ),
+        'topic' => array(
+            'display' => true,
+            'label' => 'Topic',
+            'default' => ''
+        ),
+        'description' => array(
+            'display' => true,
+            'label' => 'Description',
+            'default' => ''
+        ),
+        'bonus' => array(
+            'display' => true,
+            'label' => 'Bonus',
+            'default' => 0
+        ),
+        'bonus_question' => array(
+            'display' => true,
+            'label' => 'Bonus Question',
+            'default' => ''
+        ),
+        'answers' => array(
+            'display' => true,
+            'label' => 'Answer(s)',
+            'default' => ''
+        ),
+        'correct_answer' => array(
+            'display' => true,
+            'label' => 'Correct Answer(s)',
+            'default' => 1  // for multiple answers separate the with a vertical bar
+        ),
+        'max_choices' => array(
+            'display' => true,
+            'label' => 'Max Choices',
+            'default' => 4
+        ),
+        'details' => array(
+            'display' => true,
+            'label' => 'Details (Shown when answer is displayed.)',
+            'default' => ''
+        ),
+        'source' => array(
+            'display' => true,
+            'label' => 'Source URL',
+            'default' => ''
+        ),
+        'notes' => array(
+            'display' => true,
+            'label' => 'Notes (For internal reference. This is never displayed.)',
+            'default' => ''
+        )
+    );
+
     public function findRandom() {
 
         $sql = "SELECT t.*

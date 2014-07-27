@@ -4,73 +4,13 @@
 
 class ThwordUtil {
 
-    const PRIMARY_SEPARATOR = '|';
-
-    const SECONDARY_SEPARATOR = '^';
-
-    const DEFAULT_MAX_CHOICES = 4;
-
     const GAME_THWORDS = 1;
     const GAME_ANTI_THWORDS = 2;
     const GAME_FOREIGN_THWORDS = 3;
     const GAME_THWORD_PLAYS = 4;
     const GAME_BANDELIRIUM = 5;
 
-    const MAX_THWORDS = 4;
     const MAX_CHARS = 24;
-
-    public static function getSeparatorCharacters() {
-
-        $separators = array(
-            '|' => '|',
-            '^' =>'^',
-            '`' =>'`',
-            "\n" => '\n',
-            "\t" => '\t',
-            ',' => ',',
-            ';' => ';',
-            ':' =>':',
-            '-' =>'-',
-            '\\' =>'\\',
-            '/' =>'/',
-            '=' =>'='
-        );
-
-        return $separators;
-    }
-
-    public static function getCorrectAnswerList() {
-
-        $answers = array();
-        $answers[-2] = 'Sort';
-        $answers[-1] = 'Type-in';
-        $answers[0] = 'All Correct';
-        for ($i=1; $i<11; $i++) {
-            $answers[$i] = $i;
-        }
-
-        return $answers;
-    }
-
-    public static function getLevelList() {
-
-        $levels = array();
-        for ($i=1; $i<6; $i++) {
-            $levels[$i] = $i;
-        }
-
-        return $levels;
-    }
-
-    public static function getMaxChoicesList() {
-
-        $maxChoices = array();
-        for ($i=2; $i<11; $i++) {
-            $maxChoices[$i] = $i;
-        }
-
-        return $maxChoices;
-    }
 
     public function generateLetterPlay($thword) {
 
@@ -84,6 +24,7 @@ class ThwordUtil {
             'max_choices' => $thword->max_choices,
             'value' => 0,
             'total_chars' => 0,
+            'unique_chars' => 0,
             'num_answers' => 0,
             'has_digits' => false,
             'answers' => array(),
