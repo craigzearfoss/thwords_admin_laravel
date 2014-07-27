@@ -127,7 +127,7 @@ class AdminThwordController extends \AdminController {
             $this->thword->answers = str_replace($primarySeparator, '|', $this->thword->answers);
         }
         $secondarySeparator = Input::get('secondary_separator');
-        if ($secondarySeparator != \BaseThword::SCONDARY_SEPARATOR) {
+        if ($secondarySeparator != \BaseThword::SECONDARY_SEPARATOR) {
             $this->thword->answers = str_replace($secondarySeparator, '|', $this->thword->answers);
         }
 
