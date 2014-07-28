@@ -49,10 +49,10 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('/admin/thword/{id}/next', 'AdminThwordController@next');
     Route::get('/admin/thword/last', 'AdminThwordController@last');
 
-    Route::get('/admin/q-thword/first', 'AdminQthwordController@first');
-    Route::get('/admin/q-thword/{id}/previous', 'AdminQthwordController@previous');
-    Route::get('/admin/q-thword/{id}/next', 'AdminQthwordController@next');
-    Route::get('/admin/q-thword/last', 'AdminQthwordController@last');
+    Route::get('/admin/q-thword/first', 'AdminQThwordController@first');
+    Route::get('/admin/q-thword/{id}/previous', 'AdminQThwordController@previous');
+    Route::get('/admin/q-thword/{id}/next', 'AdminQThwordController@next');
+    Route::get('/admin/q-thword/last', 'AdminQThwordController@last');
 
     Route::get('/admin/bandelirium/first', 'AdminBandeliriumController@first');
     Route::get('/admin/bandelirium/{id}/previous', 'AdminBandeliriumController@previous');
