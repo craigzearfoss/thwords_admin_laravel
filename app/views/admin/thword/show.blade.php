@@ -67,6 +67,13 @@
                     </tr>
                 @endif
 
+                @if ($thwordData['field']['dt']['display'])
+                    <tr>
+                        <td>{{ $thwordData['field']['dt']['label'] }}</td>
+                        <td>{{ $thwordData['data']['dt']['name'] }}</td>
+                    </tr>
+                @endif
+
                 @if ($thwordData['field']['lang']['display'])
                     <tr>
                         <td>{{ $thwordData['field']['lang']['label'] }}</td>

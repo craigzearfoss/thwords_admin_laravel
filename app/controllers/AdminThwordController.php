@@ -101,6 +101,7 @@ class AdminThwordController extends \AdminController {
         $bonus         = (Input::get('my_checkbox') === '1') ? 1 : 0;
         $bonusQuestion = Input::get('bonus_question');
         $details       = Input::get('details');
+        $dt            = Input::get('dt');
         $source        = Input::get('source');
         $notes         = Input::get('notes');
 
@@ -118,6 +119,7 @@ class AdminThwordController extends \AdminController {
         $this->thword->bonus          = $bonus;
         $this->thword->bonus_question = isset($bonusQuestion) ? $bonusQuestion : $this->fieldMappings['bonus_question']['default'];
         $this->thword->details        = isset($details) ? $details : $this->fieldMappings['details']['default'];
+        $this->thword->dt             = isset($dt) ? $dt : $this->fieldMappings['dt']['default'];
         $this->thword->source         = isset($source) ? $source : $this->fieldMappings['source']['default'];
         $this->thword->notes          = isset($notes) ? $notes : $this->fieldMappings['notes']['default'];
 
@@ -213,6 +215,7 @@ class AdminThwordController extends \AdminController {
         $bonus         = (Input::get('my_checkbox') === '1') ? 1 : 0;
         $bonusQuestion = Input::get('bonus_question');
         $details       = Input::get('details');
+        $dt            = Input::get('dt');
         $source        = Input::get('source');
         $notes         = Input::get('notes');
 
@@ -230,6 +233,7 @@ class AdminThwordController extends \AdminController {
         $thword->bonus          = $bonus;
         $thword->bonus_question = isset($bonusQuestion) ? $bonusQuestion : $this->fieldMappings['bonus_question']['default'];
         $thword->details        = isset($details) ? $details : $this->fieldMappings['details']['default'];
+        $thword->det            = isset($t) ? $dt : $this->fieldMappings['dt']['default'];
         $thword->source         = isset($source) ? $source : $this->fieldMappings['source']['default'];
         $thword->notes          = isset($notes) ? $notes : $this->fieldMappings['notes']['default'];
 

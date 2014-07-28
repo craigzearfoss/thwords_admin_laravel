@@ -64,6 +64,13 @@
         </div>
     @endif
 
+    @if ($thwordData['field']['dt']['display'])
+        <div class="form-group">
+            {{ Form::label('dt', $thwordData['field']['dt']['label']) }}
+            {{ Form::text('dt', null, ['placeholder' => $thwordData['field']['dt']['label'], 'class' => 'form-control']) }}
+        </div>
+    @endif
+
     @if ($thwordData['field']['topic']['display'])
         <div class="form-group">
             {{ Form::label('topic', $thwordData['field']['topic']['label']) }}

@@ -80,6 +80,11 @@ class Qthword extends BaseThword {
             'label' => 'Details (Shown when answer is displayed.)',
             'default' => ''
         ),
+        'dt' => array(
+            'display' => true,
+            'label' => 'Date',
+            'default' => '0000-00-00'
+        ),
         'source' => array(
             'display' => true,
             'label' => 'Source URL',
