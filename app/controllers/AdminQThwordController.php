@@ -17,7 +17,7 @@ class AdminQThwordController extends \AdminThwordController {
         $this->table         = 'thw_qthwords';
         $this->fieldMappings = $this->thword->getFieldMappings();
         $this->template      = 'thword';
-        $this->url           = 'q-thwords';
+        $this->url           = 'q-thword';
 
         Breadcrumbs::setDivider('»');
         Breadcrumbs::addCrumb('Home', '/');
