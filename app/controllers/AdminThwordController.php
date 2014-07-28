@@ -233,7 +233,7 @@ class AdminThwordController extends \AdminController {
         $thword->bonus          = $bonus;
         $thword->bonus_question = isset($bonusQuestion) ? $bonusQuestion : $this->fieldMappings['bonus_question']['default'];
         $thword->details        = isset($details) ? $details : $this->fieldMappings['details']['default'];
-        $thword->det            = isset($t) ? $dt : $this->fieldMappings['dt']['default'];
+        $thword->dt             = isset($t) ? $dt : $this->fieldMappings['dt']['default'];
         $thword->source         = isset($source) ? $source : $this->fieldMappings['source']['default'];
         $thword->notes          = isset($notes) ? $notes : $this->fieldMappings['notes']['default'];
 
