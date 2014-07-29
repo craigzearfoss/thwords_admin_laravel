@@ -70,7 +70,7 @@
                 @if ($thwordData['field']['dt']['display'])
                     <tr>
                         <td>{{ $thwordData['field']['dt']['label'] }}</td>
-                        <td>{{ $thwordData['data']['dt']['name'] }}</td>
+                        <td>{{ $thwordData['data']['thword']['dt'] }}</td>
                     </tr>
                 @endif
 

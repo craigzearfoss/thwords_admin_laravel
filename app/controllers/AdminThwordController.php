@@ -233,7 +233,7 @@ class AdminThwordController extends \AdminController {
         $thword->bonus          = $bonus;
         $thword->bonus_question = isset($bonusQuestion) ? $bonusQuestion : $this->fieldMappings['bonus_question']['default'];
         $thword->details        = isset($details) ? $details : $this->fieldMappings['details']['default'];
-        $thword->dt             = isset($t) ? $dt : $this->fieldMappings['dt']['default'];
+        $thword->dt             = isset($dt) ? $dt : $this->fieldMappings['dt']['default'];
         $thword->source         = isset($source) ? $source : $this->fieldMappings['source']['default'];
         $thword->notes          = isset($notes) ? $notes : $this->fieldMappings['notes']['default'];
 
@@ -297,7 +297,8 @@ class AdminThwordController extends \AdminController {
         } else {
             $thwArray = $thword->toArray();
         }
-
+  //      var_dump( $this->fieldMappings['topic']); echo '<hr>';
+//var_dump( $this->fieldMappings['dt']); die;
         return View::make('admin.' . $this->template . '.show', [
             'thwordData' => array(
                 'name'  => $this->name,
