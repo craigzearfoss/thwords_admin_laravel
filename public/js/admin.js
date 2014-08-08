@@ -71,6 +71,11 @@ $(document).ready(function(){
 
 });
 
+$("#dt").calendarsPicker({
+    dateFormat: 'yyyy-mm-dd',
+    defaultDate: '2014-08-07'
+});
+
 function replaceSeparatorCharacters(search, replace, subject) {
 
     switch (search) {
